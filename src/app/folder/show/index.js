@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 
 import Layout from '../components/layout';
-import urlManager from '../../../common/utils/url-manager';
+import urlManager from 'common/utils/url-manager';
 
 const Component = (props) => {
   const {

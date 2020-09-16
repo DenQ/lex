@@ -4,7 +4,7 @@ import {
   Link,
 } from 'react-router-dom';
 
-import urlManager from '../../../../common/utils/url-manager';
+import urlManager from 'common/utils/url-manager';
 
 
 const Component = (props) => {
