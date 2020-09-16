@@ -1,4 +1,5 @@
 export const urls = {
+    HOME: '/',
     FOLDER: '/folder',
     FOLDERS: '/folders',
     FOLDER_ADD: '/folders/add',
@@ -9,6 +10,7 @@ export const urls = {
 const replaceUrl = (url, id) => url.replace(':id', id);
 
 export default {
+    home: () => urls.HOME,
     folders: () => urls.FOLDERS,
     folder: () => {
         return {
