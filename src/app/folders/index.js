@@ -5,16 +5,23 @@ import {
 } from 'react-router-dom';
 
 import urlManager from 'common/utils/url-manager';
+import { findAll } from 'api/folders';
 
-const fakeData = [1, 2, 3, 4, 5, 6 ,7, 8, 9, 10];
 
 const Component = () => {
-  const list = fakeData.map((item) => {
-    const to = urlManager.folder().show(item);
+  const [list, setList] = React.useState([]);
+  React.useEffect(() => {
+    findAll().then((results) => {
+      setList(results);
+    });
+  }, []);
+
+  const $list = list.map((item) => {
+    const to = urlManager.folder().show(item.id);
 
     return (
-      <div key={item} >
-        <Link to={to}>Folder {item}</Link>
+      <div key={item.id} >
+        <Link to={to}>Folder {item.name}</Link>
       </div>
     );
   });
@@ -27,7 +34,7 @@ const Component = () => {
     <>
       <h1>List Folders</h1>
       {addFolder}
-      {list}
+      {$list}
     </>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { findById } from '../form/utils';
+import { findById } from 'api/folders'
 
 
 export const useFindById = (props) => {

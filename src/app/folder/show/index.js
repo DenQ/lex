@@ -8,6 +8,7 @@ import Layout from '../components/layout';
 import Form from '../form';
 import { useFindById } from '../utils';
 
+
 const Component = (props) => {
   const { entity, id } = useFindById(props);
 

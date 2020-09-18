@@ -1,12 +1,13 @@
-import entityTypes from 'common/@types/entity';
+import {
+    eject as ejectFolders,
+    inject as injectFolders,
+} from 'api/folders';
 
 import { fieldNames } from '../constants';
 
 
-export const submitHandler = ({ onSuccessSubmit }) => async (values, form, x) => {
-    const foldersEntitySerialized = window.localStorage.getItem(entityTypes.FOLDERS);
-    const foldersEntity = JSON.parse(foldersEntitySerialized);
-    const { list, meta } = foldersEntity;
+export const submitHandler = ({ onSuccessSubmit }) => async (values) => {
+    const { list, meta } = await ejectFolders();
     const isNew = !values[fieldNames.ID];
 
     if (isNew) {
@@ -24,18 +25,9 @@ export const submitHandler = ({ onSuccessSubmit }) => async (values, form, x) =>
         });
     }
 
-    const newEntitySerialized = JSON.stringify({
+    await injectFolders({
         meta, list,
     });
 
-    window.localStorage.setItem(entityTypes.FOLDERS, newEntitySerialized);
-
     await onSuccessSubmit();
-};
-
-export const findById = async ({ id }) => {
-    const foldersEntitySerialized = window.localStorage.getItem(entityTypes.FOLDERS);
-    const foldersEntity = JSON.parse(foldersEntitySerialized);
-    const { list } = foldersEntity;
-    return await list.find((item) => Number(item.id) === Number(id));
 };
