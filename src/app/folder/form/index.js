@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Field } from 'react-final-form'
+import { Form } from 'react-final-form'
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -7,6 +7,7 @@ import urlManager from 'common/utils/url-manager';
 
 import { submitHandler } from './utils';
 import { fieldNames } from './constants';
+import InputControl from './components/input-control';
 
 const initialValues = {
   [fieldNames.ID]: null,
@@ -16,6 +17,7 @@ const initialValues = {
 
 const EntityForm = ({
   initialValues,
+  readOnly,
 }) => {
     const history = useHistory();
     const validate = () => {};
@@ -34,20 +36,20 @@ const EntityForm = ({
           <form onSubmit={handleSubmit}>
             <div>
               <label>ID</label>
-              <Field name={fieldNames.ID} component="input" placeholder="NEW" disabled />
+              <InputControl fieldName={fieldNames.ID} placeholder="NEW"  readOnly={readOnly} disabled />
             </div>
 
             <div>
               <label>Name Folder</label>
-              <Field name={fieldNames.NAME} component="input" placeholder="Folder Name" />
+              <InputControl fieldName={fieldNames.NAME} placeholder="Folder Name" readOnly={readOnly} />
             </div>
 
             <div>
               <label>Description Folder</label>
-              <Field name={fieldNames.DESCRIPTION} component="input" placeholder="Description" />
+              <InputControl fieldName={fieldNames.DESCRIPTION} placeholder="Description" readOnly={readOnly} />
             </div>
 
-            <button type="submit">Submit</button>
+            <button type="submit">Save</button>
           </form>
         )}
       />
@@ -60,11 +62,13 @@ EntityForm.propTypes = {
     id: null,
     name: PropTypes.string,
     description: PropTypes.string,
-  })
+  }),
+  readOnly: PropTypes.bool,
 };
 
 EntityForm.defaultProps = {
   initialValues,
+  readOnly: false,
 };
 
 export default EntityForm;

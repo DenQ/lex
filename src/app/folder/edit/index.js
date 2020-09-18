@@ -3,24 +3,10 @@ import React from 'react';
 
 import Layout from '../components/layout';
 import Form from '../form';
-import { findById } from '../form/utils';
+import { useFindById } from '../utils';
 
 const Component = (props) => {
-  const {
-    match: {
-      params: {
-        id,
-      },
-    },
-  } = props;
-  const [entity, setEntity] = React.useState(null);
-
-  React.useEffect(() => {
-    findById({ id }).then((modelResult) => {
-      console.log(1, modelResult);
-      setEntity(modelResult)
-    })
-  }, [id]);
+  const { entity } = useFindById(props);
 
   if (!entity) {
     return 'Loading';
