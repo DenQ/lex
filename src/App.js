@@ -13,7 +13,7 @@ import ShowFolder from './app/folder/show';
 import EditFolder from './app/folder/edit';
 import AddFolder from './app/folder/add';
 
-function App() {
+function App(props) {
   return (
     <Router>
       <Switch>
