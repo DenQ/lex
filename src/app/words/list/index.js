@@ -2,12 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { findAll } from 'api/words';
+import RefreshContext from 'common/contexts/refetch-context';
+
 import PresenterWord from '../presenter';
 import { fieldNames } from '../form/constants';
 
 const Component = ({
     folderId,
 }) => {
+    const { wordsReload } = React.useContext(RefreshContext);
     const [list, setList] = React.useState([]);
 
     React.useEffect(() => {
@@ -15,7 +18,7 @@ const Component = ({
         findAll({ criteria }).then((results) => {
             setList(results);
         });
-    }, [folderId, list]);
+    }, [folderId, wordsReload]);
 
     return (
         <>

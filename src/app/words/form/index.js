@@ -2,6 +2,8 @@ import React from 'react';
 import { Form } from 'react-final-form'
 import PropTypes from 'prop-types';
 
+import RefreshContext from 'common/contexts/refetch-context';
+
 import { submitHandler } from './utils';
 import { fieldNames } from './constants';
 import InputControl from './components/input-control';
@@ -18,12 +20,17 @@ const EntityForm = ({
 	initialValues,
 	readOnly,
 }) => {
+    const {
+		wordsReload,
+		setWordsReload,
+	} = React.useContext(RefreshContext);
 	const validate = () => { };
 
 	const onSuccessSubmit = ({ form }) => {
 		console.log('success', form);
 		setTimeout(() => {
 			form.reset();
+			setWordsReload(wordsReload + 1);
 		}, 0);
 	}
 
