@@ -18,12 +18,12 @@ export const submitHandler = ({ onSuccessSubmit }) => async (values, form) => {
             id: meta.lastId,
         });
     } else {
-        // list.forEach((item, index) => {
-        //     if (Number(item.id) === Number(values[fieldNames.ID])) {
-        //         list[index][fieldNames.NAME] = values[fieldNames.NAME];
-        //         list[index][fieldNames.DESCRIPTION] = values[fieldNames.DESCRIPTION];
-        //     }
-        // });
+        list.forEach((item, index) => {
+            if (Number(item.id) === Number(values[fieldNames.ID])) {
+                list[index][fieldNames.WORD_NATIVE] = values[fieldNames.WORD_NATIVE];
+                list[index][fieldNames.WORD_TRANSLATION] = values[fieldNames.WORD_TRANSLATION];
+            }
+        });
     }
 
     await injectWords({

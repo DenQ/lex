@@ -15,7 +15,7 @@ const Component = ({
         findAll({ criteria }).then((results) => {
             setList(results);
         });
-    }, [folderId]);
+    }, [folderId, list]);
 
     return (
         <>
