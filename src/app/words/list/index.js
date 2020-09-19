@@ -1,21 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { findAll } from 'api/words';
 import PresenterWord from '../presenter';
 import { fieldNames } from '../form/constants';
-
-const list = [
-    {
-        [fieldNames.ID]: 1,
-        [fieldNames.FOLDER_ID]: 2,
-        [fieldNames.WORD_NATIVE]: 'xxx',
-        [fieldNames.WORD_TRANSLATION]: 'yyy',
-    },
-];
 
 const Component = ({
     folderId,
 }) => {
+    const [list, setList] = React.useState([]);
+
+    React.useEffect(() => {
+        const criteria = (item) => Number(item[fieldNames.FOLDER_ID]) === Number(folderId);
+        findAll({ criteria }).then((results) => {
+            setList(results);
+        });
+    }, [folderId]);
+
     return (
         <>
             <div>
