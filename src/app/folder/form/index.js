@@ -23,7 +23,6 @@ const EntityForm = ({
     const validate = () => {};
 
     const onSuccessSubmit = () => {
-      console.log('success', history);
       history.push(urlManager.folders());
     }
 

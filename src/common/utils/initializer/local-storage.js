@@ -10,6 +10,7 @@ const defaultEntityView = {
 export default () => {
     [
         entityTypes.FOLDERS,
+        entityTypes.WORDS,
     ].forEach((key) => {
         if (!window.localStorage.getItem(key)) {
             window.localStorage.setItem(key, JSON.stringify(defaultEntityView));
