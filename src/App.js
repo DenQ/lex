@@ -5,6 +5,7 @@ import {
   Route,
   // Link
 } from 'react-router-dom';
+import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 
 import RefreshContext from 'common/contexts/refetch-context';
 
@@ -13,6 +14,22 @@ import ListFolders from './app/folders';
 import ShowFolder from './app/folder/show';
 import EditFolder from './app/folder/edit';
 import AddFolder from './app/folder/add';
+
+// const useStyles = makeStyles((theme) => ({
+  // root: {
+  //   color: theme.status.danger,
+  //   '&$checked': {
+  //     color: theme.status.danger,
+  //   },
+  // },
+  // checked: {},
+// }));
+
+const theme = createMuiTheme({
+  // status: {
+    // danger: orange[500],
+  // },
+});
 
 function App() {
   const [wordsReload, setWordsReload] = React.useState(0);
@@ -23,17 +40,19 @@ function App() {
     foldersReload, setFoldersReload,
   };
   return (
-    <RefreshContext.Provider value={refreshContextValue}>
-      <Router>
-        <Switch>
-          <Route path={urls.FOLDER_SHOW} component={ShowFolder} />
-          <Route path={urls.FOLDER_ADD} component={AddFolder} />
-          <Route path={urls.FOLDER_EDIT} component={EditFolder} />
-          <Route path={urls.FOLDERS} component={ListFolders} />
-          <Route path="/" component={ListFolders} />
-        </Switch>
-      </Router>
-    </RefreshContext.Provider>
+    <ThemeProvider theme={theme}>
+      <RefreshContext.Provider value={refreshContextValue}>
+        <Router>
+          <Switch>
+            <Route path={urls.FOLDER_SHOW} component={ShowFolder} />
+            <Route path={urls.FOLDER_ADD} component={AddFolder} />
+            <Route path={urls.FOLDER_EDIT} component={EditFolder} />
+            <Route path={urls.FOLDERS} component={ListFolders} />
+            <Route path="/" component={ListFolders} />
+          </Switch>
+        </Router>
+      </RefreshContext.Provider>
+    </ThemeProvider>
   );
 }
 

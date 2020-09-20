@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 
 import urlManager from 'common/utils/url-manager';
+import GeneralLayout from 'app/system/layout';
 
 import Layout from '../components/layout';
 import Form from '../form';
@@ -21,11 +22,13 @@ const Component = (props) => {
   }
 
   return (
-    <Layout title="Details Folder">
-      <Link to={urlManager.folder().edit(id)}>To Edit</Link>
-      <Form initialValues={initialValues} readOnly />
-    </Layout>
-  )
+    <GeneralLayout title="Details Folder">
+      <Layout>
+        <Link to={urlManager.folder().edit(id)}>To Edit</Link>
+        <Form initialValues={initialValues} readOnly />
+      </Layout>
+    </GeneralLayout>
+  );
 };
 
 Component.propTypes = {

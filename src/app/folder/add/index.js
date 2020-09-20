@@ -1,14 +1,18 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 
+import GeneralLayout from 'app/system/layout';
+
 import Layout from '../components/layout';
 import Form from '../form';
 
 const Component = () => {
   return (
-    <Layout title="Add Folder">
-      <Form />
-    </Layout>
+    <GeneralLayout title="Add Folder">
+      <Layout>
+        <Form />
+      </Layout>
+    </GeneralLayout>
   )
 };
 

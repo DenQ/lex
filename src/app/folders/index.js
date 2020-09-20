@@ -3,12 +3,14 @@ import React from 'react';
 import {
   Link,
 } from 'react-router-dom';
+import Button from '@material-ui/core/Button'
 
-import urlManager from 'common/utils/url-manager';
 import { findAll } from 'api/folders';
+import urlManager from 'common/utils/url-manager';
+import GeneralLayout from 'app/system/layout';
 
 
-const Component = () => {
+const Component = (props) => {
   const [list, setList] = React.useState([]);
   React.useEffect(() => {
     findAll().then((results) => {
@@ -26,16 +28,28 @@ const Component = () => {
     );
   });
 
+  const onClickCreateNew = () => {
+    const { history } = props;
+    history.push(urlManager.folder().add());
+  };
+
   const addFolder = (
-    <Link to="/folders/add" >Create New *</Link>
+    <Button
+      variant="contained"
+      color="primary"
+      onClick={onClickCreateNew}
+      size="small"
+      href={urlManager.folder().add()}
+    >
+      Create New *
+    </Button>
   );
 
   return (
-    <>
-      <h1>List Folders</h1>
+    <GeneralLayout title="Folders" isHome>
       {addFolder}
       {$list}
-    </>
+    </GeneralLayout>
   );
 };
 

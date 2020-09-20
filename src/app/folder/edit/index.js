@@ -2,6 +2,7 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 
 import WordsList from 'app/words/list';
+import GeneralLayout from 'app/system/layout';
 
 import Layout from '../components/layout';
 import FolderForm from '../form';
@@ -19,10 +20,12 @@ const Component = (props) => {
   }
 
   return (
-    <Layout title="Edit Folder">
-      <FolderForm initialValues={initialValues} />
-      <WordsList folderId={entity.id} />
-    </Layout>
+    <GeneralLayout title="Edit Folder">
+      <Layout>
+        <FolderForm initialValues={initialValues} />
+        <WordsList folderId={entity.id} />
+      </Layout>
+    </GeneralLayout>
   )
 };
 
