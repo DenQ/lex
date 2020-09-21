@@ -39,6 +39,7 @@ function App() {
     wordsReload, setWordsReload,
     foldersReload, setFoldersReload,
   };
+  console.log(5555);
   return (
     <ThemeProvider theme={theme}>
       <RefreshContext.Provider value={refreshContextValue}>

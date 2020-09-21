@@ -1,13 +1,16 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
-import {
-  Link,
-} from 'react-router-dom';
+// import {
+//   Link,
+// } from 'react-router-dom';
 import Button from '@material-ui/core/Button'
 
+import Grid from '@material-ui/core/Grid';
 import { findAll } from 'api/folders';
 import urlManager from 'common/utils/url-manager';
 import GeneralLayout from 'app/system/layout';
+
+import FolderCard from './components/card';
 
 
 const Component = (props) => {
@@ -20,12 +23,16 @@ const Component = (props) => {
 
   const $list = list.map((item) => {
     const to = urlManager.folder().show(item.id);
-
     return (
-      <div key={item.id} >
-        <Link to={to}>Folder {item.name}</Link>
-      </div>
+      <Grid key={item.id} item>
+        <FolderCard
+          data={item}
+          to={to}
+          history={props.history}
+        />
+      </Grid>
     );
+
   });
 
   const onClickCreateNew = () => {
@@ -39,7 +46,6 @@ const Component = (props) => {
       color="primary"
       onClick={onClickCreateNew}
       size="small"
-      href={urlManager.folder().add()}
     >
       Create New *
     </Button>
@@ -48,7 +54,9 @@ const Component = (props) => {
   return (
     <GeneralLayout title="Folders" isHome>
       {addFolder}
-      {$list}
+      <Grid container justify="center" spacing={2}>
+        {$list}
+      </Grid>
     </GeneralLayout>
   );
 };
