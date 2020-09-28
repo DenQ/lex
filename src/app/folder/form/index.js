@@ -48,7 +48,9 @@ const EntityForm = ({
               <InputControl fieldName={fieldNames.DESCRIPTION} placeholder="Description" readOnly={readOnly} />
             </div>
 
-            <button type="submit">Save</button>
+            {!readOnly && (
+              <button type="submit">Save</button>
+            )}
           </form>
         )}
       />

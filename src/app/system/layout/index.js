@@ -23,6 +23,7 @@ const Component = (props) => {
     return (
       <div className={classes.root}>
         <ToolbarApp title={title} isHome={isHome}/>
+        <br />
         {props.children}
       </div>
     );
