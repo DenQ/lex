@@ -7,16 +7,18 @@ const TextComponent = (props) => {
         input:{
             value,
         },
+        placeholder,
     } = props;
     return (
         <span>
-            : {value}
+            {placeholder} : {value}
         </span>
     );
 }
 
 TextComponent.propTypes = {
     readOnly: PropTypes.bool,
+    placeholder: PropTypes.string.isRequired,
 };
 
 TextComponent.defaultProps = {

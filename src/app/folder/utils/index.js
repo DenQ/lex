@@ -21,6 +21,6 @@ export const useFindById = (props) => {
 
     return {
         entity,
-        id,
+        id: Number(id),
     };
 };

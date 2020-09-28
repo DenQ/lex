@@ -34,17 +34,17 @@ const EntityForm = ({
         render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
             <div>
-              <label>ID</label>
+              {/* <label>ID</label> */}
               <InputControl fieldName={fieldNames.ID} placeholder="NEW"  readOnly={readOnly} disabled />
             </div>
 
             <div>
-              <label>Name Folder</label>
+              {/* <label>Name Folder</label> */}
               <InputControl fieldName={fieldNames.NAME} placeholder="Folder Name" readOnly={readOnly} />
             </div>
 
             <div>
-              <label>Description Folder</label>
+              {/* <label>Description Folder</label> */}
               <InputControl fieldName={fieldNames.DESCRIPTION} placeholder="Description" readOnly={readOnly} />
             </div>
 

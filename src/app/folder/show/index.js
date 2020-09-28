@@ -1,14 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 
-import urlManager from 'common/utils/url-manager';
 import GeneralLayout from 'app/system/layout';
 
 import Layout from '../components/layout';
+import Header from '../components/header';
 import Form from '../form';
 import { useFindById } from '../utils';
-
+import { controlNames } from '../constants';
 
 const Component = (props) => {
   const { entity, id } = useFindById(props);
@@ -19,12 +18,19 @@ const Component = (props) => {
 
   const initialValues = {
     ...entity,
-  }
+  };
+
 
   return (
     <GeneralLayout title="Details Folder">
       <Layout>
-        <Link to={urlManager.folder().edit(id)}>To Edit</Link>
+        <Header
+          id={id}
+          controls={[
+            controlNames.TO_EDIT,
+            controlNames.TO_REMOVE
+          ]}
+        />
         <Form initialValues={initialValues} readOnly />
       </Layout>
     </GeneralLayout>
