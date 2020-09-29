@@ -8,6 +8,9 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import PlayIcon from '@material-ui/icons/PlayCircleOutline';
 import Fab from '@material-ui/core/Fab';
+import Badge from '@material-ui/core/Badge';
+
+import { count } from 'api/words';
 
 const useStyles = makeStyles({
     root: {
@@ -19,7 +22,7 @@ const useStyles = makeStyles({
         fontSize: 14,
     },
     playButton: {
-      marginLeft: 40,
+        marginLeft: 40,
     },
 });
 
@@ -31,25 +34,38 @@ const Component = (props) => {
         to,
         history,
     } = props;
+    const [countWords, setCountWords] = React.useState(0);
+
+    React.useEffect(() => {
+        const criteria = (item) => {
+            return Number(item['folder_id']) === Number(data.id);
+        };
+
+        count({ criteria }).then((result) => {
+            setCountWords(result)
+        });
+    }, [data.id]);
 
     const onClickToFolder = () => {
         history.push(to);
     };
 
     return (
-        <Card className={classes.root}>
-            <CardContent>
-                <Typography className={classes.title} color="textSecondary" gutterBottom>
-                    {data.name}
-                </Typography>
-                <Fab aria-label="play" size="small" className={classes.playButton}>
-                    <PlayIcon color="primary" />
-                </Fab>
-            </CardContent>
-            <CardActions>
-                <Button size="medium" color="primary" onClick={onClickToFolder}>To Folder</Button>
-            </CardActions>
-        </Card>
+        <Badge badgeContent={countWords} color="primary">
+            <Card className={classes.root}>
+                <CardContent>
+                    <Typography className={classes.title} color="textSecondary" gutterBottom>
+                        {data.name}
+                    </Typography>
+                    <Fab aria-label="play" size="small" className={classes.playButton}>
+                        <PlayIcon color="primary" />
+                    </Fab>
+                </CardContent>
+                <CardActions>
+                    <Button size="medium" color="primary" onClick={onClickToFolder}>To Folder</Button>
+                </CardActions>
+            </Card>
+        </Badge>
     );
 };
 

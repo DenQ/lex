@@ -14,6 +14,7 @@ import FolderCardNew from './components/card-new';
 
 const Component = (props) => {
   const [list, setList] = React.useState([]);
+
   React.useEffect(() => {
     findAll().then((results) => {
       setList(results);

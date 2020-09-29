@@ -24,3 +24,8 @@ export const findAll = async ({ criteria = () => true }) => {
     const { list } = await eject();
     return await list.filter(criteria);
 };
+
+export const count = async ({ criteria = () => true }) => {
+    const list = await findAll({ criteria });
+    return list.length;
+};
