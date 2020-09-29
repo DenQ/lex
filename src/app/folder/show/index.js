@@ -2,6 +2,7 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 
 import GeneralLayout from 'app/system/layout';
+import WordsList from 'app/words/list';
 
 import Layout from '../components/layout';
 import Header from '../components/header';
@@ -32,6 +33,7 @@ const Component = (props) => {
           ]}
         />
         <Form initialValues={initialValues} readOnly />
+        <WordsList folderId={entity.id} readOnly />
       </Layout>
     </GeneralLayout>
   );
