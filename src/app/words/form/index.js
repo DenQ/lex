@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form } from 'react-final-form'
 import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
 
 import RefreshContext from 'common/contexts/refetch-context';
 
@@ -16,10 +17,17 @@ const initialValues = {
 	[fieldNames.WORD_TRANSLATION]: '',
 };
 
+const useStyles = makeStyles({
+	id: {
+		display: 'none',
+	}
+});
+
 const EntityForm = ({
 	initialValues,
 	readOnly,
 }) => {
+    const classes = useStyles();
     const {
 		wordsReload,
 		setWordsReload,
@@ -42,12 +50,12 @@ const EntityForm = ({
 			render={({ handleSubmit }) => (
 				<form onSubmit={handleSubmit}>
 					<br />
-					<div>
+					<div className={classes.id}>
 						<label>ID</label>
 						<InputControl fieldName={fieldNames.ID} placeholder="NEW" readOnly disabled />
 					</div>
 
-					<div>
+					<div className={classes.id}>
 						<label>Folder ID</label>
 						<InputControl fieldName={fieldNames.FOLDER_ID} placeholder="NEW" readOnly />
 					</div>

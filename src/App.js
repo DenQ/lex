@@ -5,7 +5,7 @@ import {
   Route,
   // Link
 } from 'react-router-dom';
-import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 import RefreshContext from 'common/contexts/refetch-context';
 
@@ -39,7 +39,7 @@ function App() {
     wordsReload, setWordsReload,
     foldersReload, setFoldersReload,
   };
-  console.log(5555);
+  // console.log(5555);
   return (
     <ThemeProvider theme={theme}>
       <RefreshContext.Provider value={refreshContextValue}>

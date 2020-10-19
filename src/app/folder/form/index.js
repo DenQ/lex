@@ -2,6 +2,7 @@ import React from 'react';
 import { Form } from 'react-final-form'
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
 
 import urlManager from 'common/utils/url-manager';
 
@@ -10,66 +11,72 @@ import { fieldNames } from './constants';
 import InputControl from './components/input-control';
 
 const initialValues = {
-  [fieldNames.ID]: null,
-  [fieldNames.NAME]: '',
-  [fieldNames.DESCRIPTION]: '',
+	[fieldNames.ID]: null,
+	[fieldNames.NAME]: '',
+	[fieldNames.DESCRIPTION]: '',
 };
 
+const useStyles = makeStyles({
+	id: {
+		display: 'none',
+	}
+});
+
 const EntityForm = ({
-  initialValues,
-  readOnly,
+	initialValues,
+	readOnly,
 }) => {
-    const history = useHistory();
-    const validate = () => {};
+    const classes = useStyles();
+	const history = useHistory();
+	const validate = () => { };
 
-    const onSuccessSubmit = () => {
-      history.push(urlManager.folders());
-    }
+	const onSuccessSubmit = () => {
+		history.push(urlManager.folders());
+	}
 
-    return (
-      <Form
-        onSubmit={submitHandler({ onSuccessSubmit })}
-        validate={validate}
-        initialValues={initialValues}
-        render={({ handleSubmit }) => (
-          <form onSubmit={handleSubmit}>
-            <div>
-              {/* <label>ID</label> */}
-              <InputControl fieldName={fieldNames.ID} placeholder="NEW"  readOnly={readOnly} disabled />
-            </div>
+	return (
+		<Form
+			onSubmit={submitHandler({ onSuccessSubmit })}
+			validate={validate}
+			initialValues={initialValues}
+			render={({ handleSubmit }) => (
+				<form onSubmit={handleSubmit}>
+					<div className={classes.id}>
+						<InputControl fieldName={fieldNames.ID} placeholder="NEW" readOnly={readOnly} disabled />
+					</div>
 
-            <div>
-              {/* <label>Name Folder</label> */}
-              <InputControl fieldName={fieldNames.NAME} placeholder="Folder Name" readOnly={readOnly} />
-            </div>
+					<div>
+						{/* <label>Name Folder</label> */}
+						<InputControl fieldName={fieldNames.NAME} placeholder="Folder Name" readOnly={readOnly} />
+					</div>
 
-            <div>
-              {/* <label>Description Folder</label> */}
-              <InputControl fieldName={fieldNames.DESCRIPTION} placeholder="Description" readOnly={readOnly} />
-            </div>
+					<div>
+						{/* <label>Description Folder</label> */}
+						<InputControl fieldName={fieldNames.DESCRIPTION} placeholder="Description" readOnly={readOnly} />
+					</div>
 
-            {!readOnly && (
-              <button type="submit">Save</button>
-            )}
-          </form>
-        )}
-      />
-    );
+					{!readOnly && (
+						<button type="submit">Save</button>
+					)}
+				</form>
+			)}
+		/>
+	);
 }
 
 
 EntityForm.propTypes = {
-  initialValues: PropTypes.shape({
-    id: null,
-    name: PropTypes.string,
-    description: PropTypes.string,
-  }),
-  readOnly: PropTypes.bool,
+	initialValues: PropTypes.shape({
+		id: null,
+		name: PropTypes.string,
+		description: PropTypes.string,
+	}),
+	readOnly: PropTypes.bool,
 };
 
 EntityForm.defaultProps = {
-  initialValues,
-  readOnly: false,
+	initialValues,
+	readOnly: false,
 };
 
 export default EntityForm;
