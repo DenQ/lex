@@ -1,8 +1,5 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
-// import {
-//   Link,
-// } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import { findAll } from 'api/folders';
 import urlManager from 'common/utils/url-manager';

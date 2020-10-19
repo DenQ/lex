@@ -2,6 +2,8 @@ import React from 'react';
 import { Form } from 'react-final-form'
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 
 import RefreshContext from 'common/contexts/refetch-context';
 
@@ -27,8 +29,8 @@ const EntityForm = ({
 	initialValues,
 	readOnly,
 }) => {
-    const classes = useStyles();
-    const {
+	const classes = useStyles();
+	const {
 		wordsReload,
 		setWordsReload,
 	} = React.useContext(RefreshContext);
@@ -49,28 +51,33 @@ const EntityForm = ({
 			initialValues={initialValues}
 			render={({ handleSubmit }) => (
 				<form onSubmit={handleSubmit}>
-					<br />
-					<div className={classes.id}>
-						<label>ID</label>
-						<InputControl fieldName={fieldNames.ID} placeholder="NEW" readOnly disabled />
-					</div>
+					<Grid container spacing={5}>
 
-					<div className={classes.id}>
-						<label>Folder ID</label>
-						<InputControl fieldName={fieldNames.FOLDER_ID} placeholder="NEW" readOnly />
-					</div>
+						<Grid item>
 
-					<div>
-						<label>Word Native</label>
-						<InputControl fieldName={fieldNames.WORD_NATIVE} placeholder="Native" readOnly={readOnly} />
-					</div>
+							<div className={classes.id}>
+								<label>ID</label>
+								<InputControl fieldName={fieldNames.ID} placeholder="NEW" readOnly disabled />
+							</div>
 
-					<div>
-						<label>Word Translation</label>
-						<InputControl fieldName={fieldNames.WORD_TRANSLATION} placeholder="Translation" readOnly={readOnly} />
-					</div>
+							<div className={classes.id}>
+								<label>Folder ID</label>
+								<InputControl fieldName={fieldNames.FOLDER_ID} placeholder="NEW" readOnly />
+							</div>
+						</Grid>
 
-					<button type="submit">Save</button>
+						<Grid item xs={3}>
+							<InputControl fieldName={fieldNames.WORD_NATIVE} placeholder="Native" readOnly={readOnly} />
+						</Grid>
+
+						<Grid item xs={3}>
+							<InputControl fieldName={fieldNames.WORD_TRANSLATION} placeholder="Translation" readOnly={readOnly} />
+						</Grid>
+
+						<Grid item xs={2}>
+							<Button type="submit" color="primary">Save</Button>
+						</Grid>
+					</Grid>
 				</form>
 			)}
 		/>

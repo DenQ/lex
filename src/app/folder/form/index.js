@@ -2,13 +2,16 @@ import React from 'react';
 import { Form } from 'react-final-form'
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
 import urlManager from 'common/utils/url-manager';
+import InputControl from 'app/words/form/components/input-control';
 
 import { submitHandler } from './utils';
 import { fieldNames } from './constants';
-import InputControl from './components/input-control';
+
 
 const initialValues = {
 	[fieldNames.ID]: null,
@@ -26,7 +29,7 @@ const EntityForm = ({
 	initialValues,
 	readOnly,
 }) => {
-    const classes = useStyles();
+	const classes = useStyles();
 	const history = useHistory();
 	const validate = () => { };
 
@@ -41,24 +44,28 @@ const EntityForm = ({
 			initialValues={initialValues}
 			render={({ handleSubmit }) => (
 				<form onSubmit={handleSubmit}>
-					<div className={classes.id}>
-						<InputControl fieldName={fieldNames.ID} placeholder="NEW" readOnly={readOnly} disabled />
-					</div>
+					<Grid container spacing={5}>
+						<Grid item>
+							<div className={classes.id}>
+								<InputControl fieldName={fieldNames.ID} placeholder="NEW" readOnly={readOnly} disabled />
+							</div>
+						</Grid>
 
-					<div>
-						{/* <label>Name Folder</label> */}
-						<InputControl fieldName={fieldNames.NAME} placeholder="Folder Name" readOnly={readOnly} />
-					</div>
+						<Grid item xs={3}>
+							<InputControl fieldName={fieldNames.NAME} placeholder="Folder Name" readOnly={readOnly} />
+						</Grid>
 
-					<div>
-						{/* <label>Description Folder</label> */}
-						<InputControl fieldName={fieldNames.DESCRIPTION} placeholder="Description" readOnly={readOnly} />
-					</div>
+						<Grid item xs={3}>
+							<InputControl fieldName={fieldNames.DESCRIPTION} placeholder="Description" readOnly={readOnly} />
+						</Grid>
 
-					{!readOnly && (
-						<button type="submit">Save</button>
-					)}
-				</form>
+						<Grid item>
+							{!readOnly && (
+								<Button type="submit" color="primary">Save</Button>
+							)}
+						</Grid>
+					</Grid>
+				</form >
 			)}
 		/>
 	);
