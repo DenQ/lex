@@ -49,7 +49,7 @@ const EntityForm = ({
 			onSubmit={submitHandler({ onSuccessSubmit })}
 			validate={validate}
 			initialValues={initialValues}
-			render={({ handleSubmit }) => (
+			render={({ handleSubmit, dirty }) => (
 				<form onSubmit={handleSubmit}>
 					<Grid container spacing={5}>
 
@@ -75,7 +75,7 @@ const EntityForm = ({
 						</Grid>
 
 						<Grid item xs={2}>
-							<Button type="submit" color="primary">Save</Button>
+							<Button type="submit" color="primary" disabled={!dirty}>Save</Button>
 						</Grid>
 					</Grid>
 				</form>
