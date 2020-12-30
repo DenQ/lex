@@ -29,3 +29,23 @@ export const count = async ({ criteria = () => true }) => {
     const list = await findAll({ criteria });
     return list.length;
 };
+
+export const removeById = async ({ id }) => {
+    const { list, meta } = await eject();
+    const newList = list.filter((item) => item.id !== id);
+
+    return await inject({
+        meta,
+        list: newList,
+    });
+};
+
+export const removeByFolderId = async ({ folderId }) => {
+    const { list, meta } = await eject();
+    const newList = list.filter((item) => item.folder_id !== folderId);
+
+    return await inject({
+        meta,
+        list: newList,
+    });
+};
