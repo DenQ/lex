@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 
 import Form from '../form';
 import Details from './details';
@@ -11,6 +12,7 @@ const PresenterComponent = (props) => {
         isNew,
         folderId,
         readOnly,
+        handleRemove,
     } = props;
 
     if (isNew) {
@@ -37,12 +39,13 @@ const PresenterComponent = (props) => {
     }
 
     return (
-        <Form initialValues={initialValues} />
+        <Form initialValues={initialValues} handleRemove={handleRemove} />
     );
 };
 
 PresenterComponent.propTypes = {
     folderId: PropTypes.number.isRequired,
+    handleRemove: PropTypes.func,
     isNew: PropTypes.bool,
     readOnly: PropTypes.bool,
 };
@@ -50,6 +53,7 @@ PresenterComponent.propTypes = {
 PresenterComponent.defaultProps = {
     isNew: false,
     readOnly: false,
+    handleRemove: _.noop,
 };
 
 export default PresenterComponent;

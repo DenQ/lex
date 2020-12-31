@@ -28,6 +28,7 @@ const useStyles = makeStyles({
 const EntityForm = ({
 	initialValues,
 	readOnly,
+	handleRemove,
 }) => {
 	const classes = useStyles();
 	const {
@@ -42,7 +43,14 @@ const EntityForm = ({
 			form.reset();
 			setWordsReload(wordsReload + 1);
 		}, 0);
-	}
+	};
+	const onClickRemove = () => {
+		const id = initialValues[fieldNames.ID];
+		handleRemove({ id });
+	};
+	const isCanRemove = React.useMemo(() => {
+		return !!initialValues[fieldNames.ID];
+	}, [initialValues[fieldNames.ID]])
 
 	return (
 		<Form
@@ -74,9 +82,15 @@ const EntityForm = ({
 							<InputControl fieldName={fieldNames.WORD_TRANSLATION} placeholder="Translation" readOnly={readOnly} />
 						</Grid>
 
-						<Grid item xs={2}>
+						<Grid item xs={1}>
 							<Button type="submit" color="primary" disabled={!dirty}>Save</Button>
 						</Grid>
+
+						{isCanRemove && (
+							<Grid item xs={1}>
+								<Button type="button" color="secondary" onClick={onClickRemove} >Remove</Button>
+							</Grid>
+						)}
 					</Grid>
 				</form>
 			)}
@@ -93,6 +107,7 @@ EntityForm.propTypes = {
 		[fieldNames.WORD_TRANSLATION]: PropTypes.string,
 	}),
 	readOnly: PropTypes.bool,
+    handleRemove: PropTypes.func,
 };
 
 EntityForm.defaultProps = {
