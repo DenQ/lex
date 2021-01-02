@@ -14,6 +14,7 @@ import ListFolders from './app/folders';
 import ShowFolder from './app/folder/show';
 import EditFolder from './app/folder/edit';
 import AddFolder from './app/folder/add';
+import PlayFolder from './app/folder/play';
 
 // const useStyles = makeStyles((theme) => ({
   // root: {
@@ -48,6 +49,7 @@ function App() {
             <Route path={urls.FOLDER_SHOW} component={ShowFolder} />
             <Route path={urls.FOLDER_ADD} component={AddFolder} />
             <Route path={urls.FOLDER_EDIT} component={EditFolder} />
+            <Route path={urls.FOLDER_PLAY} component={PlayFolder} />
             <Route path={urls.FOLDERS} component={ListFolders} />
             <Route path="/" component={ListFolders} />
           </Switch>
