@@ -10,25 +10,40 @@ import { fieldNames as wordFieldNames } from 'app/words/form/constants';
 const Component = ({
     targetWord,
     list,
+    handleSelectWord,
+    vector,
 }) => {
+    const onSelectWord = (selectedWord) => () => {
+        handleSelectWord({
+            targetWord,
+            selectedWord,
+        });
+    };
+    const getTitle = (item, vector) => {
+        return item[
+            vector ? wordFieldNames.WORD_TRANSLATION : wordFieldNames.WORD_NATIVE
+        ];
+    };
+    const targetTitle = React.useMemo(() => {
+        return getTitle(targetWord, !vector);
+    }, [vector, targetWord]);
+
     return (
         <List>
             <ListItem button key={targetWord[wordFieldNames.ID]}>
-                <Typography>
-                    {targetWord[wordFieldNames.WORD_TRANSLATION]}
-                </Typography>
+                <Typography>{targetTitle}</Typography>
             </ListItem>
             {list.map((item) => {
                 return (
-                    <ListItem button key={item.id}>
+                    <ListItem button key={item.id} onClick={onSelectWord(item)}>
                         <Typography>
-                            {item.word_native}
+                            {getTitle(item, vector)}
                         </Typography>
                     </ListItem>
                 );
             })}
         </List>
-);
+    );
 };
 
 Component.propTypes = {

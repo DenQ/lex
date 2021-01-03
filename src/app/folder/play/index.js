@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
 // import PropTypes from 'prop-types';
-// import List from '@material-ui/core/List';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-// import ListItem from '@material-ui/core/ListItem';
 
-// import WordsList from 'app/words/list';
 import { findAll } from 'api/words';
 import GeneralLayout from 'app/system/layout';
 // import { fieldNames as wordFieldNames } from 'app/words/form/constants';
@@ -22,6 +19,8 @@ const Component = (props) => {
     const { entity, id } = useFindById(props);
     const [list, setList] = useState([]);
     const [targetWord, setTargetWord] = useState([]);
+    const [vector, setVector] = useState(true);
+    const [needReload, setNeedReload] = useState(null);
 
     useEffect(() => {
         const criteria = item => item[fieldNames.FOLDER_ID] === id;
@@ -31,8 +30,22 @@ const Component = (props) => {
                 const newList = getRange({ list, targetWord });
                 setList(newList);
                 setTargetWord(targetWord);
+                setVector(Math.random() >= 0.5);
             });
-    }, []);
+    }, [needReload]);
+
+    const handleSelectWord = ({
+        targetWord,
+        selectedWord,
+    }) => {
+        console.log(777, {
+            targetWord,
+            selectedWord,
+        });
+        setTimeout(() => {
+            setNeedReload(+new Date());
+        }, 200);
+    };
 
     if (!entity) {
         return 'Loading';
@@ -51,7 +64,12 @@ const Component = (props) => {
                     <Typography variant="button">
                         Play words
                     </Typography>
-                    <PlayListWords list={list} targetWord={targetWord} />
+                    <PlayListWords
+                        list={list}
+                        targetWord={targetWord}
+                        handleSelectWord={handleSelectWord}
+                        vector={vector}
+                    />
                 </Box>
             </Layout>
         </GeneralLayout>
