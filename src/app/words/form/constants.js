@@ -1,3 +1,4 @@
+// TODO: need use src/common/@types/words.js
 export const fieldNames = {
     ID: 'id',
     FOLDER_ID: 'folder_id',

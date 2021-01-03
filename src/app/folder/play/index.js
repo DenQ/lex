@@ -1,53 +1,63 @@
 import React, { useEffect, useState } from 'react';
 // import PropTypes from 'prop-types';
 import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
 
 import { findAll } from 'api/words';
 import GeneralLayout from 'app/system/layout';
-// import { fieldNames as wordFieldNames } from 'app/words/form/constants';
+import { fieldNames as wordFieldNames } from 'app/words/form/constants';
 import PlayListWords from './components/list';
 
 import Header from '../components/header';
 import Layout from '../components/layout';
-// import FolderForm from '../form';
 import { useFindById } from '../utils';
-import { getRange, getWeakestWord } from './utils';
+import { getRange, getWeakestWord, setRate } from './utils';
 import { fieldNames } from './constants';
 
 const Component = (props) => {
     const { entity, id } = useFindById(props);
     const [list, setList] = useState([]);
-    const [targetWord, setTargetWord] = useState([]);
+    const [targetWord, setTargetWord] = useState(null);
     const [vector, setVector] = useState(true);
     const [needReload, setNeedReload] = useState(null);
+    const [errorItem, setErrorItem] = useState(null);
 
+    /* eslint-disable react-hooks/exhaustive-deps */
     useEffect(() => {
         const criteria = item => item[fieldNames.FOLDER_ID] === id;
         findAll({ criteria })
             .then((list) => {
                 const targetWord = getWeakestWord({ list });
                 const newList = getRange({ list, targetWord });
+
                 setList(newList);
                 setTargetWord(targetWord);
                 setVector(Math.random() >= 0.5);
             });
     }, [needReload]);
+    /* eslint-enable react-hooks/exhaustive-deps */
 
     const handleSelectWord = ({
         targetWord,
         selectedWord,
     }) => {
-        console.log(777, {
+        const isSuccess = targetWord[wordFieldNames.ID] === selectedWord[wordFieldNames.ID];
+        setRate({
             targetWord,
-            selectedWord,
-        });
-        setTimeout(() => {
-            setNeedReload(+new Date());
-        }, 200);
+            isSuccess,
+        }).then((r) => {
+            if (!isSuccess) {
+                setErrorItem(selectedWord);
+            }
+            setTimeout(() => {
+                setNeedReload(+new Date());
+                setErrorItem(null);
+            }, 300);
+        }).catch((e) => {
+            console.error(e);
+        })
     };
 
-    if (!entity) {
+    if (!entity || !targetWord) {
         return 'Loading';
     }
 
@@ -61,14 +71,12 @@ const Component = (props) => {
                     ]}
                 />
                 <Box m={2}>
-                    <Typography variant="button">
-                        Play words
-                    </Typography>
                     <PlayListWords
                         list={list}
                         targetWord={targetWord}
                         handleSelectWord={handleSelectWord}
                         vector={vector}
+                        errorItem={errorItem}
                     />
                 </Box>
             </Layout>

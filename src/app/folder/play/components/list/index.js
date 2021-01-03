@@ -1,18 +1,30 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
+import _ from 'lodash';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import ListItem from '@material-ui/core/ListItem';
+import { makeStyles } from '@material-ui/core/styles';
 
-import { fieldNames as wordFieldNames } from 'app/words/form/constants';
+import {
+    fieldNames as wordFieldNames,
+    ModelProps as WordModelProps,
+} from 'common/@types/words';
 
+const useStyles = makeStyles({
+	errorItem: {
+        color: 'red'
+	}
+});
 
 const Component = ({
     targetWord,
     list,
     handleSelectWord,
     vector,
+    errorItem,
 }) => {
+	const classes = useStyles();
     const onSelectWord = (selectedWord) => () => {
         handleSelectWord({
             targetWord,
@@ -27,16 +39,18 @@ const Component = ({
     const targetTitle = React.useMemo(() => {
         return getTitle(targetWord, !vector);
     }, [vector, targetWord]);
+    const itemVariant = 'h5';
 
     return (
         <List>
             <ListItem button key={targetWord[wordFieldNames.ID]}>
-                <Typography>{targetTitle}</Typography>
+                <Typography color="primary" variant={itemVariant}>{targetTitle}</Typography>
             </ListItem>
             {list.map((item) => {
+                const isError = errorItem ? item[wordFieldNames.ID] === errorItem[wordFieldNames.ID] : false;
                 return (
                     <ListItem button key={item.id} onClick={onSelectWord(item)}>
-                        <Typography>
+                        <Typography color="textSecondary" variant={itemVariant} className={isError ? classes.errorItem : undefined}>
                             {getTitle(item, vector)}
                         </Typography>
                     </ListItem>
@@ -47,9 +61,16 @@ const Component = ({
 };
 
 Component.propTypes = {
+    targetWord: WordModelProps.isRequired,
+    list: PropTypes.arrayOf(WordModelProps),
+    handleSelectWord: PropTypes.func,
+    vector: PropTypes.bool.isRequired,
+    errorItem: WordModelProps,
 };
 
 Component.defaultProps = {
+    handleSelectWord: _.noop,
+    errorItem: null,
 };
 
 export default Component;

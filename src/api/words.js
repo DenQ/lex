@@ -1,3 +1,4 @@
+import { fieldNames } from 'app/words/form/constants';
 import entityTypes from 'common/@types/entity';
 
 
@@ -49,3 +50,24 @@ export const removeByFolderId = async ({ folderId }) => {
         list: newList,
     });
 };
+
+export const updateById = async ({ id, payload }) => {
+    const { list, meta } = await eject();
+    const word = await findById({ id });
+
+    if (!word) return null;
+    // TODO: need exclude ID. Via _.omit(...)
+    const newWord = {
+        ...word,
+        ...payload,
+    };
+    const newList = list.map((item) => {
+        if (item[fieldNames.ID] === id) return newWord;
+        return item;
+    });
+
+    return await inject({
+        meta,
+        list: newList,
+    });
+}
