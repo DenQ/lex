@@ -2,6 +2,7 @@ import _ from 'lodash';
 
 import { updateById } from 'api/words'
 import { fieldNames as wordFieldNames } from 'app/words/form/constants';
+import { MAX_COUNT_WINS } from './constants';
 
 export const getWeakestWord = ({ list }) => {
     return _.chain(list)
@@ -42,4 +43,19 @@ export const setRate = ({ targetWord, isSuccess }) => {
             [wordFieldNames.NUMBER_OF_WINS]: isSuccess ? wins + 1 : wins,
         }
     })
+};
+
+
+export const calculateProgress = ({ list }) => {
+    const maxAvalableValueList = list.length * MAX_COUNT_WINS;
+    const value = _.chain(list)
+        .map((item) => {
+            const wins = item[wordFieldNames.NUMBER_OF_WINS] ;
+            if (wins >= MAX_COUNT_WINS) return MAX_COUNT_WINS;
+            return wins;
+        })
+        .sum()
+        .value();
+
+    return Math.round(value * 100 / maxAvalableValueList);
 };

@@ -5,12 +5,13 @@ import Box from '@material-ui/core/Box';
 import { findAll } from 'api/words';
 import GeneralLayout from 'app/system/layout';
 import { fieldNames as wordFieldNames } from 'app/words/form/constants';
-import PlayListWords from './components/list';
 
+import PlayListWords from './components/list';
+import Progress from './components/statistic-info';
 import Header from '../components/header';
 import Layout from '../components/layout';
 import { useFindById } from '../utils';
-import { getRange, getWeakestWord, setRate } from './utils';
+import { getRange, getWeakestWord, setRate, calculateProgress } from './utils';
 import { fieldNames } from './constants';
 
 const Component = (props) => {
@@ -20,6 +21,7 @@ const Component = (props) => {
     const [vector, setVector] = useState(true);
     const [needReload, setNeedReload] = useState(null);
     const [errorItem, setErrorItem] = useState(null);
+    const [progress, setProgress] = React.useState(0);
 
     /* eslint-disable react-hooks/exhaustive-deps */
     useEffect(() => {
@@ -28,10 +30,12 @@ const Component = (props) => {
             .then((list) => {
                 const targetWord = getWeakestWord({ list });
                 const newList = getRange({ list, targetWord });
+                const progress = calculateProgress({ list });
 
                 setList(newList);
                 setTargetWord(targetWord);
                 setVector(Math.random() >= 0.5);
+                setProgress(progress);
             });
     }, [needReload]);
     /* eslint-enable react-hooks/exhaustive-deps */
@@ -70,6 +74,7 @@ const Component = (props) => {
                         // controlNames.TO_REMOVE
                     ]}
                 />
+                <Progress value={progress}/>
                 <Box m={2}>
                     <PlayListWords
                         list={list}
