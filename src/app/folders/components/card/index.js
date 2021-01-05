@@ -34,6 +34,7 @@ const Component = (props) => {
     const {
         data,
         to,
+        toPlay,
         history,
     } = props;
     const [countWords, setCountWords] = React.useState(0);
@@ -51,6 +52,9 @@ const Component = (props) => {
     const onClickToFolder = () => {
         history.push(to);
     };
+    const onClickPlay = () => {
+        history.push(toPlay);
+    };
 
     return (
         <Badge badgeContent={countWords} color="primary">
@@ -60,7 +64,7 @@ const Component = (props) => {
                         {data.name}
                     </Typography>
                     <Fab aria-label="play" size="small" className={classes.playButton}>
-                        <PlayIcon color="primary" />
+                        <PlayIcon color="primary" onClick={onClickPlay} />
                     </Fab>
                 </CardContent>
                 <CardActions>

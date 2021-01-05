@@ -20,11 +20,13 @@ const Component = (props) => {
 
   const $list = list.map((item) => {
     const to = urlManager.folder().show(item.id);
+    const toPlay = urlManager.folder().play(item.id);
     return (
       <Grid key={item.id} item>
         <FolderCard
           data={item}
           to={to}
+          toPlay={toPlay}
           history={props.history}
         />
       </Grid>

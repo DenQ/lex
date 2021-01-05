@@ -48,9 +48,11 @@ const EntityForm = ({
 		const id = initialValues[fieldNames.ID];
 		handleRemove({ id });
 	};
+    /* eslint-disable react-hooks/exhaustive-deps */
 	const isCanRemove = React.useMemo(() => {
 		return !!initialValues[fieldNames.ID];
-	}, [initialValues[fieldNames.ID]])
+	}, [initialValues[fieldNames.ID]]);
+    /* eslint-enable react-hooks/exhaustive-deps */
 
 	return (
 		<Form
