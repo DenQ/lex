@@ -22,6 +22,7 @@ const Component = (props) => {
     const [needReload, setNeedReload] = useState(null);
     const [errorItem, setErrorItem] = useState(null);
     const [progress, setProgress] = React.useState(0);
+    const [noData, setNoData] = React.useState(false);
 
     /* eslint-disable react-hooks/exhaustive-deps */
     useEffect(() => {
@@ -31,6 +32,10 @@ const Component = (props) => {
                 const targetWord = getWeakestWord({ list });
                 const newList = getRange({ list, targetWord });
                 const progress = calculateProgress({ list });
+
+                if (list.length === 0) {
+                    setNoData(true);
+                }
 
                 setList(newList);
                 setTargetWord(targetWord);
@@ -61,8 +66,10 @@ const Component = (props) => {
         })
     };
 
+
     if (!entity || !targetWord) {
-        return 'Loading';
+        if (!noData)
+            return 'Loading';
     }
 
     return (
@@ -74,16 +81,23 @@ const Component = (props) => {
                         // controlNames.TO_REMOVE
                     ]}
                 />
-                <Progress value={progress}/>
-                <Box m={2}>
-                    <PlayListWords
-                        list={list}
-                        targetWord={targetWord}
-                        handleSelectWord={handleSelectWord}
-                        vector={vector}
-                        errorItem={errorItem}
-                    />
-                </Box>
+                {noData && (
+                    "no data"
+                )}
+                {!noData && (
+                    <>
+                        <Progress value={progress}/>
+                        <Box m={2}>
+                            <PlayListWords
+                                list={list}
+                                targetWord={targetWord}
+                                handleSelectWord={handleSelectWord}
+                                vector={vector}
+                                errorItem={errorItem}
+                            />
+                        </Box>
+                    </>
+                )}
             </Layout>
         </GeneralLayout>
     )
