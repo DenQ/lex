@@ -4,7 +4,8 @@ import Box from '@material-ui/core/Box';
 
 import { findAll } from 'api/words';
 import GeneralLayout from 'app/system/layout';
-import { fieldNames as wordFieldNames } from 'app/words/form/constants';
+import { fieldNames as wordFieldNames } from 'common/@types/words';
+import NoData from 'common/components/no-data';
 
 import PlayListWords from './components/list';
 import Progress from './components/statistic-info';
@@ -12,7 +13,7 @@ import Header from '../components/header';
 import Layout from '../components/layout';
 import { useFindById } from '../utils';
 import { getRange, getWeakestWord, setRate, calculateProgress } from './utils';
-import { fieldNames } from './constants';
+import { fieldNames, noDataProps } from './constants';
 
 const Component = (props) => {
     const { entity, id } = useFindById(props);
@@ -82,7 +83,7 @@ const Component = (props) => {
                     ]}
                 />
                 {noData && (
-                    "no data"
+                    <NoData {...noDataProps} />
                 )}
                 {!noData && (
                     <>
