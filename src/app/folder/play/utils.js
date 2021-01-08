@@ -2,6 +2,8 @@ import _ from 'lodash';
 
 import { updateById } from 'api/words'
 import { fieldNames as wordFieldNames } from 'app/words/form/constants';
+import urlManager from 'common/utils/url-manager';
+
 import { MAX_COUNT_WINS } from './constants';
 
 export const getWeakestWord = ({ list }) => {
@@ -58,4 +60,23 @@ export const calculateProgress = ({ list }) => {
         .value();
 
     return Math.round(value * 100 / maxAvalableValueList);
+};
+
+export const buildBreadCrumbsProps = ({
+    folderId,
+}) => {
+    return [
+        {
+            to: urlManager.home(),
+            title: 'Home',
+        },
+        {
+            to: urlManager.folder().show(folderId),
+            title: 'Folder',
+        },
+        {
+            to: undefined,
+            title: 'Play'
+        }
+    ];
 };

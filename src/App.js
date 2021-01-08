@@ -40,7 +40,7 @@ function App() {
     wordsReload, setWordsReload,
     foldersReload, setFoldersReload,
   };
-  // console.log(5555);
+  // console.log(5555, theme);
   return (
     <ThemeProvider theme={theme}>
       <RefreshContext.Provider value={refreshContextValue}>
