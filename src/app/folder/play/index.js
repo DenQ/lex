@@ -6,13 +6,14 @@ import { findAll } from 'api/words';
 import GeneralLayout from 'app/system/layout';
 import { fieldNames as wordFieldNames } from 'common/@types/words';
 import NoData from 'common/components/no-data';
+import BreadCrumbs from 'common/components/bread-crumbs';
 
 import PlayListWords from './components/list';
 import Progress from './components/statistic-info';
 import Header from '../components/header';
 import Layout from '../components/layout';
 import { useFindById } from '../utils';
-import { getRange, getWeakestWord, setRate, calculateProgress } from './utils';
+import { getRange, getWeakestWord, setRate, calculateProgress, buildBreadCrumbsProps } from './utils';
 import { fieldNames, noDataProps } from './constants';
 
 const Component = (props) => {
@@ -73,6 +74,10 @@ const Component = (props) => {
             return 'Loading';
     }
 
+    const breadcrumbsProps = buildBreadCrumbsProps({
+        folderId: id,
+    });
+
     return (
         <GeneralLayout title="Play Folder">
             <Layout>
@@ -82,6 +87,9 @@ const Component = (props) => {
                         // controlNames.TO_REMOVE
                     ]}
                 />
+                <Box m={2}>
+                    <BreadCrumbs data={breadcrumbsProps} />
+                </Box>
                 {noData && (
                     <NoData {...noDataProps} />
                 )}
