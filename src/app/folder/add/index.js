@@ -10,7 +10,6 @@ import { buildBreadCrumbsProps } from '../utils';
 
 const Component = () => {
   const breadcrumbsProps = buildBreadCrumbsProps({
-      // folderName: '',
       actionName: 'Add',
   });
 
