@@ -64,6 +64,7 @@ export const calculateProgress = ({ list }) => {
 
 export const buildBreadCrumbsProps = ({
     folderId,
+    folderName,
 }) => {
     return [
         {
@@ -72,7 +73,7 @@ export const buildBreadCrumbsProps = ({
         },
         {
             to: urlManager.folder().show(folderId),
-            title: 'Folder',
+            title: `Folder (${folderName})`,
         },
         {
             to: undefined,

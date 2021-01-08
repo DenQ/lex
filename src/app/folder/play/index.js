@@ -6,7 +6,6 @@ import { findAll } from 'api/words';
 import GeneralLayout from 'app/system/layout';
 import { fieldNames as wordFieldNames } from 'common/@types/words';
 import NoData from 'common/components/no-data';
-import BreadCrumbs from 'common/components/bread-crumbs';
 
 import PlayListWords from './components/list';
 import Progress from './components/statistic-info';
@@ -76,6 +75,7 @@ const Component = (props) => {
 
     const breadcrumbsProps = buildBreadCrumbsProps({
         folderId: id,
+        folderName: entity.name,
     });
 
     return (
@@ -83,13 +83,8 @@ const Component = (props) => {
             <Layout>
                 <Header
                     id={id}
-                    controls={[
-                        // controlNames.TO_REMOVE
-                    ]}
+                    breadcrumbsProps={breadcrumbsProps}
                 />
-                <Box m={2}>
-                    <BreadCrumbs data={breadcrumbsProps} />
-                </Box>
                 {noData && (
                     <NoData {...noDataProps} />
                 )}
