@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { findById } from 'api/folders'
+import urlManager from 'common/utils/url-manager';
 
 
 export const useFindById = (props) => {
@@ -23,4 +24,24 @@ export const useFindById = (props) => {
         entity,
         id: Number(id),
     };
+};
+
+export const buildBreadCrumbsProps = ({
+   folderName,
+   actionName,
+}) => {
+    return [
+        {
+            to: urlManager.home(),
+            title: 'Home',
+        },
+        {
+            to: undefined,
+            title: folderName ? `Folder (${folderName})` : 'Folder',
+        },
+        {
+            to: undefined,
+            title: actionName
+        }
+    ];
 };

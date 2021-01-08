@@ -40,13 +40,15 @@ const Component = ({
     );
 };
 
+export const BreadcrumbsPropTypes = PropTypes.arrayOf(
+    PropTypes.shape({
+        to: PropTypes.string,
+        title: PropTypes.string.isRequired,
+    }),
+);
+
 Component.propTypes = {
-    data: PropTypes.arrayOf(
-        PropTypes.shape({
-            to: PropTypes.string,
-            title: PropTypes.string.isRequired,
-        }),
-    ),
+    data: BreadcrumbsPropTypes,
 };
 
 Component.defaultProps = {

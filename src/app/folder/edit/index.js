@@ -7,7 +7,7 @@ import Header from '../components/header';
 
 import Layout from '../components/layout';
 import FolderForm from '../form';
-import { useFindById } from '../utils';
+import { useFindById, buildBreadCrumbsProps } from '../utils';
 import { controlNames } from '../constants';
 
 const Component = (props) => {
@@ -21,6 +21,11 @@ const Component = (props) => {
         ...entity,
     }
 
+  const breadcrumbsProps = buildBreadCrumbsProps({
+      folderName: entity.name,
+      actionName: 'Edit',
+  });
+
     return (
         <GeneralLayout title="Edit Folder">
             <Layout>
@@ -29,6 +34,7 @@ const Component = (props) => {
                     controls={[
                         controlNames.TO_REMOVE
                     ]}
+                    breadcrumbsProps={breadcrumbsProps}
                 />
                 <FolderForm initialValues={initialValues} />
                 <WordsList folderId={entity.id} />

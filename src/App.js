@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  // Link
 } from 'react-router-dom';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
@@ -16,20 +15,7 @@ import EditFolder from './app/folder/edit';
 import AddFolder from './app/folder/add';
 import PlayFolder from './app/folder/play';
 
-// const useStyles = makeStyles((theme) => ({
-  // root: {
-  //   color: theme.status.danger,
-  //   '&$checked': {
-  //     color: theme.status.danger,
-  //   },
-  // },
-  // checked: {},
-// }));
-
 const theme = createMuiTheme({
-  // status: {
-    // danger: orange[500],
-  // },
 });
 
 function App() {
@@ -40,7 +26,7 @@ function App() {
     wordsReload, setWordsReload,
     foldersReload, setFoldersReload,
   };
-  // console.log(5555, theme);
+
   return (
     <ThemeProvider theme={theme}>
       <RefreshContext.Provider value={refreshContextValue}>
