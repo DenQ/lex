@@ -12,7 +12,7 @@ export const getWeakestWord = ({ list }) => {
         .value();
 };
 
-export const getRange = ({ list, targetWord, limit = 15 }) => {
+export const getRange = ({ list, targetWord, limit = 10 }) => {
     return _.chain(list)
         .sortBy(handleSortList)
         .slice(0, limit)
