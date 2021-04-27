@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-// import PropTypes from 'prop-types';
 import Box from '@material-ui/core/Box';
 
-import { findAll } from 'api/words';
+import {findAll, updateByFolderId} from 'api/words';
 import GeneralLayout from 'app/system/layout';
 import { fieldNames as wordFieldNames } from 'common/@types/words';
 import NoData from 'common/components/no-data';
 
+import Explored from './components/explored';
 import PlayListWords from './components/list';
 import Progress from './components/statistic-info';
 import Header from '../components/header';
@@ -22,8 +22,8 @@ const Component = (props) => {
     const [vector, setVector] = useState(true);
     const [needReload, setNeedReload] = useState(null);
     const [errorItem, setErrorItem] = useState(null);
-    const [progress, setProgress] = React.useState(0);
-    const [noData, setNoData] = React.useState(false);
+    const [progress, setProgress] = useState(0);
+    const [noData, setNoData] = useState(false);
 
     /* eslint-disable react-hooks/exhaustive-deps */
     useEffect(() => {
@@ -67,6 +67,20 @@ const Component = (props) => {
         })
     };
 
+    const restartFolderHandler = () => {
+        const payload = {
+            [wordFieldNames.NUMBER_OF_ATTEMPTS]: 0,
+            [wordFieldNames.NUMBER_OF_WINS]: 0,
+        };
+        updateByFolderId({ folderId: id, payload })
+            .then(() => {
+                setNeedReload(+new Date());
+            })
+            .catch((e) => {
+                console.error(e);
+            });
+    };
+
 
     if (!entity || !targetWord) {
         if (!noData)
@@ -88,7 +102,7 @@ const Component = (props) => {
                 {noData && (
                     <NoData {...noDataProps} />
                 )}
-                {!noData && (
+                {!noData && progress < 100 && (
                     <>
                         <Progress value={progress}/>
                         <Box m={2}>
@@ -101,6 +115,9 @@ const Component = (props) => {
                             />
                         </Box>
                     </>
+                )}
+                {!noData && progress >= 100 && (
+                    <Explored restartFolderHandler={restartFolderHandler}/>
                 )}
             </Layout>
         </GeneralLayout>
