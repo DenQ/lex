@@ -71,3 +71,21 @@ export const updateById = async ({ id, payload }) => {
         list: newList,
     });
 }
+
+export const updateByFolderId = async ({ folderId, payload }) => {
+    const { list, meta } = await eject();
+    const newList = list.map((word) => {
+        if (word.folder_id === folderId) {
+            return {
+                ...word,
+                ...payload,
+            };
+        }
+        return word;
+    });
+
+    return await inject({
+        meta,
+        list: newList,
+    });
+}
