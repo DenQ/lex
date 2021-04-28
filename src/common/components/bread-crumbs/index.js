@@ -7,14 +7,12 @@ import { Link } from 'react-router-dom';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
 
-const useStyles = makeStyles((theme, ...o) => {
-    return {
+const useStyles = makeStyles((theme, ...o) => ({
         link: {
             color: 'inherit',
             textDecoration: 'none',
         },
-    };
-});
+    }));
 
 const Component = ({
     data,
@@ -44,7 +42,7 @@ export const BreadcrumbsPropTypes = PropTypes.arrayOf(
     PropTypes.shape({
         to: PropTypes.string,
         title: PropTypes.string.isRequired,
-    }),
+    })
 );
 
 Component.propTypes = {
