@@ -6,51 +6,50 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
-
 const useStyles = makeStyles((theme, ...o) => ({
-        link: {
-            color: 'inherit',
-            textDecoration: 'none',
-        },
-    }));
+	link: {
+		color: 'inherit',
+		textDecoration: 'none',
+	},
+}));
 
-const Component = ({
-    data,
-}) => {
-    const classes = useStyles();
+const Component = ({ data }) => {
+	const classes = useStyles();
 
-    return (
-        <Breadcrumbs separator={<NavigateNextIcon fontSize="small"/>} aria-label="breadcrumb">
-            {data.map((item, index) => {
-                if (!item.to) {
-                    return (
-                        <Typography color="textPrimary" key="last">{item.title}</Typography>
-                    );
-                }
+	return (
+		<Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
+			{data.map((item, index) => {
+				if (!item.to) {
+					return (
+						<Typography color="textPrimary" key="last">
+							{item.title}
+						</Typography>
+					);
+				}
 
-                return (
-                    <Link color="inherit" to={item.to} className={classes.link} key={index}>
-                        {item.title}
-                    </Link>
-                );
-            })}
-        </Breadcrumbs>
-    );
+				return (
+					<Link color="inherit" to={item.to} className={classes.link} key={index}>
+						{item.title}
+					</Link>
+				);
+			})}
+		</Breadcrumbs>
+	);
 };
 
 export const BreadcrumbsPropTypes = PropTypes.arrayOf(
-    PropTypes.shape({
-        to: PropTypes.string,
-        title: PropTypes.string.isRequired,
-    })
+	PropTypes.shape({
+		to: PropTypes.string,
+		title: PropTypes.string.isRequired,
+	}),
 );
 
 Component.propTypes = {
-    data: BreadcrumbsPropTypes,
+	data: BreadcrumbsPropTypes,
 };
 
 Component.defaultProps = {
-    data: [],
+	data: [],
 };
 
 export default Component;

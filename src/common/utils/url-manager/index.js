@@ -11,14 +11,12 @@ export const urls = {
 const replaceUrl = (url, id) => url.replace(':id', id);
 
 export default {
-    home: () => urls.HOME,
-    folders: () => urls.FOLDERS,
-    folder: () => {
-        return {
-            add: () => urls.FOLDER_ADD,
-            show: (id) => replaceUrl(urls.FOLDER_SHOW, id),
-            edit: (id) => replaceUrl(urls.FOLDER_EDIT, id),
-            play: (id) => replaceUrl(urls.FOLDER_PLAY, id),
-        }
-    },
+  home: () => urls.HOME,
+  folders: () => urls.FOLDERS,
+  folder: () => ({
+           add: () => urls.FOLDER_ADD,
+          show: (id) => replaceUrl(urls.FOLDER_SHOW, id),
+          edit: (id) => replaceUrl(urls.FOLDER_EDIT, id),
+          play: (id) => replaceUrl(urls.FOLDER_PLAY, id),
+      }),
 };
