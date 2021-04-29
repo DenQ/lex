@@ -1,26 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-
-const TextComponent = (props) => {
-    const {
-        input:{
-            value,
-        },
-    } = props;
-    return (
-        <span>
-            : {value}
-        </span>
-    );
-}
+const TextComponent = props => {
+	const {
+		input: { value },
+	} = props;
+	return <span>: {value}</span>;
+};
 
 TextComponent.propTypes = {
-    readOnly: PropTypes.bool,
+	readOnly: PropTypes.bool,
 };
 
 TextComponent.defaultProps = {
-    readOnly: false,
+	readOnly: false,
 };
 
 export default TextComponent;

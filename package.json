@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^7.1.2",
     "add": "^2.0.6",
     "final-form": "^4.20.1",
+    "lint-staged": "^10.5.4",
     "mui-rff": "^2.5.6",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
@@ -26,11 +27,18 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx src --color",
-    "format": "prettier --write 'src/**/*.{ts,tsx,scss,css,json}'"
+    "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx src --color",
+    "format": "prettier --config .prettierrc --write ./src"
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write --ignore-unknown",
+      "git add"
+    ]
   },
   "browserslist": {
     "production": [

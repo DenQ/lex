@@ -41,7 +41,7 @@ export const BreadcrumbsPropTypes = PropTypes.arrayOf(
 	PropTypes.shape({
 		to: PropTypes.string,
 		title: PropTypes.string.isRequired,
-	}),
+	})
 );
 
 Component.propTypes = {

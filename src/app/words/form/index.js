@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form } from 'react-final-form'
+import { Form } from 'react-final-form';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -11,7 +11,6 @@ import { submitHandler } from './utils';
 import { fieldNames } from './constants';
 import InputControl from './components/input-control';
 
-
 const initialValues = {
 	[fieldNames.ID]: null,
 	[fieldNames.FOLDER_ID]: null,
@@ -22,20 +21,13 @@ const initialValues = {
 const useStyles = makeStyles({
 	id: {
 		display: 'none',
-	}
+	},
 });
 
-const EntityForm = ({
-	initialValues,
-	readOnly,
-	handleRemove,
-}) => {
+const EntityForm = ({ initialValues, readOnly, handleRemove }) => {
 	const classes = useStyles();
-	const {
-		wordsReload,
-		setWordsReload,
-	} = React.useContext(RefreshContext);
-	const validate = () => { };
+	const { wordsReload, setWordsReload } = React.useContext(RefreshContext);
+	const validate = () => {};
 
 	const onSuccessSubmit = ({ form }) => {
 		console.log('success', form);
@@ -48,11 +40,9 @@ const EntityForm = ({
 		const id = initialValues[fieldNames.ID];
 		handleRemove({ id });
 	};
-    /* eslint-disable react-hooks/exhaustive-deps */
-	const isCanRemove = React.useMemo(() => {
-		return !!initialValues[fieldNames.ID];
-	}, [initialValues[fieldNames.ID]]);
-    /* eslint-enable react-hooks/exhaustive-deps */
+	/* eslint-disable react-hooks/exhaustive-deps */
+	const isCanRemove = React.useMemo(() => !!initialValues[fieldNames.ID], [initialValues[fieldNames.ID]]);
+	/* eslint-enable react-hooks/exhaustive-deps */
 
 	return (
 		<Form
@@ -62,9 +52,7 @@ const EntityForm = ({
 			render={({ handleSubmit, dirty }) => (
 				<form onSubmit={handleSubmit}>
 					<Grid container spacing={5}>
-
 						<Grid item>
-
 							<div className={classes.id}>
 								<label>ID</label>
 								<InputControl fieldName={fieldNames.ID} placeholder="NEW" readOnly disabled />
@@ -85,12 +73,16 @@ const EntityForm = ({
 						</Grid>
 
 						<Grid item xs={1}>
-							<Button type="submit" color="primary" disabled={!dirty}>Save</Button>
+							<Button type="submit" color="primary" disabled={!dirty}>
+								Save
+							</Button>
 						</Grid>
 
 						{isCanRemove && (
 							<Grid item xs={1}>
-								<Button type="button" color="secondary" onClick={onClickRemove} >Remove</Button>
+								<Button type="button" color="secondary" onClick={onClickRemove}>
+									Remove
+								</Button>
 							</Grid>
 						)}
 					</Grid>
@@ -98,8 +90,7 @@ const EntityForm = ({
 			)}
 		/>
 	);
-}
-
+};
 
 EntityForm.propTypes = {
 	initialValues: PropTypes.shape({
@@ -109,7 +100,7 @@ EntityForm.propTypes = {
 		[fieldNames.WORD_TRANSLATION]: PropTypes.string,
 	}),
 	readOnly: PropTypes.bool,
-    handleRemove: PropTypes.func,
+	handleRemove: PropTypes.func,
 };
 
 EntityForm.defaultProps = {

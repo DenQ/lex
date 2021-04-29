@@ -1,8 +1,8 @@
 {
-    "compilerOptions": {
-      "baseUrl": "src",
-      "paths": {
-        "@common": ["src/common/*"]
-      }
-    }
-  }
+	"compilerOptions": {
+		"baseUrl": "src",
+		"paths": {
+			"@common": ["src/common/*"]
+		}
+	}
+}

@@ -11,47 +11,41 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Fab from '@material-ui/core/Fab';
 
 const useStyles = makeStyles({
-    root: {
-        minWidth: 170,
-        minHeight: 170,
-        float: 'left',
-    },
-    title: {
-        fontSize: 14,
-    },
-    playButton: {
-      marginLeft: 40,
-      marginTop: 35,
-    },
+	root: {
+		minWidth: 170,
+		minHeight: 170,
+		float: 'left',
+	},
+	title: {
+		fontSize: 14,
+	},
+	playButton: {
+		marginLeft: 40,
+		marginTop: 35,
+	},
 });
 
+const Component = props => {
+	const classes = useStyles();
+	const { to, history } = props;
 
-const Component = (props) => {
-    const classes = useStyles();
-    const {
-        to,
-        history,
-    } = props;
+	const onClickToFolder = () => {
+		history.push(to);
+	};
 
-    const onClickToFolder = () => {
-        history.push(to);
-    };
-
-    return (
-        <Card className={classes.root}>
-            <CardContent>
-                <Fab aria-label="add-new" size="large" className={classes.playButton} onClick={onClickToFolder}>
-                    <AddCircleIcon color="secondary" />
-                </Fab>
-            </CardContent>
-        </Card>
-    );
+	return (
+		<Card className={classes.root}>
+			<CardContent>
+				<Fab aria-label="add-new" size="large" className={classes.playButton} onClick={onClickToFolder}>
+					<AddCircleIcon color="secondary" />
+				</Fab>
+			</CardContent>
+		</Card>
+	);
 };
 
-Component.propTypes = {
-};
+Component.propTypes = {};
 
-Component.defaultProps = {
-};
+Component.defaultProps = {};
 
 export default Component;

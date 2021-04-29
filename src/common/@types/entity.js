@@ -1,4 +1,4 @@
 export default {
-    FOLDERS: 'folders',
-    WORDS: 'words',
-}
+	FOLDERS: 'folders',
+	WORDS: 'words',
+};

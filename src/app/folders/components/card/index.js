@@ -15,70 +15,62 @@ import { fieldNames as fieldNamesWords } from 'app/words/form/constants';
 import { count } from 'api/words';
 
 const useStyles = makeStyles({
-    root: {
-        minWidth: 170,
-        minHeight: 170,
-        float: 'left',
-    },
-    title: {
-        fontSize: 14,
-    },
-    playButton: {
-        marginLeft: 40,
-    },
+	root: {
+		minWidth: 170,
+		minHeight: 170,
+		float: 'left',
+	},
+	title: {
+		fontSize: 14,
+	},
+	playButton: {
+		marginLeft: 40,
+	},
 });
 
+const Component = props => {
+	const classes = useStyles();
+	const { data, to, toPlay, history } = props;
+	const [countWords, setCountWords] = React.useState(0);
 
-const Component = (props) => {
-    const classes = useStyles();
-    const {
-        data,
-        to,
-        toPlay,
-        history,
-    } = props;
-    const [countWords, setCountWords] = React.useState(0);
+	React.useEffect(() => {
+		const criteria = item => Number(item[fieldNamesWords.FOLDER_ID]) === Number(data.id);
 
-    React.useEffect(() => {
-        const criteria = (item) => {
-            return Number(item[fieldNamesWords.FOLDER_ID]) === Number(data.id);
-        };
+		count({ criteria }).then(result => {
+			setCountWords(result);
+		});
+	}, [data.id]);
 
-        count({ criteria }).then((result) => {
-            setCountWords(result)
-        });
-    }, [data.id]);
+	const onClickToFolder = () => {
+		history.push(to);
+	};
+	const onClickPlay = () => {
+		history.push(toPlay);
+	};
 
-    const onClickToFolder = () => {
-        history.push(to);
-    };
-    const onClickPlay = () => {
-        history.push(toPlay);
-    };
-
-    return (
-        <Badge badgeContent={countWords} color="primary">
-            <Card className={classes.root}>
-                <CardContent>
-                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                        {data.name}
-                    </Typography>
-                    <Fab aria-label="play" size="small" className={classes.playButton}>
-                        <PlayIcon color="primary" onClick={onClickPlay} />
-                    </Fab>
-                </CardContent>
-                <CardActions>
-                    <Button size="medium" color="primary" onClick={onClickToFolder}>To Folder</Button>
-                </CardActions>
-            </Card>
-        </Badge>
-    );
+	return (
+		<Badge badgeContent={countWords} color="primary">
+			<Card className={classes.root}>
+				<CardContent>
+					<Typography className={classes.title} color="textSecondary" gutterBottom>
+						{data.name}
+					</Typography>
+					<Fab aria-label="play" size="small" className={classes.playButton}>
+						<PlayIcon color="primary" onClick={onClickPlay} />
+					</Fab>
+				</CardContent>
+				<CardActions>
+					<Button size="medium" color="primary" onClick={onClickToFolder}>
+						To Folder
+					</Button>
+				</CardActions>
+			</Card>
+		</Badge>
+	);
 };
 
-Component.propTypes = {
-};
+Component.propTypes = {};
 
-Component.defaultProps = {
-};
+Component.defaultProps = {};
 
 export default Component;

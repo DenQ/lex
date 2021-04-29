@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form } from 'react-final-form'
+import { Form } from 'react-final-form';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
@@ -12,7 +12,6 @@ import InputControl from 'app/words/form/components/input-control';
 import { submitHandler } from './utils';
 import { fieldNames } from './constants';
 
-
 const initialValues = {
 	[fieldNames.ID]: null,
 	[fieldNames.NAME]: '',
@@ -22,20 +21,17 @@ const initialValues = {
 const useStyles = makeStyles({
 	id: {
 		display: 'none',
-	}
+	},
 });
 
-const EntityForm = ({
-	initialValues,
-	readOnly,
-}) => {
+const EntityForm = ({ initialValues, readOnly }) => {
 	const classes = useStyles();
 	const history = useHistory();
-	const validate = () => { };
+	const validate = () => {};
 
 	const onSuccessSubmit = () => {
 		history.push(urlManager.folders());
-	}
+	};
 
 	return (
 		<Form
@@ -61,16 +57,17 @@ const EntityForm = ({
 
 						<Grid item>
 							{!readOnly && (
-								<Button type="submit" color="primary" disabled={!dirty}>Save</Button>
+								<Button type="submit" color="primary" disabled={!dirty}>
+									Save
+								</Button>
 							)}
 						</Grid>
 					</Grid>
-				</form >
+				</form>
 			)}
 		/>
 	);
-}
-
+};
 
 EntityForm.propTypes = {
 	initialValues: PropTypes.shape({
