@@ -65,6 +65,7 @@
 				"maxDepth": 100
 			}
 		],
+		"@typescript-eslint/no-shadow": 1,
 		"react/jsx-props-no-spreading": "off",
 		"import/prefer-default-export": "off",
 		"react/jsx-boolean-value": "off",
