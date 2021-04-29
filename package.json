@@ -35,9 +35,8 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "yarn lint",
-      "yarn format",
-      "git add"
+      "git add .",
+      "yarn format"
     ]
   },
   "husky": {
