@@ -19,9 +19,12 @@ export const submitHandler = ({ onSuccessSubmit }) => async (values, form) => {
 		list.forEach((item, index) => {
 			if (Number(item.id) === Number(values[fieldNames.ID])) {
 				list[index][fieldNames.WORD_NATIVE] = values[fieldNames.WORD_NATIVE];
-				list[index][fieldNames.WORD_TRANSLATION] = values[fieldNames.WORD_TRANSLATION];
-				list[index][fieldNames.NUMBER_OF_ATTEMPTS] = values[fieldNames.NUMBER_OF_ATTEMPTS] || 0;
-				list[index][fieldNames.NUMBER_OF_WINS] = values[fieldNames.NUMBER_OF_WINS] || 0;
+				list[index][fieldNames.WORD_TRANSLATION] =
+					values[fieldNames.WORD_TRANSLATION];
+				list[index][fieldNames.NUMBER_OF_ATTEMPTS] =
+					values[fieldNames.NUMBER_OF_ATTEMPTS] || 0;
+				list[index][fieldNames.NUMBER_OF_WINS] =
+					values[fieldNames.NUMBER_OF_WINS] || 0;
 			}
 		});
 	}

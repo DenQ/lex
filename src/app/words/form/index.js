@@ -41,7 +41,9 @@ const EntityForm = ({ initialValues, readOnly, handleRemove }) => {
 		handleRemove({ id });
 	};
 	/* eslint-disable react-hooks/exhaustive-deps */
-	const isCanRemove = React.useMemo(() => !!initialValues[fieldNames.ID], [initialValues[fieldNames.ID]]);
+	const isCanRemove = React.useMemo(() => !!initialValues[fieldNames.ID], [
+		initialValues[fieldNames.ID],
+	]);
 	/* eslint-enable react-hooks/exhaustive-deps */
 
 	return (
@@ -55,21 +57,38 @@ const EntityForm = ({ initialValues, readOnly, handleRemove }) => {
 						<Grid item>
 							<div className={classes.id}>
 								<label>ID</label>
-								<InputControl fieldName={fieldNames.ID} placeholder="NEW" readOnly disabled />
+								<InputControl
+									fieldName={fieldNames.ID}
+									placeholder="NEW"
+									readOnly
+									disabled
+								/>
 							</div>
 
 							<div className={classes.id}>
 								<label>Folder ID</label>
-								<InputControl fieldName={fieldNames.FOLDER_ID} placeholder="NEW" readOnly />
+								<InputControl
+									fieldName={fieldNames.FOLDER_ID}
+									placeholder="NEW"
+									readOnly
+								/>
 							</div>
 						</Grid>
 
 						<Grid item xs={3}>
-							<InputControl fieldName={fieldNames.WORD_NATIVE} placeholder="Native" readOnly={readOnly} />
+							<InputControl
+								fieldName={fieldNames.WORD_NATIVE}
+								placeholder="Native"
+								readOnly={readOnly}
+							/>
 						</Grid>
 
 						<Grid item xs={3}>
-							<InputControl fieldName={fieldNames.WORD_TRANSLATION} placeholder="Translation" readOnly={readOnly} />
+							<InputControl
+								fieldName={fieldNames.WORD_TRANSLATION}
+								placeholder="Translation"
+								readOnly={readOnly}
+							/>
 						</Grid>
 
 						<Grid item xs={1}>

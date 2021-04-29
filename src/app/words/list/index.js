@@ -25,7 +25,7 @@ const Component = ({ folderId, readOnly }) => {
 
 	const isShowListHeader = React.useMemo(
 		() => (list.length > 0 && !readOnly) || list.length > 0,
-		[readOnly, list.length]
+		[readOnly, list.length],
 	);
 
 	const handleRemove = ({ id }) => {

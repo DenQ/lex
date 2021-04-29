@@ -30,7 +30,12 @@ const Component = props => {
 	const urlToHome = urlManager.folders();
 
 	const linkToHome = !isHome && (
-		<IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="home">
+		<IconButton
+			edge="start"
+			className={classes.menuButton}
+			color="inherit"
+			aria-label="home"
+		>
 			<Link to={urlToHome} className={classes.link}>
 				<HomeIcon />
 			</Link>
@@ -40,7 +45,12 @@ const Component = props => {
 	return (
 		<AppBar position="static">
 			<Toolbar>
-				<IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+				<IconButton
+					edge="start"
+					className={classes.menuButton}
+					color="inherit"
+					aria-label="menu"
+				>
 					<MenuIcon />
 				</IconButton>
 				{linkToHome}

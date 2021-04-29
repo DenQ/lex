@@ -6,7 +6,10 @@ import Typography from '@material-ui/core/Typography';
 import ListItem from '@material-ui/core/ListItem';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { fieldNames as wordFieldNames, ModelProps as WordModelProps } from 'common/@types/words';
+import {
+	fieldNames as wordFieldNames,
+	ModelProps as WordModelProps,
+} from 'common/@types/words';
 
 const useStyles = makeStyles({
 	errorItem: {
@@ -14,7 +17,13 @@ const useStyles = makeStyles({
 	},
 });
 
-const Component = ({ targetWord, list, handleSelectWord, vector, errorItem }) => {
+const Component = ({
+	targetWord,
+	list,
+	handleSelectWord,
+	vector,
+	errorItem,
+}) => {
 	const classes = useStyles();
 	const onSelectWord = selectedWord => () => {
 		handleSelectWord({
@@ -22,8 +31,12 @@ const Component = ({ targetWord, list, handleSelectWord, vector, errorItem }) =>
 			selectedWord,
 		});
 	};
-	const getTitle = (item, vector) => item[vector ? wordFieldNames.WORD_TRANSLATION : wordFieldNames.WORD_NATIVE];
-	const targetTitle = React.useMemo(() => getTitle(targetWord, !vector), [vector, targetWord]);
+	const getTitle = (item, vector) =>
+		item[vector ? wordFieldNames.WORD_TRANSLATION : wordFieldNames.WORD_NATIVE];
+	const targetTitle = React.useMemo(() => getTitle(targetWord, !vector), [
+		vector,
+		targetWord,
+	]);
 	const itemVariant = 'h5';
 
 	return (
@@ -34,10 +47,16 @@ const Component = ({ targetWord, list, handleSelectWord, vector, errorItem }) =>
 				</Typography>
 			</ListItem>
 			{list.map(item => {
-				const isError = errorItem ? item[wordFieldNames.ID] === errorItem[wordFieldNames.ID] : false;
+				const isError = errorItem
+					? item[wordFieldNames.ID] === errorItem[wordFieldNames.ID]
+					: false;
 				return (
 					<ListItem button key={item.id} onClick={onSelectWord(item)}>
-						<Typography color="textSecondary" variant={itemVariant} className={isError ? classes.errorItem : undefined}>
+						<Typography
+							color="textSecondary"
+							variant={itemVariant}
+							className={isError ? classes.errorItem : undefined}
+						>
 							{getTitle(item, vector)}
 						</Typography>
 					</ListItem>

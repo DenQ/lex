@@ -22,7 +22,12 @@ const Component = props => {
 		const toPlay = urlManager.folder().play(item.id);
 		return (
 			<Grid key={item.id} item>
-				<FolderCard data={item} to={to} toPlay={toPlay} history={props.history} />
+				<FolderCard
+					data={item}
+					to={to}
+					toPlay={toPlay}
+					history={props.history}
+				/>
 			</Grid>
 		);
 	});

@@ -7,7 +7,9 @@ import Box from '@material-ui/core/Box';
 import { removeById } from 'api/folders';
 import { removeByFolderId } from 'api/words';
 import urlManager from 'common/utils/url-manager';
-import BreadCrumbs, { BreadcrumbsPropTypes } from 'common/components/bread-crumbs';
+import BreadCrumbs, {
+	BreadcrumbsPropTypes,
+} from 'common/components/bread-crumbs';
 
 import { controlNames } from '../../constants';
 
@@ -38,7 +40,7 @@ const Component = props => {
 		collectionControls.push(
 			<Button color="primary" onClick={toEditHandler} key="to-edit">
 				To Edit
-			</Button>
+			</Button>,
 		);
 	}
 
@@ -46,7 +48,7 @@ const Component = props => {
 		collectionControls.push(
 			<Button color="secondary" onClick={toRemoveHandler} key="to-remove">
 				Remove
-			</Button>
+			</Button>,
 		);
 	}
 	const breadcrumbs = breadcrumbsProps && (

@@ -3,6 +3,7 @@
     "baseUrl": "src",
     "paths": {
       "common": ["src/common/*"],
+      "app": ["src/app/*"],
       "api": ["src/api/*"]
     },
     "target": "es5",

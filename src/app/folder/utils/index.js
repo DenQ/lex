@@ -24,16 +24,16 @@ export const useFindById = props => {
 };
 
 export const buildBreadCrumbsProps = ({ folderName, actionName }) => [
-		{
-			to: urlManager.home(),
-			title: 'Home',
-		},
-		{
-			to: undefined,
-			title: folderName ? `Folder (${folderName})` : 'Folder',
-		},
-		{
-			to: undefined,
-			title: actionName,
-		},
-	];
+	{
+		to: urlManager.home(),
+		title: 'Home',
+	},
+	{
+		to: undefined,
+		title: folderName ? `Folder (${folderName})` : 'Folder',
+	},
+	{
+		to: undefined,
+		title: actionName,
+	},
+];

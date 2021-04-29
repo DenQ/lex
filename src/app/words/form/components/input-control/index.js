@@ -7,7 +7,14 @@ import TextComponent from 'app/folder/form/components/text-component';
 
 const Component = ({ disabled, fieldName, readOnly, placeholder }) => {
 	if (!readOnly) {
-		return <TextField name={fieldName} label={placeholder} disabled={disabled} size="small" />;
+		return (
+			<TextField
+				name={fieldName}
+				label={placeholder}
+				disabled={disabled}
+				size="small"
+			/>
+		);
 	}
 
 	return (

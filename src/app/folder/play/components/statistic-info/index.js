@@ -21,7 +21,9 @@ export const Component = ({ value }) => {
 					<LinearProgress variant="determinate" value={value} />
 				</Box>
 				<Box minWidth={35}>
-					<Typography variant="body2" color="textSecondary">{`${Math.round(value)}%`}</Typography>
+					<Typography variant="body2" color="textSecondary">{`${Math.round(
+						value,
+					)}%`}</Typography>
 				</Box>
 			</Box>
 		</div>

@@ -17,7 +17,10 @@ const Component = ({ data }) => {
 	const classes = useStyles();
 
 	return (
-		<Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
+		<Breadcrumbs
+			separator={<NavigateNextIcon fontSize="small" />}
+			aria-label="breadcrumb"
+		>
 			{data.map((item, index) => {
 				if (!item.to) {
 					return (
@@ -28,7 +31,12 @@ const Component = ({ data }) => {
 				}
 
 				return (
-					<Link color="inherit" to={item.to} className={classes.link} key={index}>
+					<Link
+						color="inherit"
+						to={item.to}
+						className={classes.link}
+						key={index}
+					>
 						{item.title}
 					</Link>
 				);
@@ -41,7 +49,7 @@ export const BreadcrumbsPropTypes = PropTypes.arrayOf(
 	PropTypes.shape({
 		to: PropTypes.string,
 		title: PropTypes.string.isRequired,
-	})
+	}),
 );
 
 Component.propTypes = {

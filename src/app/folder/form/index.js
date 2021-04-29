@@ -43,16 +43,29 @@ const EntityForm = ({ initialValues, readOnly }) => {
 					<Grid container spacing={5}>
 						<Grid item>
 							<div className={classes.id}>
-								<InputControl fieldName={fieldNames.ID} placeholder="NEW" readOnly={readOnly} disabled />
+								<InputControl
+									fieldName={fieldNames.ID}
+									placeholder="NEW"
+									readOnly={readOnly}
+									disabled
+								/>
 							</div>
 						</Grid>
 
 						<Grid item xs={3}>
-							<InputControl fieldName={fieldNames.NAME} placeholder="Folder Name" readOnly={readOnly} />
+							<InputControl
+								fieldName={fieldNames.NAME}
+								placeholder="Folder Name"
+								readOnly={readOnly}
+							/>
 						</Grid>
 
 						<Grid item xs={3}>
-							<InputControl fieldName={fieldNames.DESCRIPTION} placeholder="Description" readOnly={readOnly} />
+							<InputControl
+								fieldName={fieldNames.DESCRIPTION}
+								placeholder="Description"
+								readOnly={readOnly}
+							/>
 						</Grid>
 
 						<Grid item>

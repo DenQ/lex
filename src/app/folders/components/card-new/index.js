@@ -36,7 +36,12 @@ const Component = props => {
 	return (
 		<Card className={classes.root}>
 			<CardContent>
-				<Fab aria-label="add-new" size="large" className={classes.playButton} onClick={onClickToFolder}>
+				<Fab
+					aria-label="add-new"
+					size="large"
+					className={classes.playButton}
+					onClick={onClickToFolder}
+				>
 					<AddCircleIcon color="secondary" />
 				</Fab>
 			</CardContent>

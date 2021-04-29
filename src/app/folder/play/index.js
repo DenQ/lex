@@ -12,7 +12,13 @@ import Progress from './components/statistic-info';
 import Header from '../components/header';
 import Layout from '../components/layout';
 import { useFindById } from '../utils';
-import { getRange, getWeakestWord, setRate, calculateProgress, buildBreadCrumbsProps } from './utils';
+import {
+	getRange,
+	getWeakestWord,
+	setRate,
+	calculateProgress,
+	buildBreadCrumbsProps,
+} from './utils';
 import { fieldNames, noDataProps } from './constants';
 
 const Component = props => {
@@ -46,7 +52,8 @@ const Component = props => {
 	/* eslint-enable react-hooks/exhaustive-deps */
 
 	const handleSelectWord = ({ targetWord, selectedWord }) => {
-		const isSuccess = targetWord[wordFieldNames.ID] === selectedWord[wordFieldNames.ID];
+		const isSuccess =
+			targetWord[wordFieldNames.ID] === selectedWord[wordFieldNames.ID];
 		setRate({
 			targetWord,
 			isSuccess,
@@ -107,7 +114,9 @@ const Component = props => {
 						</Box>
 					</>
 				)}
-				{!noData && progress >= 100 && <Explored restartFolderHandler={restartFolderHandler} />}
+				{!noData && progress >= 100 && (
+					<Explored restartFolderHandler={restartFolderHandler} />
+				)}
 			</Layout>
 		</GeneralLayout>
 	);

@@ -29,7 +29,11 @@ const Component = props => {
 	return (
 		<GeneralLayout title="Edit Folder">
 			<Layout>
-				<Header id={id} controls={[controlNames.TO_REMOVE]} breadcrumbsProps={breadcrumbsProps} />
+				<Header
+					id={id}
+					controls={[controlNames.TO_REMOVE]}
+					breadcrumbsProps={breadcrumbsProps}
+				/>
 				<FolderForm initialValues={initialValues} />
 				<WordsList folderId={entity.id} />
 			</Layout>

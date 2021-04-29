@@ -7,7 +7,10 @@ import { fieldNames } from '../../form/constants';
 
 const Component = props => {
 	const {
-		data: { [fieldNames.WORD_NATIVE]: native, [fieldNames.WORD_TRANSLATION]: translation },
+		data: {
+			[fieldNames.WORD_NATIVE]: native,
+			[fieldNames.WORD_TRANSLATION]: translation,
+		},
 	} = props;
 
 	return (

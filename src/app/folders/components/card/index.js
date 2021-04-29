@@ -34,7 +34,8 @@ const Component = props => {
 	const [countWords, setCountWords] = React.useState(0);
 
 	React.useEffect(() => {
-		const criteria = item => Number(item[fieldNamesWords.FOLDER_ID]) === Number(data.id);
+		const criteria = item =>
+			Number(item[fieldNamesWords.FOLDER_ID]) === Number(data.id);
 
 		count({ criteria }).then(result => {
 			setCountWords(result);
@@ -52,7 +53,11 @@ const Component = props => {
 		<Badge badgeContent={countWords} color="primary">
 			<Card className={classes.root}>
 				<CardContent>
-					<Typography className={classes.title} color="textSecondary" gutterBottom>
+					<Typography
+						className={classes.title}
+						color="textSecondary"
+						gutterBottom
+					>
 						{data.name}
 					</Typography>
 					<Fab aria-label="play" size="small" className={classes.playButton}>
