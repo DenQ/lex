@@ -8,55 +8,49 @@ import GeneralLayout from 'app/system/layout';
 import FolderCard from './components/card';
 import FolderCardNew from './components/card-new';
 
+const Component = props => {
+	const [list, setList] = React.useState([]);
 
-const Component = (props) => {
-  const [list, setList] = React.useState([]);
+	React.useEffect(() => {
+		findAll().then(results => {
+			setList(results);
+		});
+	}, []);
 
-  React.useEffect(() => {
-    findAll().then((results) => {
-      setList(results);
-    });
-  }, []);
+	const $list = list.map(item => {
+		const to = urlManager.folder().show(item.id);
+		const toPlay = urlManager.folder().play(item.id);
+		return (
+			<Grid key={item.id} item>
+				<FolderCard
+					data={item}
+					to={to}
+					toPlay={toPlay}
+					history={props.history}
+				/>
+			</Grid>
+		);
+	});
 
-  const $list = list.map((item) => {
-    const to = urlManager.folder().show(item.id);
-    const toPlay = urlManager.folder().play(item.id);
-    return (
-      <Grid key={item.id} item>
-        <FolderCard
-          data={item}
-          to={to}
-          toPlay={toPlay}
-          history={props.history}
-        />
-      </Grid>
-    );
-  });
+	const toAddFolder = urlManager.folder().add();
+	const $newFolder = (
+		<Grid key="new-folder" item>
+			<FolderCardNew to={toAddFolder} history={props.history} />
+		</Grid>
+	);
 
-  const toAddFolder = urlManager.folder().add();
-  const $newFolder = (
-      <Grid key={'new-folder'} item>
-        <FolderCardNew
-          to={toAddFolder}
-          history={props.history}
-        />
-      </Grid>
-  );
-
-  return (
-    <GeneralLayout title="Folders" isHome>
-      <Grid container justify="center" spacing={2}>
-        {$newFolder}
-        {$list}
-      </Grid>
-    </GeneralLayout>
-  );
+	return (
+		<GeneralLayout title="Folders" isHome>
+			<Grid container justify="center" spacing={2}>
+				{$newFolder}
+				{$list}
+			</Grid>
+		</GeneralLayout>
+	);
 };
 
-Component.propTypes = {
-};
+Component.propTypes = {};
 
-Component.defaultProps = {
-};
+Component.defaultProps = {};
 
 export default Component;

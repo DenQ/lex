@@ -1,9 +1,9 @@
 import React from 'react';
 
 export default React.createContext({
-    wordsReload: 0,
-    setWordsReload: () => {},
+	wordsReload: 0,
+	setWordsReload: () => {},
 
-    foldersReload: 0,
-    setFoldersReload: () => {},
+	foldersReload: 0,
+	setFoldersReload: () => {},
 });

@@ -1,20 +1,10 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 
+const Component = props => <>{props.children}</>;
 
-const Component = (props) => {
+Component.propTypes = {};
 
-  return (
-    <>
-        {props.children}
-    </>
-  );
-};
-
-Component.propTypes = {
-};
-
-Component.defaultProps = {
-};
+Component.defaultProps = {};
 
 export default Component;

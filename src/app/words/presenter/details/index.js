@@ -5,34 +5,32 @@ import Typography from '@material-ui/core/Typography';
 
 import { fieldNames } from '../../form/constants';
 
+const Component = props => {
+	const {
+		data: {
+			[fieldNames.WORD_NATIVE]: native,
+			[fieldNames.WORD_TRANSLATION]: translation,
+		},
+	} = props;
 
-const Component = (props) => {
-    const {
-        data: {
-            [fieldNames.WORD_NATIVE]: native,
-            [fieldNames.WORD_TRANSLATION]: translation,
-        },
-    } = props;
-
-    return (
-        <ListItem button>
-            <Typography>
-                {native} - {translation}
-            </Typography>
-        </ListItem>
-    );
+	return (
+		<ListItem button>
+			<Typography>
+				{native} - {translation}
+			</Typography>
+		</ListItem>
+	);
 };
 
 Component.propTypes = {
-    data: PropTypes.shape({
-        [fieldNames.ID]: PropTypes.number,
-        [fieldNames.FOLDER_ID]: PropTypes.number,
-        [fieldNames.WORD_NATIVE]: PropTypes.string,
-        [fieldNames.WORD_TRANSLATION]: PropTypes.string,
-    }).isRequired,
+	data: PropTypes.shape({
+		[fieldNames.ID]: PropTypes.number,
+		[fieldNames.FOLDER_ID]: PropTypes.number,
+		[fieldNames.WORD_NATIVE]: PropTypes.string,
+		[fieldNames.WORD_TRANSLATION]: PropTypes.string,
+	}).isRequired,
 };
 
-Component.defaultProps = {
-};
+Component.defaultProps = {};
 
 export default Component;

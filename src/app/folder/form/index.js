@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form } from 'react-final-form'
+import { Form } from 'react-final-form';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
@@ -12,7 +12,6 @@ import InputControl from 'app/words/form/components/input-control';
 import { submitHandler } from './utils';
 import { fieldNames } from './constants';
 
-
 const initialValues = {
 	[fieldNames.ID]: null,
 	[fieldNames.NAME]: '',
@@ -22,20 +21,17 @@ const initialValues = {
 const useStyles = makeStyles({
 	id: {
 		display: 'none',
-	}
+	},
 });
 
-const EntityForm = ({
-	initialValues,
-	readOnly,
-}) => {
+const EntityForm = ({ initialValues, readOnly }) => {
 	const classes = useStyles();
 	const history = useHistory();
-	const validate = () => { };
+	const validate = () => {};
 
 	const onSuccessSubmit = () => {
 		history.push(urlManager.folders());
-	}
+	};
 
 	return (
 		<Form
@@ -47,30 +43,44 @@ const EntityForm = ({
 					<Grid container spacing={5}>
 						<Grid item>
 							<div className={classes.id}>
-								<InputControl fieldName={fieldNames.ID} placeholder="NEW" readOnly={readOnly} disabled />
+								<InputControl
+									fieldName={fieldNames.ID}
+									placeholder="NEW"
+									readOnly={readOnly}
+									disabled
+								/>
 							</div>
 						</Grid>
 
 						<Grid item xs={3}>
-							<InputControl fieldName={fieldNames.NAME} placeholder="Folder Name" readOnly={readOnly} />
+							<InputControl
+								fieldName={fieldNames.NAME}
+								placeholder="Folder Name"
+								readOnly={readOnly}
+							/>
 						</Grid>
 
 						<Grid item xs={3}>
-							<InputControl fieldName={fieldNames.DESCRIPTION} placeholder="Description" readOnly={readOnly} />
+							<InputControl
+								fieldName={fieldNames.DESCRIPTION}
+								placeholder="Description"
+								readOnly={readOnly}
+							/>
 						</Grid>
 
 						<Grid item>
 							{!readOnly && (
-								<Button type="submit" color="primary" disabled={!dirty}>Save</Button>
+								<Button type="submit" color="primary" disabled={!dirty}>
+									Save
+								</Button>
 							)}
 						</Grid>
 					</Grid>
-				</form >
+				</form>
 			)}
 		/>
 	);
-}
-
+};
 
 EntityForm.propTypes = {
 	initialValues: PropTypes.shape({
