@@ -31,8 +31,12 @@ const Component = props => {
 
 Component.propTypes = {
 	title: PropTypes.string.isRequired,
+	children: PropTypes.any.isRequired,
+	isHome: PropTypes.bool,
 };
 
-Component.defaultProps = {};
+Component.defaultProps = {
+	isHome: true,
+};
 
 export default Component;

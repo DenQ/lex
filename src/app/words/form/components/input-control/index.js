@@ -30,10 +30,12 @@ const Component = ({ disabled, fieldName, readOnly, placeholder }) => {
 
 Component.propTypes = {
 	readOnly: PropTypes.bool,
+	disabled: PropTypes.bool,
 };
 
 Component.defaultProps = {
 	readOnly: false,
+	disabled: false,
 };
 
 export default Component;
