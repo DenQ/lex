@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import PlayIcon from '@material-ui/icons/PlayCircleOutline';
 import Fab from '@material-ui/core/Fab';
-import Badge from '@material-ui/core/Badge';
+import { Badge } from 'lib/info/badge';
 
 import { fieldNames as fieldNamesWords } from 'app/words/form/constants';
 
@@ -50,7 +50,7 @@ const Component = props => {
 	};
 
 	return (
-		<Badge badgeContent={countWords} color="primary">
+		<Badge value={countWords} color="primary">
 			<Card className={classes.root}>
 				<CardContent>
 					<Typography

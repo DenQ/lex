@@ -15,7 +15,7 @@ export const Badge: React.FC<Props> = ({
 	children,
 	color = 'default',
 	value,
-	rectangle = false,
+	rectangle = true,
 	allowZero = false,
 	dot = false,
 	positionLeft = false,
