@@ -30,8 +30,8 @@ const Template: Story<BadgeProps> = args => (
 	</Badge>
 );
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const Default = Template.bind({});
+Default.args = {
 	color: 'secondary',
 	value: 1,
 };
