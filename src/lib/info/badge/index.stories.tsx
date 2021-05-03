@@ -1,5 +1,4 @@
 import React from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { Story, Meta } from '@storybook/react';
 import MailIcon from '@material-ui/icons/Mail';
 
