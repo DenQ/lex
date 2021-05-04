@@ -1,13 +1,14 @@
-import React, { useMemo, useState, useCallback } from 'react';
+import React, { ReactElement } from 'react';
 import { Form } from 'react-final-form';
 import { makeValidate } from 'mui-rff';
-
+import { BaseFormHeader } from './components/footer';
 
 export interface Props {
 	initialValues: any;
 	validationSchema?: any;
 	onSubmit: () => {};
 	debug?: boolean;
+	Footer?: ReactElement;
 }
 
 export const BaseForm: React.FC<Props> = ({
@@ -16,24 +17,18 @@ export const BaseForm: React.FC<Props> = ({
 	debug = false,
 	children,
 	validationSchema = {},
-}) => {
-	const onClick = () => {
-	};
-
-	return (
-		<Form
-			validate={makeValidate(validationSchema)}
-			initialValues={initialValues}
-			onSubmit={() => {}}
-			render={props => (
-				<form onSubmit={onSubmit}>
-					{debug && <pre>{JSON.stringify(props, null, 2)}</pre>}
-					{children}
-					<button type="submit" onClick={onClick}>
-						Submit
-					</button>
-				</form>
-			)}
-		/>
-	);
-};
+	Footer = BaseFormHeader,
+}) => (
+	<Form
+		validate={makeValidate(validationSchema)}
+		initialValues={initialValues}
+		onSubmit={() => {}}
+		render={formProps => (
+			<form onSubmit={onSubmit}>
+				{debug && <pre>{JSON.stringify(formProps, null, 2)}</pre>}
+				{children}
+				<Footer formProps={formProps} />
+			</form>
+		)}
+	/>
+);
