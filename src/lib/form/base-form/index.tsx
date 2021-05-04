@@ -1,29 +1,28 @@
 import React from 'react';
 import { Form } from 'react-final-form';
+import { makeValidate } from 'mui-rff';
 
 export interface Props {
-	validate: ()=> {},
-	initialValues: any,
-	onSubmit: () => {},
+	initialValues: any;
+	validationSchema?: any;
+	onSubmit: () => {};
 	debug?: boolean;
 }
 
 export const BaseForm: React.FC<Props> = ({
-	validate,
 	initialValues,
 	onSubmit,
 	debug = false,
 	children,
+	validationSchema = {},
 }) => (
 	<Form
-		validate={validate}
+		validate={makeValidate(validationSchema)}
 		initialValues={initialValues}
 		onSubmit={() => {}}
 		render={props => (
-			<form onSubmit={onSubmit} >
-				{debug && (
-					<pre>{JSON.stringify(props, null, 2)}</pre>
-				)}
+			<form onSubmit={onSubmit}>
+				{debug && <pre>{JSON.stringify(props, null, 2)}</pre>}
 				{children}
 				<button type="submit">Submit</button>
 			</form>
