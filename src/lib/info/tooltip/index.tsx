@@ -1,20 +1,24 @@
-import React, { ReactFragment } from 'react';
+import React, { ReactFragment, useMemo } from 'react';
 import MUITooltip from '@material-ui/core/Tooltip';
 
 export interface Props {
 	value: ReactFragment;
-	side?: 'bottom' | 'left' | 'top' | 'right';
-	edge?: 'start' | 'end';
 	children: React.ReactElement;
+	side?: 'bottom' | 'left' | 'top' | 'right';
+	edge?: 'start' | 'end' | 'center';
 }
 
 export const Tooltip = ({
 	value,
 	children,
 	side = 'top',
-	edge = undefined,
+	edge = 'center',
 }: Props) => {
-	const placement: string = edge ? `${side}-${edge}` : side;
+	const placement = useMemo(() => {
+		if (edge === 'center') return side;
+
+		return `${side}-${edge}`;
+	}, [side, edge]);
 
 	return (
 		// @ts-ignore

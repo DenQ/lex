@@ -5,7 +5,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import { Badge, Props as BadgeProps } from './index';
 
 export default {
-	title: 'Lib/Badge',
+	title: 'Lib/info/Badge',
 	component: Badge,
 	argTypes: {
 		color: {

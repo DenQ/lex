@@ -4,7 +4,7 @@ export interface Props {
 	formProps: any;
 }
 
-export const BaseFormHeader = (props: Props) => {
+export const BaseFormHeader: React.FC<Props> = (props) => {
 	const onClick = () => {
 		console.log(4444, props);
 	};

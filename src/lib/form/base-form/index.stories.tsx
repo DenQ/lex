@@ -1,6 +1,6 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
-import { TextField, showErrorOnChange } from 'mui-rff';
+import { TextField as MUITextField, showErrorOnChange } from 'mui-rff';
 import * as Yup from 'yup';
 
 import { BaseForm, Props as BaseFormProps } from './index';
@@ -21,8 +21,8 @@ const validationSchema = Yup.object().shape({
 
 const Template: Story<BaseFormProps> = args => (
 	<BaseForm {...args}>
-		<TextField name={FIELD_NAME} showError={showErrorOnChange} />
-		<TextField name={FIELD_NAME1} showError={showErrorOnChange} />
+		<MUITextField name={FIELD_NAME} showError={showErrorOnChange} />
+		<MUITextField name={FIELD_NAME1} showError={showErrorOnChange} />
 	</BaseForm>
 );
 

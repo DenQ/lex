@@ -1,8 +1,10 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
-import { Form } from 'react-final-form';
 
+import { BaseForm } from 'lib/form/base-form';
 import { TextField, Props as TextFieldProps } from './index';
+
+type ButtonEvent = React.MouseEvent<HTMLButtonElement>;
 
 export default {
 	title: 'Lib/Form/Text Field',
@@ -10,34 +12,24 @@ export default {
 	argTypes: {},
 } as Meta;
 
-const validate = () => ({
-	full_name: 'error',
-});
-const onSubmit = (e) => {
+const initValues = {
+	fullName: 'Hello',
+};
+
+const onSubmit = (e: ButtonEvent) => {
 	e.preventDefault();
-	console.log(444);
-}
+	console.log('Submit...');
+};
 
 const Template: Story<TextFieldProps> = args => (
-	<Form
-		validate={validate}
-		initialValues={{
-			[args.name]: 'Hello',
-		}}
-		onSubmit={() => {}}
-		render={props => (
-			<form onSubmit={onSubmit} >
-				<pre>{JSON.stringify(props, null, 2)}</pre>
-				<TextField {...args} />
-				<button type="submit">Submit</button>
-			</form>
-		)}
-	/>
+	<BaseForm onSubmit={onSubmit} initialValues={initValues} debug>
+		<TextField {...args} />
+	</BaseForm>
 );
 
 export const Default = Template.bind({});
 Default.args = {
-	name: 'full_name',
+	name: 'fullName',
 	label: 'Full Name',
 	placeholder: 'Type...',
 };

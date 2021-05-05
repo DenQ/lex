@@ -5,9 +5,19 @@ import MailIcon from '@material-ui/icons/Mail';
 import { Tooltip, Props as TooltipProps } from './index';
 
 export default {
-	title: 'Lib/Tooltip',
+	title: 'Lib/info/Tooltip',
 	component: Tooltip,
 	argTypes: {
+		side: {
+			name: 'Side',
+			control: { type: 'select' },
+			options: ['bottom', 'left', 'top', 'right'],
+		},
+		edge: {
+			name: 'Edge',
+			control: { type: 'select' },
+			options: ['start', 'end', 'center'],
+		}
 	},
 } as Meta;
 
