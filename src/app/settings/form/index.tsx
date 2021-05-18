@@ -11,6 +11,7 @@ import { FormFooter } from './components/footer';
 import validationSchema from './validation-schema';
 import { fieldLabels, fieldNames, initialValues } from './constants';
 import { changeSettings } from './utils';
+import { useFetch } from './hooks/fetch';
 // import { getInitialize } from './utils'
 // import Slider from '@material-ui/core/Slider';
 
@@ -26,32 +27,21 @@ type Props = {};
 
 const SettingsForm: React.FC<Props> = () => {
 	// const classes = useStyles();
-	const [loading, setLoading] = useState(false);
-	const [settings, setSettings] = useState({});
-
-	useEffect(() => {
-		setLoading(true);
-		fetchSettings().then(payload => {
-			setTimeout(() => {
-				setSettings(payload);
-				setLoading(false);
-			}, 100);
-		});
-	}, []);
-
-	const initValues = useMemo(
-		() => ({
-			...initialValues,
-			...settings,
-		}),
-		[settings]
-	);
+	const { loading, settings, initValues, reload } = useFetch();
 
 	const onSuccessSubmit = (a: any): void => {
-		// updateSettings()
 		const { formProps } = a;
 		console.log('submit', formProps.values);
-		changeSettings({ payload: formProps.values });
+		changeSettings({
+			afterSuccessSubmit: () => {
+				reload();
+				console.log('success');
+			},
+			afterErrorSubmit: () => {
+				console.log('error');
+			},
+			payload: formProps.values,
+		});
 	};
 
 	if (loading) {

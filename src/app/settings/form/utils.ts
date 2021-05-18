@@ -23,18 +23,19 @@ export type TPayload = {
 
 type TInput = {
 	payload: TPayload;
+	afterSuccessSubmit: () => void
+	afterErrorSubmit: () => void
 };
 
-export const changeSettings = async ({ payload }: TInput): Promise<void> => {
+export const changeSettings = async ({ payload, afterSuccessSubmit, afterErrorSubmit }: TInput): Promise<void> => {
 	try {
 		const result = await updateSettings({
 			...preparePayload(payload),
 		});
-		// need to refresh page
-		console.log(123, result);
+		afterSuccessSubmit();
 	} catch (e) {
-		// need to show error info
 		console.log('Error', e);
+		afterErrorSubmit();
 	} finally {
 		console.log('Fin!');
 	}
