@@ -10,6 +10,7 @@ import { TextField } from 'lib/form/text-field';
 import { FormFooter } from './components/footer';
 import validationSchema from './validation-schema';
 import { fieldLabels, fieldNames, initialValues } from './constants';
+import { changeSettings } from './utils';
 // import { getInitialize } from './utils'
 // import Slider from '@material-ui/core/Slider';
 
@@ -34,18 +35,23 @@ const SettingsForm: React.FC<Props> = () => {
 			setTimeout(() => {
 				setSettings(payload);
 				setLoading(false);
-			}, 1000);
+			}, 100);
 		});
 	}, []);
 
-	const initValues = useMemo(() => ({
+	const initValues = useMemo(
+		() => ({
 			...initialValues,
 			...settings,
-		}), [settings]);
+		}),
+		[settings]
+	);
 
 	const onSuccessSubmit = (a: any): void => {
 		// updateSettings()
-		console.log('submit', a);
+		const { formProps } = a;
+		console.log('submit', formProps.values);
+		changeSettings({ payload: formProps.values });
 	};
 
 	if (loading) {

@@ -18,7 +18,7 @@ export const FormFooter = ({ formProps, onSubmit }: Props) => {
 	const onClick = (e: any): void => {
 		e && e.preventDefault();
 		// console.log(4444, formProps);
-		// onSubmit({ formProps })
+		onSubmit({ formProps })
 	};
 
 	return (
