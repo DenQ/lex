@@ -1,12 +1,11 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 
-
-// import { updateSettings } from 'api/settings';
 import { OnSubmitType } from 'lib/form/base-form';
 
 type FormProps = {
 	dirty: boolean,
+	valid: boolean,
 };
 
 export interface Props {
@@ -15,9 +14,9 @@ export interface Props {
 }
 
 export const FormFooter = ({ formProps, onSubmit }: Props) => {
+	const { valid, dirty } = formProps;
 	const onClick = (e: any): void => {
 		e && e.preventDefault();
-		// console.log(4444, formProps);
 		onSubmit({ formProps })
 	};
 
@@ -26,7 +25,7 @@ export const FormFooter = ({ formProps, onSubmit }: Props) => {
 			type="submit"
 			onClick={onClick}
 			color="primary"
-			disabled={!formProps.dirty}
+			disabled={!dirty || !valid}
 		>
 			Submit
 		</Button>

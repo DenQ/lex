@@ -29,11 +29,10 @@ const SettingsForm: React.FC<Props> = () => {
 
 	const onSuccessSubmit = (a: any): void => {
 		const { formProps } = a;
-		console.log('submit', formProps.values);
+
 		changeSettings({
 			afterSuccessSubmit: () => {
 				reload();
-				console.log('success');
 			},
 			afterErrorSubmit: () => {
 				console.log('error');
