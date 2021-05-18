@@ -7,10 +7,20 @@ const defaultEntityView = {
 	},
 };
 
+const keyValueEntityView = {
+	payload: {},
+	meta: {},
+};
+
 export default () => {
 	[entityTypes.FOLDERS, entityTypes.WORDS].forEach(key => {
 		if (!window.localStorage.getItem(key)) {
 			window.localStorage.setItem(key, JSON.stringify(defaultEntityView));
+		}
+	});
+	[entityTypes.SETTINGS].forEach(key => {
+		if (!window.localStorage.getItem(key)) {
+			window.localStorage.setItem(key, JSON.stringify(keyValueEntityView));
 		}
 	});
 };

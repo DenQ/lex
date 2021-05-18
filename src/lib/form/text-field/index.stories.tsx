@@ -4,7 +4,7 @@ import { Story, Meta } from '@storybook/react';
 import { BaseForm } from 'lib/form/base-form';
 import { TextField, Props as TextFieldProps } from './index';
 
-type ButtonEvent = React.MouseEvent<HTMLButtonElement>;
+export type OnSubmitType = (params: object) => void;
 
 export default {
 	title: 'Lib/Form/Text Field',
@@ -16,9 +16,8 @@ const initValues = {
 	fullName: 'Hello',
 };
 
-const onSubmit = (e: ButtonEvent) => {
-	e.preventDefault();
-	console.log('Submit...');
+const onSubmit: OnSubmitType = (params: object) => {
+	console.log('Submit...', params);
 };
 
 const Template: Story<TextFieldProps> = args => (

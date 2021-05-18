@@ -30,7 +30,7 @@ export const Default = Template.bind({});
 Default.args = {
 	validationSchema,
 	onSubmit: e => {
-		e.preventDefault();
-		console.log(777);
+		// e.preventDefault();
+		console.log(999, e);
 	},
 };
