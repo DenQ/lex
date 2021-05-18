@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -28,6 +28,13 @@ const Component = props => {
 	const classes = useStyles();
 	const { title, isHome } = props;
 	const urlToHome = urlManager.folders();
+	const history = useHistory();
+
+	const showSettingsButton = !/settings/iu.test(window.location.pathname);
+	const onClickToSettings = e => {
+		e.preventDefault();
+		history.push(urlManager.settings());
+	};
 
 	const linkToHome = !isHome && (
 		<IconButton
@@ -57,7 +64,7 @@ const Component = props => {
 				<Typography variant="h6" className={classes.title}>
 					{title}
 				</Typography>
-				<Button color="inherit">Settings</Button>
+				{showSettingsButton && <Button color="inherit" onClick={onClickToSettings}>Settings</Button>}
 			</Toolbar>
 		</AppBar>
 	);

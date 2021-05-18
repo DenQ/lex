@@ -36,7 +36,7 @@ Component.propTypes = {
 };
 
 Component.defaultProps = {
-	isHome: true,
+	isHome: false,
 };
 
 export default Component;

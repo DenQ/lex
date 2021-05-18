@@ -3,11 +3,10 @@ import Grid from '@material-ui/core/Grid';
 import GeneralLayout from '../system/layout';
 import SettingsForm from './form';
 
-type Props = {
-};
+type Props = {};
 
 const SettingsPage: React.FC<Props> = () => (
-	<GeneralLayout title="Folders" isHome>
+	<GeneralLayout title="Folders">
 		<Grid container justify="center" spacing={2}>
 			<SettingsForm />
 		</Grid>
