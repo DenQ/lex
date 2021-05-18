@@ -26,8 +26,6 @@ export const fetchSettings = async () => {
 export const updateSettings = async data => {
 	const { payload, meta } = await eject();
 
-	console.log(34, data);
-
 	return inject({
 		meta,
 		payload: {

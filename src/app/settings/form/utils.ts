@@ -1,5 +1,5 @@
 import { updateSettings } from 'api/settings';
-import { fieldLabels, fieldNames, initialValues } from './constants';
+import { fieldNames } from './constants';
 //
 // const { PLAY_COUNT_WORDS, PLAY_MAX_COUNT_WINS } = fieldNames;
 //
@@ -28,12 +28,21 @@ type TInput = {
 export const changeSettings = async ({ payload }: TInput): Promise<void> => {
 	try {
 		const result = await updateSettings({
-			...payload,
+			...preparePayload(payload),
 		});
+		// need to refresh page
 		console.log(123, result);
-	}	 catch (e) {
+	} catch (e) {
+		// need to show error info
 		console.log('Error', e);
 	} finally {
 		console.log('Fin!');
 	}
 };
+
+export const preparePayload = (data: TPayload): TPayload => ({
+	[fieldNames.PLAY_COUNT_WORDS]: Number(data[fieldNames.PLAY_COUNT_WORDS]),
+	[fieldNames.PLAY_MAX_COUNT_WINS]: Number(
+		data[fieldNames.PLAY_MAX_COUNT_WINS]
+	),
+});
