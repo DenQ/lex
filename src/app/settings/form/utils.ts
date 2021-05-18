@@ -29,7 +29,7 @@ type TInput = {
 
 export const changeSettings = async ({ payload, afterSuccessSubmit, afterErrorSubmit }: TInput): Promise<void> => {
 	try {
-		const result = await updateSettings({
+		await updateSettings({
 			...preparePayload(payload),
 		});
 		afterSuccessSubmit();

@@ -1,18 +1,16 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React from 'react';
 // import { useHistory } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 // import { makeStyles } from '@material-ui/core/styles';
 
-import { fetchSettings /* , updateSettings */ } from 'api/settings';
 import { BaseForm } from 'lib/form/base-form';
 import { TextField } from 'lib/form/text-field';
 
 import { FormFooter } from './components/footer';
 import validationSchema from './validation-schema';
-import { fieldLabels, fieldNames, initialValues } from './constants';
+import { fieldLabels, fieldNames } from './constants';
 import { changeSettings } from './utils';
 import { useFetch } from './hooks/fetch';
-// import { getInitialize } from './utils'
 // import Slider from '@material-ui/core/Slider';
 
 // import urlManager from 'common/utils/url-manager';
@@ -27,7 +25,7 @@ type Props = {};
 
 const SettingsForm: React.FC<Props> = () => {
 	// const classes = useStyles();
-	const { loading, settings, initValues, reload } = useFetch();
+	const { loading, initValues, reload } = useFetch();
 
 	const onSuccessSubmit = (a: any): void => {
 		const { formProps } = a;
