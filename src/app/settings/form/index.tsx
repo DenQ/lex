@@ -6,7 +6,8 @@ import Grid from '@material-ui/core/Grid';
 import { BaseForm } from 'lib/form/base-form';
 import { TextField } from 'lib/form/text-field';
 
-import { actions } from '@storybook/addon-actions';
+import { preparePayload } from 'common/utils/settings/utils';
+// import { actions } from '@storybook/addon-actions';
 import { FormFooter } from './components/footer';
 import validationSchema from './validation-schema';
 import { fieldLabels, fieldNames } from './constants';
@@ -36,7 +37,8 @@ const SettingsForm: React.FC<Props> = () => {
 		changeSettings({
 			afterSuccessSubmit: () => {
 				reload();
-				actions.update(formProps.values);
+				actions.update(preparePayload(formProps.values));
+				// actions.update(formProps.values);
 			},
 			afterErrorSubmit: () => {
 				console.log('error');

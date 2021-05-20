@@ -7,6 +7,7 @@ import { fieldNames as wordFieldNames } from 'common/@types/words';
 import NoData from 'common/components/no-data';
 import { useSettings } from 'common/contexts/settings';
 
+import { fieldNames as settingsFieldNames } from 'common/@types/settings';
 import Explored from './components/explored';
 import PlayListWords from './components/list';
 import Progress from './components/statistic-info';
@@ -32,7 +33,7 @@ const Component = props => {
 	const [progress, setProgress] = useState(0);
 	const [noData, setNoData] = useState(false);
 	const { settings } = useSettings();
-	console.log(444444, settings);
+	console.log(123, settings);
 
 	/* eslint-disable react-hooks/exhaustive-deps */
 	useEffect(() => {
@@ -42,11 +43,11 @@ const Component = props => {
 			const newList = getRange({
 				list,
 				targetWord,
-				limit: settings.play_count_words,
+				limit: Number(settings[settingsFieldNames.PLAY_COUNT_WORDS]),
 			});
 			const progress = calculateProgress({
 				list,
-				maxCountWins: Number(settings.play_max_count_wins),
+				maxCountWins: Number(settings[settingsFieldNames.PLAY_MAX_COUNT_WINS]),
 			});
 
 			if (list.length === 0) {
@@ -58,7 +59,12 @@ const Component = props => {
 			setVector(Math.random() >= 0.5);
 			setProgress(progress);
 		});
-	}, [needReload, settings.play_count_words, settings.play_max_count_wins]);
+	}, [
+		needReload,
+		JSON.stringify(settings),
+		// settings[settingsFieldNames.PLAY_COUNT_WORDS],
+		// settings[settingsFieldNames.PLAY_MAX_COUNT_WINS],
+	]);
 	/* eslint-enable react-hooks/exhaustive-deps */
 
 	const handleSelectWord = ({ targetWord, selectedWord }) => {
