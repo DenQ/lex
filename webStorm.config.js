@@ -3,5 +3,6 @@ System.config({
 		"common/*": "./src/common/*",
 		"api/*": "./src/api/*",
 		"app/*": "./src/app/*",
+		"lib/*": "./src/lib/*",
 	}
 });

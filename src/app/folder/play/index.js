@@ -5,7 +5,9 @@ import { findAll, updateByFolderId } from 'api/words';
 import GeneralLayout from 'app/system/layout';
 import { fieldNames as wordFieldNames } from 'common/@types/words';
 import NoData from 'common/components/no-data';
+import { useSettings } from 'common/contexts/settings';
 
+import { fieldNames as settingsFieldNames } from 'common/@types/settings';
 import Explored from './components/explored';
 import PlayListWords from './components/list';
 import Progress from './components/statistic-info';
@@ -30,14 +32,22 @@ const Component = props => {
 	const [errorItem, setErrorItem] = useState(null);
 	const [progress, setProgress] = useState(0);
 	const [noData, setNoData] = useState(false);
+	const { settings } = useSettings();
 
 	/* eslint-disable react-hooks/exhaustive-deps */
 	useEffect(() => {
 		const criteria = item => item[fieldNames.FOLDER_ID] === id;
 		findAll({ criteria }).then(list => {
 			const targetWord = getWeakestWord({ list });
-			const newList = getRange({ list, targetWord });
-			const progress = calculateProgress({ list });
+			const newList = getRange({
+				list,
+				targetWord,
+				limit: settings[settingsFieldNames.PLAY_COUNT_WORDS],
+			});
+			const progress = calculateProgress({
+				list,
+				maxCountWins: settings[settingsFieldNames.PLAY_MAX_COUNT_WINS],
+			});
 
 			if (list.length === 0) {
 				setNoData(true);
@@ -48,7 +58,11 @@ const Component = props => {
 			setVector(Math.random() >= 0.5);
 			setProgress(progress);
 		});
-	}, [needReload]);
+	}, [
+		needReload,
+		settings[settingsFieldNames.PLAY_COUNT_WORDS],
+		settings[settingsFieldNames.PLAY_MAX_COUNT_WINS],
+	]);
 	/* eslint-enable react-hooks/exhaustive-deps */
 
 	const handleSelectWord = ({ targetWord, selectedWord }) => {

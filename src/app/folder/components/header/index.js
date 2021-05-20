@@ -40,7 +40,7 @@ const Component = props => {
 		collectionControls.push(
 			<Button color="primary" onClick={toEditHandler} key="to-edit">
 				To Edit
-			</Button>,
+			</Button>
 		);
 	}
 
@@ -48,7 +48,7 @@ const Component = props => {
 		collectionControls.push(
 			<Button color="secondary" onClick={toRemoveHandler} key="to-remove">
 				Remove
-			</Button>,
+			</Button>
 		);
 	}
 	const breadcrumbs = breadcrumbsProps && (
