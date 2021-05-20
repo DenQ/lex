@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import { errorMessages } from 'common/@messages/errors';
-import { fieldNames, initialValues } from './constants';
+import { fieldNames } from './constants';
 
 export default Yup.object().shape({
 	[fieldNames.PLAY_COUNT_WORDS]: Yup.number()
