@@ -42,11 +42,11 @@ const Component = props => {
 			const newList = getRange({
 				list,
 				targetWord,
-				limit: Number(settings[settingsFieldNames.PLAY_COUNT_WORDS]),
+				limit: settings[settingsFieldNames.PLAY_COUNT_WORDS],
 			});
 			const progress = calculateProgress({
 				list,
-				maxCountWins: Number(settings[settingsFieldNames.PLAY_MAX_COUNT_WINS]),
+				maxCountWins: settings[settingsFieldNames.PLAY_MAX_COUNT_WINS],
 			});
 
 			if (list.length === 0) {
