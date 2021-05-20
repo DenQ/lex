@@ -5,7 +5,7 @@ export interface IKeyValue {
 }
 
 export interface ISettingsAction {
-	update: (payload: IKeyValue) => void;
+	reload: () => void;
 }
 
 export interface ISettings {
@@ -16,7 +16,7 @@ export interface ISettings {
 const initialValues = {
 	settings: {},
 	actions: {
-		update: () => null,
+		reload: () => null,
 	},
 };
 

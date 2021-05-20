@@ -1,19 +1,15 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { preparePayload } from 'common/utils/settings/utils';
 import { fetchSettings } from 'api/settings';
-import {
-	ISettings,
-	SettingsContext,
-} from './common/contexts/settings';
+import { ISettings, SettingsContext } from 'common/contexts/settings';
 
 type Props = {};
 
-export const Providers: React.FC<Props> = ({ children }) => {
-	// TODO: need to extract to common hooks
+export const SettingsProvider: React.FC<Props> = ({ children }) => {
 	const [settingsValue, setSettingsValue] = useState<ISettings>({
 		settings: {},
 		actions: {
-			update: () => null,
+			reload: () => null,
 		},
 	});
 	const [needReload, setNeedReload] = useState(+new Date());
@@ -26,7 +22,8 @@ export const Providers: React.FC<Props> = ({ children }) => {
 				...settingsValue,
 				settings: preparePayload(response),
 				actions: {
-					update: payload => {
+					...settingsValue.actions,
+					reload: () => {
 						reload();
 						return null;
 					},
@@ -35,9 +32,11 @@ export const Providers: React.FC<Props> = ({ children }) => {
 		});
 	};
 
+	/* eslint-disable react-hooks/exhaustive-deps */
 	useEffect(() => {
 		fetchData();
 	}, [needReload]);
+	/* eslint-enable react-hooks/exhaustive-deps */
 
 	return (
 		<>
@@ -47,5 +46,3 @@ export const Providers: React.FC<Props> = ({ children }) => {
 		</>
 	);
 };
-
-export default Providers;

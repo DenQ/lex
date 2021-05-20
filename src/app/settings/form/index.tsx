@@ -1,13 +1,10 @@
 import React from 'react';
-// import { useHistory } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 // import { makeStyles } from '@material-ui/core/styles';
 
 import { BaseForm } from 'lib/form/base-form';
 import { TextField } from 'lib/form/text-field';
 
-import { preparePayload } from 'common/utils/settings/utils';
-// import { actions } from '@storybook/addon-actions';
 import { FormFooter } from './components/footer';
 import validationSchema from './validation-schema';
 import { fieldLabels, fieldNames } from './constants';
@@ -37,8 +34,7 @@ const SettingsForm: React.FC<Props> = () => {
 		changeSettings({
 			afterSuccessSubmit: () => {
 				reload();
-				actions.update(preparePayload(formProps.values));
-				// actions.update(formProps.values);
+				actions.reload();
 			},
 			afterErrorSubmit: () => {
 				console.log('error');

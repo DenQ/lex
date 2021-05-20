@@ -4,7 +4,7 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 import RefreshContext from 'common/contexts/refetch-context';
 import { urls } from 'common/utils/url-manager';
-import Providers from './providers';
+import { SettingsProvider } from 'common/context-providers/settings';
 
 import ListFolders from './app/folders';
 import ShowFolder from './app/folder/show';
@@ -29,7 +29,7 @@ function App() {
 	return (
 		<ThemeProvider theme={theme}>
 			<RefreshContext.Provider value={refreshContextValue}>
-				<Providers>
+				<SettingsProvider>
 					<Router>
 						<Switch>
 							<Route path={urls.FOLDER_SHOW} component={ShowFolder} />
@@ -41,7 +41,7 @@ function App() {
 							<Route path="/" component={ListFolders} />
 						</Switch>
 					</Router>
-				</Providers>
+				</SettingsProvider>
 			</RefreshContext.Provider>
 		</ThemeProvider>
 	);

@@ -33,7 +33,6 @@ const Component = props => {
 	const [progress, setProgress] = useState(0);
 	const [noData, setNoData] = useState(false);
 	const { settings } = useSettings();
-	console.log(123, settings);
 
 	/* eslint-disable react-hooks/exhaustive-deps */
 	useEffect(() => {
@@ -61,9 +60,8 @@ const Component = props => {
 		});
 	}, [
 		needReload,
-		JSON.stringify(settings),
-		// settings[settingsFieldNames.PLAY_COUNT_WORDS],
-		// settings[settingsFieldNames.PLAY_MAX_COUNT_WINS],
+		settings[settingsFieldNames.PLAY_COUNT_WORDS],
+		settings[settingsFieldNames.PLAY_MAX_COUNT_WINS],
 	]);
 	/* eslint-enable react-hooks/exhaustive-deps */
 
