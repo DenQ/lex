@@ -6,11 +6,13 @@ import Grid from '@material-ui/core/Grid';
 import { BaseForm } from 'lib/form/base-form';
 import { TextField } from 'lib/form/text-field';
 
+import { actions } from '@storybook/addon-actions';
 import { FormFooter } from './components/footer';
 import validationSchema from './validation-schema';
 import { fieldLabels, fieldNames } from './constants';
 import { changeSettings } from './utils';
 import { useFetch } from './hooks/fetch';
+import { useSettings } from '../../../common/contexts/settings';
 // import Slider from '@material-ui/core/Slider';
 
 // import urlManager from 'common/utils/url-manager';
@@ -26,6 +28,7 @@ type Props = {};
 const SettingsForm: React.FC<Props> = () => {
 	// const classes = useStyles();
 	const { loading, initValues, reload } = useFetch();
+	const { actions } = useSettings();
 
 	const onSuccessSubmit = (a: any): void => {
 		const { formProps } = a;
@@ -33,6 +36,7 @@ const SettingsForm: React.FC<Props> = () => {
 		changeSettings({
 			afterSuccessSubmit: () => {
 				reload();
+				actions.update(formProps.values);
 			},
 			afterErrorSubmit: () => {
 				console.log('error');

@@ -44,12 +44,12 @@ export const setRate = ({ targetWord, isSuccess }) => {
 	});
 };
 
-export const calculateProgress = ({ list }) => {
-	const maxAvalableValueList = list.length * MAX_COUNT_WINS;
+export const calculateProgress = ({ list, maxCountWins = MAX_COUNT_WINS }) => {
+	const maxAvalableValueList = list.length * maxCountWins;
 	const value = _.chain(list)
 		.map(item => {
 			const wins = item[wordFieldNames.NUMBER_OF_WINS];
-			if (wins >= MAX_COUNT_WINS) return MAX_COUNT_WINS;
+			if (wins >= maxCountWins) return maxCountWins;
 			return wins;
 		})
 		.sum()

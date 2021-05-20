@@ -5,6 +5,7 @@ import { findAll, updateByFolderId } from 'api/words';
 import GeneralLayout from 'app/system/layout';
 import { fieldNames as wordFieldNames } from 'common/@types/words';
 import NoData from 'common/components/no-data';
+import { useSettings } from 'common/contexts/settings';
 
 import Explored from './components/explored';
 import PlayListWords from './components/list';
@@ -30,14 +31,23 @@ const Component = props => {
 	const [errorItem, setErrorItem] = useState(null);
 	const [progress, setProgress] = useState(0);
 	const [noData, setNoData] = useState(false);
+	const { settings } = useSettings();
+	console.log(444444, settings);
 
 	/* eslint-disable react-hooks/exhaustive-deps */
 	useEffect(() => {
 		const criteria = item => item[fieldNames.FOLDER_ID] === id;
 		findAll({ criteria }).then(list => {
 			const targetWord = getWeakestWord({ list });
-			const newList = getRange({ list, targetWord });
-			const progress = calculateProgress({ list });
+			const newList = getRange({
+				list,
+				targetWord,
+				limit: settings.play_count_words,
+			});
+			const progress = calculateProgress({
+				list,
+				maxCountWins: Number(settings.play_max_count_wins),
+			});
 
 			if (list.length === 0) {
 				setNoData(true);
@@ -48,7 +58,7 @@ const Component = props => {
 			setVector(Math.random() >= 0.5);
 			setProgress(progress);
 		});
-	}, [needReload]);
+	}, [needReload, settings.play_count_words, settings.play_max_count_wins]);
 	/* eslint-enable react-hooks/exhaustive-deps */
 
 	const handleSelectWord = ({ targetWord, selectedWord }) => {
