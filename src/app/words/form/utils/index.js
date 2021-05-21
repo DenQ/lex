@@ -1,6 +1,5 @@
 import { eject as ejectWords, inject as injectWords } from 'api/words';
-
-import { fieldNames } from '../constants';
+import { fieldNames } from 'common/@types/words';
 
 export const submitHandler = ({ onSuccessSubmit }) => async (values, form) => {
 	const { list, meta } = await ejectWords();

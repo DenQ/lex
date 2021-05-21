@@ -10,7 +10,7 @@ import PlayIcon from '@material-ui/icons/PlayCircleOutline';
 import Fab from '@material-ui/core/Fab';
 import { Badge } from 'lib/info/badge';
 
-import { fieldNames as fieldNamesWords } from 'app/words/form/constants';
+import { fieldNames as wordFieldNames } from 'common/@types/words';
 
 import { count } from 'api/words';
 
@@ -35,7 +35,7 @@ const Component = props => {
 
 	React.useEffect(() => {
 		const criteria = item =>
-			Number(item[fieldNamesWords.FOLDER_ID]) === Number(data.id);
+			Number(item[wordFieldNames.FOLDER_ID]) === Number(data.id);
 
 		count({ criteria }).then(result => {
 			setCountWords(result);

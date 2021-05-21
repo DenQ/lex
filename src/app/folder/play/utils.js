@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 import { updateById } from 'api/words';
-import { fieldNames as wordFieldNames } from 'app/words/form/constants';
+import { fieldNames as wordFieldNames } from 'common/@types/words';
 import urlManager from 'common/utils/url-manager';
 
 import { MAX_COUNT_WINS } from './constants';
