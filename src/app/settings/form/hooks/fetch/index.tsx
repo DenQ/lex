@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { fetchSettings } from 'api/settings';
-import { initialValues } from '../../constants';
+import { initialValues } from 'common/@types/settings';
 
 export type TSettings = {
 	[string: string]: string | number;
