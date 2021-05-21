@@ -4,13 +4,14 @@ import Grid from '@material-ui/core/Grid';
 
 import { BaseForm } from 'lib/form/base-form';
 import { TextField } from 'lib/form/text-field';
+import { fieldNames } from 'common/@types/settings';
+import { useSettings } from 'common/contexts/settings';
 
 import { FormFooter } from './components/footer';
 import validationSchema from './validation-schema';
-import { fieldLabels, fieldNames } from './constants';
+import { fieldLabels } from './constants';
 import { changeSettings } from './utils';
 import { useFetch } from './hooks/fetch';
-import { useSettings } from '../../../common/contexts/settings';
 // import Slider from '@material-ui/core/Slider';
 
 // import urlManager from 'common/utils/url-manager';

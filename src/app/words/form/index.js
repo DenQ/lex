@@ -7,16 +7,9 @@ import Button from '@material-ui/core/Button';
 
 import RefreshContext from 'common/contexts/refetch-context';
 
+import { fieldNames, initialValues } from 'common/@types/words';
 import { submitHandler } from './utils';
-import { fieldNames } from './constants';
 import InputControl from './components/input-control';
-
-const initialValues = {
-	[fieldNames.ID]: null,
-	[fieldNames.FOLDER_ID]: null,
-	[fieldNames.WORD_NATIVE]: '',
-	[fieldNames.WORD_TRANSLATION]: '',
-};
 
 const useStyles = makeStyles({
 	id: {

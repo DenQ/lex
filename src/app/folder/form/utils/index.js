@@ -1,6 +1,5 @@
 import { eject as ejectFolders, inject as injectFolders } from 'api/folders';
-
-import { fieldNames } from '../constants';
+import { fieldNames } from 'common/@types/folder';
 
 export const submitHandler = ({ onSuccessSubmit }) => async values => {
 	const { list, meta } = await ejectFolders();

@@ -1,5 +1,5 @@
-import { fieldNames } from 'app/words/form/constants';
 import entityTypes from 'common/@types/entity';
+import { fieldNames } from 'common/@types/words';
 
 export const eject = async () => {
 	const entitySerialized = window.localStorage.getItem(entityTypes.WORDS);

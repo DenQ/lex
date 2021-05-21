@@ -6,9 +6,9 @@ import Typography from '@material-ui/core/Typography';
 
 import { findAll, removeById } from 'api/words';
 import RefreshContext from 'common/contexts/refetch-context';
+import { fieldNames } from 'common/@types/words';
 
 import PresenterWord from '../presenter';
-import { fieldNames } from '../form/constants';
 
 const Component = ({ folderId, readOnly }) => {
 	const { wordsReload } = React.useContext(RefreshContext);
@@ -25,7 +25,7 @@ const Component = ({ folderId, readOnly }) => {
 
 	const isShowListHeader = React.useMemo(
 		() => (list.length > 0 && !readOnly) || list.length > 0,
-		[readOnly, list.length],
+		[readOnly, list.length]
 	);
 
 	const handleRemove = ({ id }) => {

@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 
+import { fieldNames } from 'common/@types/words';
 import Form from '../form';
 import Details from './details';
-import { fieldNames } from '../form/constants';
 
 const PresenterComponent = props => {
 	const { data, isNew, folderId, readOnly, handleRemove } = props;

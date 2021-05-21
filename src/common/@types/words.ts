@@ -17,3 +17,10 @@ export const ModelProps = PropTypes.shape({
 	[fieldNames.NUMBER_OF_ATTEMPTS]: PropTypes.number,
 	[fieldNames.NUMBER_OF_WINS]: PropTypes.number,
 });
+
+export const initialValues = {
+	[fieldNames.ID]: null,
+	[fieldNames.FOLDER_ID]: null,
+	[fieldNames.WORD_NATIVE]: '',
+	[fieldNames.WORD_TRANSLATION]: '',
+};

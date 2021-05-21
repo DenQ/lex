@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ListItem from '@material-ui/core/ListItem';
 import Typography from '@material-ui/core/Typography';
 
-import { fieldNames } from '../../form/constants';
+import { fieldNames } from 'common/@types/words';
 
 const Component = props => {
 	const {
