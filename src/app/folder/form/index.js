@@ -6,17 +6,11 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
+import { fieldNames, initialValues } from 'common/@types/folder';
 import urlManager from 'common/utils/url-manager';
 import InputControl from 'app/words/form/components/input-control';
 
 import { submitHandler } from './utils';
-import { fieldNames } from './constants';
-
-const initialValues = {
-	[fieldNames.ID]: null,
-	[fieldNames.NAME]: '',
-	[fieldNames.DESCRIPTION]: '',
-};
 
 const useStyles = makeStyles({
 	id: {
