@@ -30,30 +30,34 @@ export const ConfirmationModal = ({
 	onCancel,
 	onYes,
 	size = 'xs'
-}: Props) => (
-	<Dialog
-		maxWidth={size}
-		fullWidth
-		open={open}
-		TransitionComponent={Transition}
-		keepMounted
-		onClose={onCancel}
-		aria-labelledby="alert-dialog-slide-title"
-		aria-describedby="alert-dialog-slide-description"
-	>
-		<DialogTitle id="alert-dialog-slide-title">{title}</DialogTitle>
-		<DialogContent>
-			<DialogContentText id="alert-dialog-slide-description">
-				{message}
-			</DialogContentText>
-		</DialogContent>
-		<DialogActions>
-			<Button onClick={onCancel} color="primary">
-				Cancel
-			</Button>
-			<Button onClick={onYes} color="secondary">
-				Yes
-			</Button>
-		</DialogActions>
-	</Dialog>
-);
+}: Props) => {
+	console.log(4444, Transition);
+
+	return (
+		<Dialog
+			maxWidth={size}
+			fullWidth
+			open={open}
+			TransitionComponent={Transition}
+			keepMounted
+			onClose={onCancel}
+			aria-labelledby="alert-dialog-slide-title"
+			aria-describedby="alert-dialog-slide-description"
+		>
+			<DialogTitle id="alert-dialog-slide-title">{title}</DialogTitle>
+			<DialogContent>
+				<DialogContentText id="alert-dialog-slide-description">
+					{message}
+				</DialogContentText>
+			</DialogContent>
+			<DialogActions>
+				<Button onClick={onCancel} color="primary">
+					Cancel
+				</Button>
+				<Button onClick={onYes} color="secondary">
+					Yes
+				</Button>
+			</DialogActions>
+		</Dialog>
+	);
+}
