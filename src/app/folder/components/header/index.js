@@ -72,8 +72,8 @@ const Component = props => {
 			<Box m={2}>{collectionControls}</Box>
 			<ConfirmationModal
 				open={open}
-				title="xxx"
-				message="yyy"
+				title="Remove folder"
+				message="Are you sure you want to delete the folder?"
 				onYes={onYes}
 				onCancel={onCancel}
 			/>

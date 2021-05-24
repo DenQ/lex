@@ -1,6 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import {
+	// createMuiTheme,
+	unstable_createMuiStrictModeTheme as createMuiTheme, // because material lagged behind of React
+	ThemeProvider,
+} from '@material-ui/core/styles';
 
 import RefreshContext from 'common/contexts/refetch-context';
 import { urls } from 'common/utils/url-manager';
