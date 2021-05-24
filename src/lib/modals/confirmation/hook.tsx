@@ -25,7 +25,7 @@ export const useConfirmationModal = ({ onConfirmation }: Input): Output => {
 		onConfirmation({
 			reset,
 		});
-	}, [onConfirmation]);
+	}, [onConfirmation, reset]);
 	const onCancel = useCallback(() => {
 		reset();
 	}, [reset]);

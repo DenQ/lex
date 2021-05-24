@@ -20,7 +20,7 @@ export interface Props {
 	message: string;
 	onCancel?: () => void;
 	onYes?: () => void;
-	size?: 'xl' | 'lg' | 'md' | 'sm' | 'xs' | undefined ;
+	size?: 'xl' | 'lg' | 'md' | 'sm' | 'xs' | undefined;
 }
 
 export const ConfirmationModal = ({
@@ -29,7 +29,7 @@ export const ConfirmationModal = ({
 	message,
 	onCancel,
 	onYes,
-	size = 'xs'
+	size = 'xs',
 }: Props) => (
 	<Dialog
 		maxWidth={size}

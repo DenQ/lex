@@ -10,7 +10,9 @@ import urlManager from 'common/utils/url-manager';
 import BreadCrumbs, {
 	BreadcrumbsPropTypes,
 } from 'common/components/bread-crumbs';
+import { useConfirmationModal } from 'lib/modals/confirmation/hook';
 
+import { ConfirmationModal } from 'lib/modals/confirmation';
 import { controlNames } from '../../constants';
 
 const Component = props => {
@@ -22,16 +24,25 @@ const Component = props => {
 		history.push(to);
 	};
 
-	const toRemoveHandler = () => {
+	const toRemoveHandler = ({ reset }) => {
 		removeById({ id })
 			.then(r => removeByFolderId({ folderId: id }))
 			.then(r => {
+				reset();
 				const to = urlManager.folders();
 				history.push(to);
 			})
 			.catch(e => {
 				console.log('Catch error', e);
 			});
+	};
+
+	const { open, toOpen, onYes, onCancel } = useConfirmationModal({
+		onConfirmation: toRemoveHandler,
+	});
+
+	const onClickToRemove = () => {
+		toOpen();
 	};
 
 	const collectionControls = [];
@@ -46,7 +57,7 @@ const Component = props => {
 
 	if (controls.includes(controlNames.TO_REMOVE)) {
 		collectionControls.push(
-			<Button color="secondary" onClick={toRemoveHandler} key="to-remove">
+			<Button color="secondary" onClick={onClickToRemove} key="to-remove">
 				Remove
 			</Button>
 		);
@@ -59,6 +70,13 @@ const Component = props => {
 		<>
 			<Box m={2}>{breadcrumbs}</Box>
 			<Box m={2}>{collectionControls}</Box>
+			<ConfirmationModal
+				open={open}
+				title="Remove folder"
+				message="Are you sure you want to delete the folder?"
+				onYes={onYes}
+				onCancel={onCancel}
+			/>
 		</>
 	);
 };
