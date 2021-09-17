@@ -5,8 +5,9 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 
 import { removeById } from 'api/words';
-
 import { useGetList } from 'app/words/list/hooks/get-list';
+
+import { orderListByName } from 'app/words/list/utils/ordering';
 import PresenterWord from '../presenter';
 
 const WordsListPage = ({ folderId, readOnly }) => {
@@ -15,6 +16,7 @@ const WordsListPage = ({ folderId, readOnly }) => {
 	const list = useGetList({
 		folderId,
 		needRefresh,
+		prepareList: (list) => orderListByName({ list })
 	});
 
 	const isShowListHeader = React.useMemo(

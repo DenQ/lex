@@ -9,11 +9,16 @@ type K = () => boolean;
 type Input = {
 	folderId: number;
 	needRefresh: string;
+	prepareList?: (list: Array<WordItemDTO>) => Array<WordItemDTO>;
 };
 
 type Output = Array<WordItemDTO>;
 
-export const useGetList = ({ folderId, needRefresh }: Input): Output => {
+export const useGetList = ({
+	folderId,
+	needRefresh,
+	prepareList = l => l,
+}: Input): Output => {
 	const { wordsReload } = useContext(RefreshContext);
 	const [list, setList] = useState<Array<WordItemDTO>>([]);
 
@@ -22,7 +27,7 @@ export const useGetList = ({ folderId, needRefresh }: Input): Output => {
 			Number(item.folder_id) === Number(folderId);
 
 		findAll({ criteria } as { criteria: K }).then(results => {
-			setList(results);
+			setList(prepareList(results));
 		});
 	}, [folderId, wordsReload, needRefresh]);
 

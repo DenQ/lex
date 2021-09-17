@@ -29,6 +29,7 @@ export type WordItemDTO = {
 	id: number;
 	folder_id: number;
 	word_native: string;
+	word_translation: string;
 	number_of_attempts: string;
 	number_of_wins: string;
 };
