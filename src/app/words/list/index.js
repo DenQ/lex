@@ -4,24 +4,18 @@ import List from '@material-ui/core/List';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 
-import { findAll, removeById } from 'api/words';
-import RefreshContext from 'common/contexts/refetch-context';
-import { fieldNames } from 'common/@types/words';
+import { removeById } from 'api/words';
 
+import { useGetList } from 'app/words/list/hooks/get-list';
 import PresenterWord from '../presenter';
 
-const Component = ({ folderId, readOnly }) => {
-	const { wordsReload } = React.useContext(RefreshContext);
-	const [list, setList] = React.useState([]);
+const WordsListPage = ({ folderId, readOnly }) => {
 	const [needRefresh, setNeedRefresh] = React.useState(null);
 
-	React.useEffect(() => {
-		const criteria = item =>
-			Number(item[fieldNames.FOLDER_ID]) === Number(folderId);
-		findAll({ criteria }).then(results => {
-			setList(results);
-		});
-	}, [folderId, wordsReload, needRefresh]);
+	const list = useGetList({
+		folderId,
+		needRefresh,
+	});
 
 	const isShowListHeader = React.useMemo(
 		() => (list.length > 0 && !readOnly) || list.length > 0,
@@ -57,13 +51,13 @@ const Component = ({ folderId, readOnly }) => {
 	);
 };
 
-Component.propTypes = {
+WordsListPage.propTypes = {
 	folderId: PropTypes.number.isRequired,
 	readOnly: PropTypes.bool,
 };
 
-Component.defaultProps = {
+WordsListPage.defaultProps = {
 	readOnly: false,
 };
 
-export default Component;
+export default WordsListPage;
