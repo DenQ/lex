@@ -45,12 +45,6 @@
 			}
 		],
 		"react/jsx-key": "error",
-		"import/no-extraneous-dependencies": [
-			"error",
-			{
-				"devDependencies": ["**/*.test.js", "**/*.test.jsx", "**/*.test.ts", "**/*.test.tsx", "src/tests/**/*"]
-			}
-		],
 		"react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
 		"import/no-anonymous-default-export": "off",
 		"no-use-before-define": "off",
@@ -78,6 +72,7 @@
 				"exports": "only-multiline",
 				"functions": "never"
 			}
-		]
+		],
+		"import/no-extraneous-dependencies": ["error", {"devDependencies": false, "optionalDependencies": false, "peerDependencies": false}]
 	}
 }
