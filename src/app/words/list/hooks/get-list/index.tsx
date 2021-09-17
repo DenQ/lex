@@ -29,7 +29,7 @@ export const useGetList = ({
 		findAll({ criteria } as { criteria: K }).then(results => {
 			setList(prepareList(results));
 		});
-	}, [folderId, wordsReload, needRefresh]);
+	}, [folderId, wordsReload, needRefresh, prepareList]);
 
 	return list;
 };
