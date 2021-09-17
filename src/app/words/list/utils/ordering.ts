@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { WordItemDTO } from '../../../../common/@types/words';
+import { WordItemDTO } from 'common/@types/words';
 
 type Input = {
 	list: Array<WordItemDTO>;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import List from '@material-ui/core/List';
 import Box from '@material-ui/core/Box';
@@ -12,11 +12,12 @@ import PresenterWord from '../presenter';
 
 const WordsListPage = ({ folderId, readOnly }) => {
 	const [needRefresh, setNeedRefresh] = React.useState(null);
+	const prepareList = useCallback(list => orderListByName({ list }), []);
 
 	const list = useGetList({
 		folderId,
 		needRefresh,
-		prepareList: (list) => orderListByName({ list })
+		prepareList,
 	});
 
 	const isShowListHeader = React.useMemo(
