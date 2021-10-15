@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Form } from 'react-final-form';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+// import _ from 'lodash';
 
 import RefreshContext from 'common/contexts/refetch-context';
 
 import { fieldNames, initialValues } from 'common/@types/words';
-import { submitHandler } from './utils';
+import { findKeyValue, submitHandler } from './utils';
 import InputControl from './components/input-control';
 
 const useStyles = makeStyles({
@@ -17,10 +18,28 @@ const useStyles = makeStyles({
 	},
 });
 
-const EntityForm = ({ initialValues, readOnly, handleRemove }) => {
+const EntityForm = ({ initialValues, readOnly, handleRemove, words }) => {
+	console.log(100, words);
 	const classes = useStyles();
 	const { wordsReload, setWordsReload } = React.useContext(RefreshContext);
-	const validate = () => {};
+
+	const validate = useCallback(
+		values => {
+			const errors = {};
+
+			const findWordNative = findKeyValue({
+				words,
+				key: fieldNames.WORD_NATIVE,
+				value: values[fieldNames.WORD_NATIVE],
+			});
+
+
+			errors[fieldNames.WORD_NATIVE] = findWordNative && findWordNative.id !== values.id ? 'unique' : undefined;
+
+			return errors;
+		},
+		[words]
+	);
 
 	const onSuccessSubmit = ({ form }) => {
 		console.log('success', form);
@@ -44,8 +63,9 @@ const EntityForm = ({ initialValues, readOnly, handleRemove }) => {
 			onSubmit={submitHandler({ onSuccessSubmit })}
 			validate={validate}
 			initialValues={initialValues}
-			render={({ handleSubmit, dirty }) => (
+			render={({ handleSubmit, valid, dirty, ...rest }) => (
 				<form onSubmit={handleSubmit}>
+					{/* {console.log(555, _.pick(rest, ['valid', 'validating', 'values']))} */}
 					<Grid container spacing={5}>
 						<Grid item>
 							<div className={classes.id}>
@@ -85,7 +105,7 @@ const EntityForm = ({ initialValues, readOnly, handleRemove }) => {
 						</Grid>
 
 						<Grid item xs={1}>
-							<Button type="submit" color="primary" disabled={!dirty}>
+							<Button type="submit" color="primary" disabled={!dirty || !valid}>
 								Save
 							</Button>
 						</Grid>

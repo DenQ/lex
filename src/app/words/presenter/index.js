@@ -7,13 +7,13 @@ import Form from '../form';
 import Details from './details';
 
 const PresenterComponent = props => {
-	const { data, isNew, folderId, readOnly, handleRemove } = props;
+	const { data, isNew, folderId, readOnly, handleRemove, words } = props;
 
 	if (isNew) {
 		const initialValues = {
 			[fieldNames.FOLDER_ID]: folderId,
 		};
-		return <Form initialValues={initialValues} />;
+		return <Form initialValues={initialValues} words={words} />;
 	}
 
 	const initialValues = {
@@ -28,7 +28,7 @@ const PresenterComponent = props => {
 		return <Details data={initialValues} />;
 	}
 
-	return <Form initialValues={initialValues} handleRemove={handleRemove} />;
+	return <Form initialValues={initialValues} handleRemove={handleRemove} words={words} />;
 };
 
 PresenterComponent.propTypes = {
