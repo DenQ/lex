@@ -19,7 +19,6 @@ const useStyles = makeStyles({
 });
 
 const EntityForm = ({ initialValues, readOnly, handleRemove, words }) => {
-	// console.log(100, words);
 	const classes = useStyles();
 	const { wordsReload, setWordsReload } = React.useContext(RefreshContext);
 	// TODO: useCallback
@@ -68,9 +67,8 @@ const EntityForm = ({ initialValues, readOnly, handleRemove, words }) => {
 			onSubmit={submitHandler({ onSuccessSubmit })}
 			validate={validate}
 			initialValues={initialValues}
-			render={({ handleSubmit, valid, dirty, ...rest }) => (
+			render={({ handleSubmit, valid, dirty }) => (
 				<form onSubmit={handleSubmit}>
-					{/* {console.log(555, _.pick(rest, ['valid', 'validating', 'values']))} */}
 					<Grid container spacing={5}>
 						<Grid item>
 							<div className={classes.id}>
