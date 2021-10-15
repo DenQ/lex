@@ -1,7 +1,4 @@
-import {
-	eject as ejectWords,
-	inject as injectWords,
-} from 'api/words';
+import { eject as ejectWords, inject as injectWords } from 'api/words';
 import { fieldNames } from 'common/@types/words';
 
 export const submitHandler = ({ onSuccessSubmit }) => async (values, form) => {
@@ -41,3 +38,18 @@ export const submitHandler = ({ onSuccessSubmit }) => async (values, form) => {
 
 export const findKeyValue = ({ words = [], key, value }) =>
 	words.find(item => item[key] === value);
+
+export const prepareValidationErrors = ({ error = {} }) => {
+	const errors = {};
+	const details = error?.details;
+	if (details && details?.length !== 0) {
+		details.forEach(item => {
+			const {
+				message,
+				context: { key },
+			} = item;
+			errors[key] = message;
+		});
+	}
+	return errors;
+};

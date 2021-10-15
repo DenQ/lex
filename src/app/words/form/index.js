@@ -1,15 +1,15 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { Form } from 'react-final-form';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-// import _ from 'lodash';
 
 import RefreshContext from 'common/contexts/refetch-context';
 
 import { fieldNames, initialValues } from 'common/@types/words';
-import { findKeyValue, submitHandler } from './utils';
+import validationWordSchema from 'app/words/form/validationSchema';
+import { findKeyValue, prepareValidationErrors, submitHandler } from './utils';
 import InputControl from './components/input-control';
 
 const useStyles = makeStyles({
@@ -19,27 +19,32 @@ const useStyles = makeStyles({
 });
 
 const EntityForm = ({ initialValues, readOnly, handleRemove, words }) => {
-	console.log(100, words);
+	// console.log(100, words);
 	const classes = useStyles();
 	const { wordsReload, setWordsReload } = React.useContext(RefreshContext);
-
-	const validate = useCallback(
-		values => {
-			const errors = {};
-
-			const findWordNative = findKeyValue({
+	// TODO: useCallback
+	const validate = values => {
+		const hasNotUnique = key => {
+			// TODO: move to common
+			const targetEntity = findKeyValue({
 				words,
-				key: fieldNames.WORD_NATIVE,
-				value: values[fieldNames.WORD_NATIVE],
+				key,
+				value: values[key],
 			});
 
+			return targetEntity && targetEntity.id !== values.id;
+		};
 
-			errors[fieldNames.WORD_NATIVE] = findWordNative && findWordNative.id !== values.id ? 'unique' : undefined;
+		const errors = {};
+		const validationErrors = validationWordSchema.validate(values, {
+			context: { hasNotUnique },
+		});
 
-			return errors;
-		},
-		[words]
-	);
+		return {
+			...errors,
+			...prepareValidationErrors(validationErrors),
+		};
+	};
 
 	const onSuccessSubmit = ({ form }) => {
 		console.log('success', form);
@@ -75,6 +80,7 @@ const EntityForm = ({ initialValues, readOnly, handleRemove, words }) => {
 									placeholder="NEW"
 									readOnly
 									disabled
+									id="new"
 								/>
 							</div>
 
