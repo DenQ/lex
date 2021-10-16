@@ -6,11 +6,10 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 
 import RefreshContext from 'common/contexts/refetch-context';
-
 import { fieldNames, initialValues } from 'common/@types/words';
-import validationWordSchema from 'app/words/form/validationSchema';
-import { utils as validationUtils } from 'common/utils/validation';
-import { findKeyValue, submitHandler } from './utils';
+
+import useValidate from './hooks/validate';
+import { submitHandler } from './utils';
 import InputControl from './components/input-control';
 
 const useStyles = makeStyles({
@@ -22,29 +21,7 @@ const useStyles = makeStyles({
 const EntityForm = ({ initialValues, readOnly, handleRemove, words }) => {
 	const classes = useStyles();
 	const { wordsReload, setWordsReload } = React.useContext(RefreshContext);
-	// TODO: useCallback
-	const validate = values => {
-		const hasNotUnique = key => {
-			// TODO: move to common
-			const targetEntity = findKeyValue({
-				words,
-				key,
-				value: values[key],
-			});
-
-			return targetEntity && targetEntity.id !== values.id;
-		};
-
-		const errors = {};
-		const validationErrors = validationWordSchema.validate(values, {
-			context: { hasNotUnique },
-		});
-
-		return {
-			...errors,
-			...validationUtils.prepareValidationErrors(validationErrors),
-		};
-	};
+	const { validate } = useValidate({ words });
 
 	const onSuccessSubmit = ({ form }) => {
 		console.log('success', form);
