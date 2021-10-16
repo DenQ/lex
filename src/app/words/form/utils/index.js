@@ -35,7 +35,3 @@ export const submitHandler = ({ onSuccessSubmit }) => async (values, form) => {
 
 	await onSuccessSubmit({ values, form });
 };
-
-export const findKeyValue = ({ words = [], key, value }) =>
-	words.find(item => item[key] === value);
-

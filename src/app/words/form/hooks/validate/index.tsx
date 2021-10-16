@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { utils as validationUtils } from 'common/modules/validation';
-import { findKeyValue } from '../../utils';
 import validationWordSchema from '../../validationSchema';
+import findByKeyValue from '../../../../../common/utils/find-by-key-value';
 
 type Input = {
 	words: Array<any>;
@@ -23,12 +23,7 @@ const useValidate = ({ words }: Input): Output => {
 	const validate = useCallback(
 		(values: Values): OutputValidateFn => {
 			const hasNotUnique = (key: string) => {
-				// TODO: move to common
-				const targetEntity = findKeyValue({
-					words,
-					key,
-					value: values[key],
-				});
+				const targetEntity = findByKeyValue(words, key, values[key]);
 
 				return targetEntity && targetEntity.id !== values.id;
 			};
