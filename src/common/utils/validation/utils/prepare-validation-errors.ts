@@ -1,4 +1,4 @@
-import { ValidationResult } from 'joi';
+import { ValidationErrorItem, ValidationResult } from 'joi';
 import { CustomValidationErrors } from '../@types';
 
 export const prepareValidationErrors = ({
@@ -7,12 +7,12 @@ export const prepareValidationErrors = ({
 	const errors: CustomValidationErrors = {};
 	const details = errors && error?.details;
 	if (details && details?.length !== 0) {
-		details.forEach((item: any) => {
-			const {
-				message,
-				context: { key },
-			} = item;
-			errors[key] = message;
+		details.forEach(item => {
+			const { message } = item;
+			const key = item?.context?.key;
+			if (key) {
+				errors[key] = message;
+			}
 		});
 	}
 	return errors;
