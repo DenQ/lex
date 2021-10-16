@@ -1,30 +1,24 @@
 import Joi from 'joi';
 import { fieldNames } from 'common/@types/words';
-import { validators as customValidators } from '../../../common/utils/validation';
-
-
-// TODO: move to common
-// TODO: add messages
-const messagesMap = {
-	'string.unique': 'Value should be unique',
-};
+import {
+	validators as customValidators,
+	messages,
+} from 'common/utils/validation';
 
 const validationWordSchema = Joi.object({
 	[fieldNames.WORD_NATIVE]: Joi.string()
-		.alphanum()
 		.min(2)
 		.max(255)
 		.required()
 		.custom(customValidators.uniqueStringValidator)
-		.messages(messagesMap),
+		.messages(messages.customMap),
 
 	[fieldNames.WORD_TRANSLATION]: Joi.string()
-		.alphanum()
 		.min(2)
 		.max(255)
 		.required()
 		.custom(customValidators.uniqueStringValidator)
-		.messages(messagesMap),
+		.messages(messages.customMap),
 
 	[fieldNames.FOLDER_ID]: Joi.number(),
 
