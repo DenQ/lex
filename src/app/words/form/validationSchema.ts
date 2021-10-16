@@ -16,6 +16,7 @@ const uniqueStringValidator = (value: any, helper: any) => {
 };
 
 // TODO: move to common
+// TODO: add messages
 const messagesMap = {
 	'string.unique': 'Value should be unique',
 };

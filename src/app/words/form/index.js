@@ -9,7 +9,8 @@ import RefreshContext from 'common/contexts/refetch-context';
 
 import { fieldNames, initialValues } from 'common/@types/words';
 import validationWordSchema from 'app/words/form/validationSchema';
-import { findKeyValue, prepareValidationErrors, submitHandler } from './utils';
+import { utils as validationUtils } from 'common/utils/validation';
+import { findKeyValue, submitHandler } from './utils';
 import InputControl from './components/input-control';
 
 const useStyles = makeStyles({
@@ -41,7 +42,7 @@ const EntityForm = ({ initialValues, readOnly, handleRemove, words }) => {
 
 		return {
 			...errors,
-			...prepareValidationErrors(validationErrors),
+			...validationUtils.prepareValidationErrors(validationErrors),
 		};
 	};
 

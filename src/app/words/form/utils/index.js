@@ -39,17 +39,3 @@ export const submitHandler = ({ onSuccessSubmit }) => async (values, form) => {
 export const findKeyValue = ({ words = [], key, value }) =>
 	words.find(item => item[key] === value);
 
-export const prepareValidationErrors = ({ error = {} }) => {
-	const errors = {};
-	const details = error?.details;
-	if (details && details?.length !== 0) {
-		details.forEach(item => {
-			const {
-				message,
-				context: { key },
-			} = item;
-			errors[key] = message;
-		});
-	}
-	return errors;
-};
