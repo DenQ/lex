@@ -1,7 +1,7 @@
-import { ValidationErrorItem, ValidationResult } from 'joi';
+import { ValidationResult } from 'joi';
 import { CustomValidationErrors } from '../@types';
 
-export const prepareValidationErrors = ({
+const prepareValidationErrors = ({
 	error,
 }: ValidationResult): CustomValidationErrors => {
 	const errors: CustomValidationErrors = {};

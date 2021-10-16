@@ -1,19 +1,7 @@
-import _ from 'lodash';
 import Joi from 'joi';
 import { fieldNames } from 'common/@types/words';
+import { validators as customValidators } from '../../../common/utils/validation';
 
-// TODO: extract to common
-// TODO: remove any types
-const uniqueStringValidator = (value: any, helper: any) => {
-	const fieldKey = _.get(helper, 'state.path.0');
-	if (!fieldKey) return value;
-
-	const hasNotUnique = helper.prefs.context?.hasNotUnique;
-	if (hasNotUnique && hasNotUnique(fieldKey)) {
-		return helper.error('string.unique');
-	}
-	return value;
-};
 
 // TODO: move to common
 // TODO: add messages
@@ -27,7 +15,7 @@ const validationWordSchema = Joi.object({
 		.min(2)
 		.max(255)
 		.required()
-		.custom(uniqueStringValidator)
+		.custom(customValidators.uniqueStringValidator)
 		.messages(messagesMap),
 
 	[fieldNames.WORD_TRANSLATION]: Joi.string()
@@ -35,7 +23,7 @@ const validationWordSchema = Joi.object({
 		.min(2)
 		.max(255)
 		.required()
-		.custom(uniqueStringValidator)
+		.custom(customValidators.uniqueStringValidator)
 		.messages(messagesMap),
 
 	[fieldNames.FOLDER_ID]: Joi.number(),
