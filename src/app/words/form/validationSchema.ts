@@ -3,7 +3,7 @@ import { fieldNames } from 'common/@types/words';
 import {
 	validators as customValidators,
 	messages,
-} from 'common/utils/validation';
+} from 'common/modules/validation';
 
 const validationWordSchema = Joi.object({
 	[fieldNames.WORD_NATIVE]: Joi.string()

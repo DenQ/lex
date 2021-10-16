@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { utils as validationUtils } from 'common/utils/validation';
+import { utils as validationUtils } from 'common/modules/validation';
 import { findKeyValue } from '../../utils';
 import validationWordSchema from '../../validationSchema';
 
