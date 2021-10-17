@@ -5,7 +5,6 @@ export const submitHandler = ({ onSuccessSubmit }) => async (values, form) => {
 	const { list, meta } = await ejectWords();
 	const isNew = !values[fieldNames.ID];
 
-	// console.log(3333, values);
 	if (isNew) {
 		meta.lastId++;
 		list.push({
