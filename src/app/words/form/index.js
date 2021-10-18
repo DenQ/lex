@@ -6,8 +6,9 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 
 import RefreshContext from 'common/contexts/refetch-context';
-
 import { fieldNames, initialValues } from 'common/@types/words';
+
+import useValidate from './hooks/validate';
 import { submitHandler } from './utils';
 import InputControl from './components/input-control';
 
@@ -17,15 +18,15 @@ const useStyles = makeStyles({
 	},
 });
 
-const EntityForm = ({ initialValues, readOnly, handleRemove }) => {
+const EntityForm = ({ initialValues, readOnly, handleRemove, words }) => {
 	const classes = useStyles();
 	const { wordsReload, setWordsReload } = React.useContext(RefreshContext);
-	const validate = () => {};
+	const { validate } = useValidate({ words });
 
 	const onSuccessSubmit = ({ form }) => {
 		console.log('success', form);
 		setTimeout(() => {
-			form.reset();
+			form.restart(initialValues);
 			setWordsReload(wordsReload + 1);
 		}, 0);
 	};
@@ -44,7 +45,7 @@ const EntityForm = ({ initialValues, readOnly, handleRemove }) => {
 			onSubmit={submitHandler({ onSuccessSubmit })}
 			validate={validate}
 			initialValues={initialValues}
-			render={({ handleSubmit, dirty }) => (
+			render={({ handleSubmit, valid, dirty }) => (
 				<form onSubmit={handleSubmit}>
 					<Grid container spacing={5}>
 						<Grid item>
@@ -55,6 +56,7 @@ const EntityForm = ({ initialValues, readOnly, handleRemove }) => {
 									placeholder="NEW"
 									readOnly
 									disabled
+									id="new"
 								/>
 							</div>
 
@@ -85,7 +87,7 @@ const EntityForm = ({ initialValues, readOnly, handleRemove }) => {
 						</Grid>
 
 						<Grid item xs={1}>
-							<Button type="submit" color="primary" disabled={!dirty}>
+							<Button type="submit" color="primary" disabled={!dirty || !valid}>
 								Save
 							</Button>
 						</Grid>
