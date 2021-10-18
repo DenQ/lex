@@ -39,7 +39,7 @@ const WordsListPage = ({ folderId, readOnly }) => {
 		<Box m={2}>
 			{isShowListHeader && <Typography variant="button">List words</Typography>}
 			<List>
-				{!readOnly && <PresenterWord folderId={folderId} isNew words={list} />}
+				{!readOnly && <PresenterWord folderId={folderId} isNew words={list} key="new" />}
 				{list.map(item => (
 					<PresenterWord
 						folderId={folderId}

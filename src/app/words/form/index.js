@@ -26,7 +26,7 @@ const EntityForm = ({ initialValues, readOnly, handleRemove, words }) => {
 	const onSuccessSubmit = ({ form }) => {
 		console.log('success', form);
 		setTimeout(() => {
-			form.reset();
+			form.restart(initialValues);
 			setWordsReload(wordsReload + 1);
 		}, 0);
 	};

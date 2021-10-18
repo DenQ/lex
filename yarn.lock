@@ -1907,6 +1907,11 @@
     prop-types "^15.6.1"
     react-lifecycles-compat "^3.0.4"
 
+"@react-hook/previous@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@react-hook/previous/-/previous-1.0.1.tgz#61f499e855873dcdb64e7b98f302194548f267f4"
+  integrity sha512-O7VaRLDEHRy1hxh03CmtWRxDhCwIVQBBkf1kYdYqUP3KNrPnQMIVIYYYQpHIIiNcS1BO6zmBKM4bugFDNgP8Iw==
+
 "@sheerun/mutationobserver-shim@^0.3.2":
   version "0.3.3"
   resolved "https://registry.yarnpkg.com/@sheerun/mutationobserver-shim/-/mutationobserver-shim-0.3.3.tgz#5405ee8e444ed212db44e79351f0c70a582aae25"
