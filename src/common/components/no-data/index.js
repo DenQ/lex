@@ -1,24 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
+import Text from 'lib/text';
 
-const Component = ({ title, message }) => (
+const NoDataComponent = ({ title, message }) => (
 	<Box m={2}>
-		<Typography color="primary" variant="h5" align="center">
+		<Text color="primary" variant="h5" align="center">
 			{title}
-		</Typography>
-		<Typography color="textSecondary" align="center" paragraph>
+		</Text>
+		<Text color="textSecondary" align="center" paragraph>
 			{message}
-		</Typography>
+		</Text>
 	</Box>
 );
 
-Component.propTypes = {
+NoDataComponent.propTypes = {
 	title: PropTypes.string.isRequired,
 	message: PropTypes.string.isRequired,
 };
 
-Component.defaultProps = {};
+NoDataComponent.defaultProps = {};
 
-export default Component;
+export default NoDataComponent;

@@ -2,7 +2,7 @@ import entityTypes from 'common/@types/entity';
 
 export const eject = async () => {
 	const foldersEntitySerialized = window.localStorage.getItem(
-		entityTypes.FOLDERS,
+		entityTypes.FOLDERS
 	);
 	const foldersEntity = JSON.parse(foldersEntitySerialized);
 	return await foldersEntity;

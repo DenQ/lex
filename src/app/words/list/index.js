@@ -2,12 +2,12 @@ import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import List from '@material-ui/core/List';
 import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
 
+import Text from 'lib/text';
 import { removeById } from 'api/words';
 import { useGetList } from 'app/words/list/hooks/get-list';
-
 import { orderListByName } from 'app/words/list/utils/ordering';
+
 import PresenterWord from '../presenter';
 
 const WordsListPage = ({ folderId, readOnly }) => {
@@ -37,7 +37,7 @@ const WordsListPage = ({ folderId, readOnly }) => {
 
 	return (
 		<Box m={2}>
-			{isShowListHeader && <Typography variant="button">List words</Typography>}
+			{isShowListHeader && <Text variant="button">List words</Text>}
 			<List>
 				{!readOnly && <PresenterWord folderId={folderId} isNew words={list} key="new" />}
 				{list.map(item => (

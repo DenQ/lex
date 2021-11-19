@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ListItem from '@material-ui/core/ListItem';
-import Typography from '@material-ui/core/Typography';
 
+import Text from 'lib/text';
 import { fieldNames } from 'common/@types/words';
 
 const Component = props => {
@@ -15,9 +15,9 @@ const Component = props => {
 
 	return (
 		<ListItem button>
-			<Typography>
+			<Text variant="body1">
 				{native} - {translation}
-			</Typography>
+			</Text>
 		</ListItem>
 	);
 };

@@ -1,11 +1,9 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import PlayIcon from '@material-ui/icons/PlayCircleOutline';
 import Fab from '@material-ui/core/Fab';
 import { Badge } from 'lib/info/badge';
@@ -13,6 +11,7 @@ import { Badge } from 'lib/info/badge';
 import { fieldNames as wordFieldNames } from 'common/@types/words';
 
 import { count } from 'api/words';
+import Text from 'lib/text';
 
 const useStyles = makeStyles({
 	root: {
@@ -53,13 +52,13 @@ const Component = props => {
 		<Badge value={countWords} color="primary">
 			<Card className={classes.root}>
 				<CardContent>
-					<Typography
+					<Text
 						className={classes.title}
 						color="textSecondary"
 						gutterBottom
 					>
 						{data.name}
-					</Typography>
+					</Text>
 					<Fab aria-label="play" size="small" className={classes.playButton}>
 						<PlayIcon color="primary" onClick={onClickPlay} />
 					</Fab>
