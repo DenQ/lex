@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import Text from 'lib/text';
 
 const useStyles = makeStyles((theme, ...o) => ({
 	link: {
@@ -24,9 +24,9 @@ const Component = ({ data }) => {
 			{data.map((item, index) => {
 				if (!item.to) {
 					return (
-						<Typography color="textPrimary" key="last">
+						<Text color="textPrimary" key="last" variant="body1">
 							{item.title}
-						</Typography>
+						</Text>
 					);
 				}
 
@@ -35,9 +35,9 @@ const Component = ({ data }) => {
 						color="inherit"
 						to={item.to}
 						className={classes.link}
-						key={index}
+						key={item.to}
 					>
-						{item.title}
+						<Text variant="body2">{item.title}</Text>
 					</Link>
 				);
 			})}
@@ -49,7 +49,7 @@ export const BreadcrumbsPropTypes = PropTypes.arrayOf(
 	PropTypes.shape({
 		to: PropTypes.string,
 		title: PropTypes.string.isRequired,
-	}),
+	})
 );
 
 Component.propTypes = {

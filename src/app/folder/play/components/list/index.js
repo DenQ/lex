@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
 import ListItem from '@material-ui/core/ListItem';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -10,6 +9,7 @@ import {
 	fieldNames as wordFieldNames,
 	ModelProps as WordModelProps,
 } from 'common/@types/words';
+import Text from 'lib/text';
 
 const useStyles = makeStyles({
 	errorItem: {
@@ -37,14 +37,14 @@ const Component = ({
 		vector,
 		targetWord,
 	]);
-	const itemVariant = 'h5';
+	const itemVariant = 'button';
 
 	return (
 		<List>
 			<ListItem button key={targetWord[wordFieldNames.ID]}>
-				<Typography color="primary" variant={itemVariant}>
+				<Text color="primary" variant={itemVariant}>
 					{targetTitle}
-				</Typography>
+				</Text>
 			</ListItem>
 			{list.map(item => {
 				const isError = errorItem
@@ -52,13 +52,13 @@ const Component = ({
 					: false;
 				return (
 					<ListItem button key={item.id} onClick={onSelectWord(item)}>
-						<Typography
+						<Text
 							color="textSecondary"
 							variant={itemVariant}
 							className={isError ? classes.errorItem : undefined}
 						>
 							{getTitle(item, vector)}
-						</Typography>
+						</Text>
 					</ListItem>
 				);
 			})}
