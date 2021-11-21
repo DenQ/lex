@@ -2,6 +2,8 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react';
 
 import TableComponent, { Props as TableProps } from './index';
+import getMockRows from './utsils/get-mock-rows';
+import { getColumns } from './columns/columns-definitions';
 
 export default {
 	title: 'Lib/Tables/General',
@@ -21,7 +23,12 @@ export default {
 	},
 } as Meta;
 
-const Template: Story<TableProps> = args => <TableComponent {...args} />;
+const Template: Story<TableProps> = args => {
+	const rows = getMockRows(100);
+	const columns = getColumns();
+
+	return <TableComponent {...args} rows={rows} columns={columns} />;
+}
 
 export const Default = Template.bind({});
 
