@@ -11,15 +11,21 @@ export default {
 	argTypes: {
 		pageSize: {
 			pageSize: 'Page Size',
-		}
-	// 	align: {
-	// 		name: 'Align',
-	// 		description: 'Align text',
-	// 		control: {
-	// 			type: 'select',
-	// 			options: ['center', 'inherit', 'justify', 'left', 'right'],
-	// 		},
-	// 	},
+		},
+		headerColumnSimpleView: {
+			name: 'headerColumnSimpleView',
+			control: {
+				type: 'boolean'
+			}
+		},
+		density: {
+			name: 'density',
+			description: 'Density',
+			control: {
+				type: 'select',
+				options: ['comfortable', 'compact', 'standard'],
+			},
+		},
 	},
 } as Meta;
 
@@ -27,11 +33,18 @@ const Template: Story<TableProps> = args => {
 	const rows = getMockRows(100);
 	const columns = getColumns();
 
-	return <TableComponent {...args} rows={rows} columns={columns} />;
-}
+	return (
+		<TableComponent
+			{...args}
+			rows={rows}
+			columns={columns}
+		/>
+	);
+};
 
 export const Default = Template.bind({});
 
 Default.args = {
-	pageSize: 5
+	pageSize: 5,
+	density: 'standard',
 };
