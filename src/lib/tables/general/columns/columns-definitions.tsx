@@ -15,7 +15,7 @@ export const getColumns = (): GridColDef[] => [
     headerName: 'Age',
     type: 'number',
     width: 150,
-    sortComparator: (v1, v2): number => (Number(v1) >= Number(v2) ? 1 : 0),
+    sortComparator: (v1, v2): number => (Number(v1) >= Number(v2) ? -1 : 1),
   },
   {
     field: 'fullName',
