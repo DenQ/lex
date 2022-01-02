@@ -40,17 +40,17 @@ const BarFolders: React.FC = () => {
       }}
     >
       <Grid container>
-        <ItemTextRight item xs={11}>
+        <ItemTextRight item xs={10}>
           <Text variant="subtitle1">List folders</Text>
         </ItemTextRight>
-        <ItemActionRight item xs={1}>
+        <ItemActionRight item xs={2}>
           <Button
             onClick={addHandler}
             color="primary"
             variant="contained"
             size="small"
           >
-            Add
+            Add Folder
           </Button>
         </ItemActionRight>
       </Grid>

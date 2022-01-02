@@ -5,12 +5,13 @@ import { getColumns } from './columns';
 
 type Props = {
   list: Folders;
+  loading: boolean;
 };
 
-const TableFolders: React.FC<Props> = ({ list }) => {
+const TableFolders: React.FC<Props> = ({ list, loading }) => {
   const columns = getColumns();
 
-  return <TableComponent rows={list} columns={columns} />;
+  return <TableComponent rows={list} columns={columns} loading={loading} />;
 };
 
 export default TableFolders;

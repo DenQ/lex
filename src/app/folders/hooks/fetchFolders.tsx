@@ -1,10 +1,11 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { findAll } from 'api/folders';
 import { Folders } from 'common/@interfaces/folders';
 
 type Output = {
-	loading: boolean;
-	list: Folders;
+  loading: boolean;
+  noData: boolean;
+  list: Folders;
 };
 
 const useFetchFolders = (): Output => {
@@ -27,7 +28,9 @@ const useFetchFolders = (): Output => {
     fetch();
   }, [fetch]);
 
-  return { list, loading };
+  const noData = useMemo(() => !loading && list.length === 0, [loading, list]);
+
+  return { list, loading, noData };
 };
 
 export default useFetchFolders;

@@ -15,7 +15,7 @@ export const getColumns = (): GridColDef[] => [
     align: 'right',
     headerAlign: 'right',
   },
-  { field: 'name', headerName: 'Description', flex: 2 },
+  { field: 'name', headerName: 'Name', flex: 2 },
   {
     field: 'description',
     headerName: 'Description',
