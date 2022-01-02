@@ -10,11 +10,7 @@ type Props = {
 const TableFolders: React.FC<Props> = ({ list }) => {
   const columns = getColumns();
 
-  return (
-    <>
-      <TableComponent rows={list} columns={columns} />
-    </>
-  );
+  return <TableComponent rows={list} columns={columns} />;
 };
 
 export default TableFolders;
