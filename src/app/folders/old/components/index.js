@@ -5,8 +5,8 @@ import { findAll } from 'api/folders';
 import urlManager from 'common/utils/url-manager';
 import GeneralLayout from 'app/system/layout';
 
-import FolderCard from './components/card';
-import FolderCardNew from './components/card-new';
+import FolderCard from 'app/folders/old/components/card';
+import FolderCardNew from 'app/folders/old/components/card-new';
 
 const Component = props => {
 	const [list, setList] = React.useState([]);

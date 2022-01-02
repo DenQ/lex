@@ -10,7 +10,7 @@ import RefreshContext from 'common/contexts/refetch-context';
 import { urls } from 'common/utils/url-manager';
 import { SettingsProvider } from 'common/context-providers/settings';
 
-import ListFolders from './app/folders';
+import ListFolders from 'app/folders';
 import ShowFolder from './app/folder/show';
 import EditFolder from './app/folder/edit';
 import AddFolder from './app/folder/add';

@@ -1,10 +1,10 @@
 import React from 'react';
 import { DataGrid, DataGridProps } from '@mui/x-data-grid';
 
-export type Props = {
-  headerColumnSimpleView: boolean;
-  checkboxSelectionMode: boolean;
-} & DataGridProps;
+export type Props = DataGridProps & {
+  headerColumnSimpleView?: boolean;
+  checkboxSelectionMode?: boolean;
+};
 
 const TableComponent: React.FC<Props> = ({
   density = 'standard',
