@@ -1,5 +1,6 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
+
 import Text from 'lib/text';
 import GeneralLayout from '../system/layout';
 import useFetchFolders from './hooks/fetchFolders';
@@ -18,6 +19,8 @@ const ListFolders: React.FC<Props> = () => {
           <Grid item xs={11}>
             <ActionBarFolders />
           </Grid>
+        </Grid>
+        <Grid container justify="center" spacing={2}>
           <Grid item xs={11}>
             {noData && (
               <Text textAlign="center" variant="h6">

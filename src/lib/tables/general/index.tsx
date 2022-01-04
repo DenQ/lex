@@ -1,5 +1,6 @@
 import React from 'react';
 import { DataGrid, DataGridProps } from '@mui/x-data-grid';
+import styles from './TableGeneral.module.scss';
 
 export type Props = DataGridProps & {
   headerColumnSimpleView?: boolean;
@@ -7,7 +8,7 @@ export type Props = DataGridProps & {
 };
 
 const TableComponent: React.FC<Props> = ({
-  density = 'standard',
+  density = 'compact',
   pageSize = 10,
   headerColumnSimpleView = true,
   checkboxSelectionMode = false,
@@ -31,13 +32,16 @@ const TableComponent: React.FC<Props> = ({
       };
 
   return (
-    <DataGrid
-      {...rent}
-      pageSize={pageSize}
-      density={density}
-      {...columnProps}
-      {...checkboxSelectionProps}
-    />
+    <div className={styles.component}>
+      <DataGrid
+        {...rent}
+        autoHeight
+        pageSize={pageSize}
+        density={density}
+        {...columnProps}
+        {...checkboxSelectionProps}
+      />
+    </div>
   );
 };
 

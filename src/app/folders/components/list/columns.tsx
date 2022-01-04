@@ -14,10 +14,12 @@ export const getColumns = (): GridColDef[] => [
     width: 75,
     align: 'right',
     headerAlign: 'right',
+    headerClassName: 'super-app-theme--header',
   },
   { field: 'name', headerName: 'Name', flex: 2 },
   {
     field: 'description',
+    headerClassName: 'super-app-theme--header',
     headerName: 'Description',
     flex: 3,
   },
