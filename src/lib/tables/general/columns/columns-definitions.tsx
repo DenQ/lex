@@ -2,7 +2,7 @@ import React from 'react';
 import {
   GridColDef,
   GridRenderCellParams,
-  GridValueGetterParams,
+  // GridValueGetterParams,
 } from '@mui/x-data-grid';
 import SystemColumn from '../components/system-column';
 
@@ -17,16 +17,16 @@ export const getColumns = (): GridColDef[] => [
     width: 150,
     sortComparator: (v1, v2): number => (Number(v1) >= Number(v2) ? -1 : 1),
   },
-  {
-    field: 'fullName',
-    headerName: 'Full name',
-    description: 'This column has a value getter and is not sortable.',
-    width: 260,
-    valueGetter: (params: GridValueGetterParams) =>
-      `${params.getValue(params.id, 'firstName') || ''} ${
-        params.getValue(params.id, 'lastName') || ''
-      }`,
-  },
+  // {
+  //   field: 'fullName',
+  //   headerName: 'Full name',
+  //   description: 'This column has a value getter and is not sortable.',
+  //   width: 260,
+  //   valueGetter: (params: GridValueGetterParams) =>
+  //     `${params.getValue(params.id, 'firstName') || ''} ${
+  //       params.getValue(params.id, 'lastName') || ''
+  //     }`,
+  // },
   {
     field: 'system',
     headerName: '',

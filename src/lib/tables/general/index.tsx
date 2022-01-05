@@ -38,6 +38,12 @@ const TableComponent: React.FC<Props> = ({
         autoHeight
         pageSize={pageSize}
         density={density}
+        sx={{
+          '& .MuiDataGrid-columnHeaderTitle': {
+            fontWeight: 900,
+            color: '#555'
+          },
+        }}
         {...columnProps}
         {...checkboxSelectionProps}
       />
