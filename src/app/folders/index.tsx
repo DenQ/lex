@@ -13,25 +13,23 @@ const ListFolders: React.FC<Props> = () => {
   const { list, loading, noData } = useFetchFolders();
 
   return (
-    <>
-      <GeneralLayout title="Folders" isHome>
-        <Grid container justify="center" spacing={2}>
-          <Grid item xs={11}>
-            <ActionBarFolders />
-          </Grid>
+    <GeneralLayout title="Folders" isHome>
+      <Grid container justify="center" spacing={2}>
+        <Grid item xs={11}>
+          <ActionBarFolders />
         </Grid>
-        <Grid container justify="center" spacing={2}>
-          <Grid item xs={11}>
-            {noData && (
-              <Text textAlign="center" variant="h6">
-                There are no folders yet
-              </Text>
-            )}
-            {!noData && <TableFolders list={list} loading={loading} />}
-          </Grid>
+      </Grid>
+      <Grid container justify="center" spacing={2}>
+        <Grid item xs={11}>
+          {noData && (
+            <Text textAlign="center" variant="h6">
+              There are no folders yet
+            </Text>
+          )}
+          {!noData && <TableFolders list={list} loading={loading} />}
         </Grid>
-      </GeneralLayout>
-    </>
+      </Grid>
+    </GeneralLayout>
   );
 };
 
