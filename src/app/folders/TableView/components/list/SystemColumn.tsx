@@ -2,18 +2,11 @@ import React from 'react';
 import { Button } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 import { Folder } from 'common/@interfaces/folders';
-import urlManager from 'common/utils/url-manager';
+import getUrl from 'app/folders/@common/utils/getUrl';
 import { ActionName } from '../../../@types/list';
 
 type Props = {
   row: Folder;
-};
-
-const getUrl = (actionName: ActionName, row: Folder) => {
-  if (actionName === 'play') {
-    return urlManager.folder().play(row.id);
-  }
-  return urlManager.folder().edit(row.id);
 };
 
 const SystemColumn: React.FC<Props> = ({ row }) => {

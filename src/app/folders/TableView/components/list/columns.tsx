@@ -2,8 +2,6 @@ import React from 'react';
 import {
   GridColDef,
   GridRenderCellParams,
-  // GridRenderCellParams,
-  // GridValueGetterParams,
 } from '@mui/x-data-grid';
 import SystemColumn from './SystemColumn';
 
@@ -29,6 +27,7 @@ export const getColumns = (): GridColDef[] => [
     flex: 1,
     align: 'right',
     headerAlign: 'center',
+    sortable: false,
     renderCell: (cellParams: GridRenderCellParams) => (
       <SystemColumn row={cellParams.row} />
     ),

@@ -17,8 +17,8 @@ const useFetchFolders = (): Output => {
       setLoading(true);
       const response = await findAll();
       setList(response);
-    } catch (e) {
-      console.error(7777, e);
+    } catch (error) {
+      console.error(error);
     } finally {
       setLoading(false);
     }

@@ -13,6 +13,12 @@
     }
   },
   "rules": {
+    "@typescript-eslint/no-empty-interface": [
+      "error",
+      {
+        "allowSingleExtends": false
+      }
+    ],
     "object-curly-spacing": ["warn", "always"],
     "no-unused-vars": [
       "warn",
