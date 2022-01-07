@@ -7,11 +7,13 @@ export const urls = {
 	FOLDER_SHOW: '/folders/:id/show',
 	FOLDER_PLAY: '/folders/:id/play',
 	SETTINGS: '/settings',
+	PING: '/ping',
 };
 
 const replaceUrl = (url, id) => url.replace(':id', id);
 
 export default {
+	ping: () => urls.PING,
 	home: () => urls.HOME,
 	settings: () => urls.SETTINGS,
 	folders: () => urls.FOLDERS,

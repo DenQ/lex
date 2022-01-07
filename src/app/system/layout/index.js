@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 
-const Component = props => {
+const GeneralLayout = props => {
 	const classes = useStyles();
 	const { title, isHome } = props;
 
@@ -29,14 +29,14 @@ const Component = props => {
 	);
 };
 
-Component.propTypes = {
+GeneralLayout.propTypes = {
 	title: PropTypes.string.isRequired,
 	children: PropTypes.any.isRequired,
 	isHome: PropTypes.bool,
 };
 
-Component.defaultProps = {
+GeneralLayout.defaultProps = {
 	isHome: false,
 };
 
-export default Component;
+export default GeneralLayout;

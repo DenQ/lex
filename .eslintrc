@@ -13,6 +13,12 @@
     }
   },
   "rules": {
+    "@typescript-eslint/no-empty-interface": [
+      "error",
+      {
+        "allowSingleExtends": false
+      }
+    ],
     "object-curly-spacing": ["warn", "always"],
     "no-unused-vars": [
       "warn",
@@ -45,7 +51,7 @@
       }
     ],
     "react/jsx-key": "error",
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx"] }],
     "import/no-anonymous-default-export": "off",
     "no-use-before-define": "off",
     "import/no-cycle": [

@@ -1,13 +1,13 @@
 import React from 'react';
 import { DataGrid, DataGridProps } from '@mui/x-data-grid';
 
-export type Props = {
-  headerColumnSimpleView: boolean;
-  checkboxSelectionMode: boolean;
-} & DataGridProps;
+export type Props = DataGridProps & {
+  headerColumnSimpleView?: boolean;
+  checkboxSelectionMode?: boolean;
+};
 
 const TableComponent: React.FC<Props> = ({
-  density = 'standard',
+  density = 'compact',
   pageSize = 10,
   headerColumnSimpleView = true,
   checkboxSelectionMode = false,
@@ -33,8 +33,15 @@ const TableComponent: React.FC<Props> = ({
   return (
     <DataGrid
       {...rent}
+      autoHeight
       pageSize={pageSize}
       density={density}
+      sx={{
+        '& .MuiDataGrid-columnHeaderTitle': {
+          fontWeight: 900,
+          color: '#555',
+        },
+      }}
       {...columnProps}
       {...checkboxSelectionProps}
     />

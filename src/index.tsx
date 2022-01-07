@@ -1,20 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ThemeProvider } from '@mui/material';
+import { createTheme } from '@mui/material/styles';
+import type {} from '@mui/x-data-grid/themeAugmentation';
 
 import initializeLocalstorage from 'common/utils/initializer/local-storage';
 
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import './index.css';
+
+const theme = createTheme({});
 
 ReactDOM.render(
-	<React.StrictMode>
-		<App />
-	</React.StrictMode>,
-	document.getElementById('root'),
-	() => {
-		initializeLocalstorage();
-	},
+  <React.StrictMode>
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
+  </React.StrictMode>,
+  document.getElementById('root'),
+  () => {
+    initializeLocalstorage();
+  }
 );
 
 // If you want your app to work offline and load faster, you can change
