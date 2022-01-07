@@ -1,7 +1,7 @@
 export type Folder = {
-	id?: number;
-	name: string;
-	description?: string;
-}
+  id?: number;
+  name: string;
+  description?: string;
+};
 
 export type Folders = Folder[];

@@ -10,35 +10,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import './index.css';
 
-const theme = createTheme({
-  // components: {
-  //   MuiDataGrid: {
-  //     styleOverrides: {
-  //       columnHeader: {
-  //         color: 'red',
-  //         fontSize: '16px'
-  //       },
-  //     },
-  //   },
-  // },
-  components: {
-    MuiDataGrid: {
-      styleOverrides: {
-        root: {
-          // fontSize: '1rem',
-          // color: 'green',
-          // columnHeader: {
-          //   color: 'red',
-          //   fontSize: '16px',
-          // },
-          // '.MuiDataGrid-columnHeaders': {
-          //   color: 'red'
-          // },
-        },
-      },
-    },
-  },
-});
+const theme = createTheme({});
 
 ReactDOM.render(
   <React.StrictMode>
