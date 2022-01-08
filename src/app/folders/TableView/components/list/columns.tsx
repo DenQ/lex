@@ -1,11 +1,14 @@
 import React from 'react';
-import {
-  GridColDef,
-  GridRenderCellParams,
-} from '@mui/x-data-grid';
-import SystemColumn from './SystemColumn';
+import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 
-export const getColumns = (): GridColDef[] => [
+import SystemColumn from './SystemColumn';
+import { RemoveHandler } from '../../../@types/list';
+
+type Input = {
+  removeHandler: RemoveHandler;
+};
+
+export const getColumns = ({ removeHandler }: Input): GridColDef[] => [
   {
     field: 'id',
     headerName: 'ID',
@@ -24,12 +27,12 @@ export const getColumns = (): GridColDef[] => [
   {
     field: 'system',
     headerName: '',
-    flex: 1,
+    flex: 2,
     align: 'right',
     headerAlign: 'center',
     sortable: false,
     renderCell: (cellParams: GridRenderCellParams) => (
-      <SystemColumn row={cellParams.row} />
+      <SystemColumn row={cellParams.row} removeHandler={removeHandler} />
     ),
   },
 ];

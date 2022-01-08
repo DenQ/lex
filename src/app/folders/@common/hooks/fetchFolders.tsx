@@ -6,6 +6,7 @@ type Output = {
   loading: boolean;
   noData: boolean;
   list: Folders;
+  fetch: () => void;
 };
 
 const useFetchFolders = (): Output => {
@@ -30,7 +31,7 @@ const useFetchFolders = (): Output => {
 
   const noData = useMemo(() => !loading && list.length === 0, [loading, list]);
 
-  return { list, loading, noData };
+  return { list, loading, noData, fetch };
 };
 
 export default useFetchFolders;
