@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Folder } from 'common/@interfaces/folders';
 import { removeById } from 'api/folders';
 import { removeByFolderId } from 'api/words';
@@ -17,7 +17,7 @@ type Output = {
 export const useRemoveFolder = ({ afterSuccessHandler }: Input): Output => {
   const [removeCandidate, setRemoveCandidate] = useState<Folder | null>(null);
 
-  const confirmYes = async () => {
+  const confirmYes = useCallback(async () => {
     if (!removeCandidate) return Promise.resolve();
 
     try {
@@ -36,12 +36,15 @@ export const useRemoveFolder = ({ afterSuccessHandler }: Input): Output => {
       // TODO: Here need show notify
     }
     return Promise.resolve();
-  };
+  }, [afterSuccessHandler, removeCandidate]);
 
-  const confirmNo = () =>
-    Promise.resolve().then(() => {
-      setRemoveCandidate(null);
-    });
+  const confirmNo = useCallback(
+    () =>
+      Promise.resolve().then(() => {
+        setRemoveCandidate(null);
+      }),
+    []
+  );
 
   return {
     confirmYes,
