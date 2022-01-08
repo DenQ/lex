@@ -16,17 +16,25 @@ const ListFoldersPage: React.FC = () => {
   const { fetch, list, loading, noData } = useFetchFolders();
   const [removeCandidate, setRemoveCandidate] = useState<Folder | null>(null);
 
-  const confirmYes = () => {
+  const confirmYes = async () => {
     if (!removeCandidate) return Promise.resolve();
 
-    const { id } = removeCandidate;
+    try {
+      const { id } = removeCandidate;
 
-    return removeById({ id })
-      .then(r => removeByFolderId({ folderId: id }))
-      .then(() => {
-        setRemoveCandidate(null);
-        fetch();
-      });
+      return await removeById({ id })
+        .then(r => removeByFolderId({ folderId: id }))
+        .then(() => {
+          setRemoveCandidate(null);
+          fetch();
+        });
+    } catch (error) {
+      // TODO: Here need show notify
+      console.log(12, error);
+    } finally {
+      // TODO: Here need show notify
+    }
+    return Promise.resolve();
   };
   const confirmNo = () =>
     Promise.resolve().then(() => {
@@ -57,8 +65,8 @@ const ListFoldersPage: React.FC = () => {
         </Grid>
       </Grid>
       <SimpleConfirmation
-        title="title"
-        message="message"
+        title="Attention!"
+        message="Do you really want to delete this folder"
         isShow={!!removeCandidate}
         onYes={confirmYes}
         onNo={confirmNo}
