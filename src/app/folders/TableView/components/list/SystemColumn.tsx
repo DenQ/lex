@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Button } from '@mui/material';
 import { useHistory } from 'react-router-dom';
+
 import { Folder } from 'common/@interfaces/folders';
 import getUrl from 'app/folders/@common/utils/getUrl';
 import { ActionName, RemoveHandler } from '../../../@types/list';
@@ -13,7 +14,7 @@ type Props = {
 const SystemColumn: React.FC<Props> = ({ row, removeHandler }) => {
   const history = useHistory();
 
-  const handleClickAction =
+  const handleClickAction = useCallback(
     (actionName: ActionName) => (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
       e.stopPropagation();
@@ -25,7 +26,9 @@ const SystemColumn: React.FC<Props> = ({ row, removeHandler }) => {
 
         history.push(url);
       }
-    };
+    },
+    [history, row, removeHandler]
+  );
 
   return (
     <>
@@ -35,7 +38,7 @@ const SystemColumn: React.FC<Props> = ({ row, removeHandler }) => {
       <Button onClick={handleClickAction(ActionName.edit)} variant="text">
         Edit
       </Button>
-      <Button onClick={handleClickAction(ActionName.remove)} variant="text">
+      <Button onClick={handleClickAction(ActionName.remove)} variant="text" color="secondary">
         Remove
       </Button>
     </>

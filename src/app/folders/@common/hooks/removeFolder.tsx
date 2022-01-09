@@ -30,10 +30,12 @@ export const useRemoveFolder = ({ afterSuccessHandler }: Input): Output => {
           afterSuccessHandler();
         });
     } catch (error) {
-      // TODO: Here need show notify
+      // TODO: Here need to show notify
+      // See: https://github.com/DenQ/lex/issues/79
       console.error(error);
     } finally {
-      // TODO: Here need show notify
+      // TODO: Here need to show notify
+      // See: https://github.com/DenQ/lex/issues/79
     }
     return Promise.resolve();
   }, [afterSuccessHandler, removeCandidate]);
