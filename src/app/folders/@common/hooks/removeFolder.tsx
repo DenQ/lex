@@ -14,7 +14,7 @@ type Output = {
   setRemoveCandidate: (item: Folder | null) => void;
 };
 
-export const useRemoveFolder = ({ afterSuccessHandler }: Input): Output => {
+const useRemoveFolder = ({ afterSuccessHandler }: Input): Output => {
   const [removeCandidate, setRemoveCandidate] = useState<Folder | null>(null);
 
   const confirmYes = useCallback(async () => {
