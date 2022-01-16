@@ -5,8 +5,8 @@ import SimpleConfirmation from 'lib/modals/SimpleConfirmation';
 import GeneralLayout from 'app/system/layout';
 import Text from 'lib/text';
 
-import useFetchFolders from './@common/hooks/fetchFolders';
 import useRemoveFolder from './@common/hooks/removeFolder';
+import useFetchFolders from './@common/hooks/fetchFolders';
 import ActionBarFolders from './@common/components/ActionBar';
 import TableView from './TableView';
 
