@@ -29,6 +29,10 @@ export const getColumns = ({ removeHandler }: Input): GridColDef[] => [
     field: 'progress',
     headerName: 'Progress',
     flex: 1,
+    align: 'right',
+    headerAlign: 'right',
+    headerClassName: 'super-app-theme--header',
+    sortable: false,
     renderCell: (cellParams: GridRenderCellParams) => (
       <ProgressColumn row={cellParams.row} />
     ),
