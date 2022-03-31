@@ -6,33 +6,36 @@ import { Settings } from 'common/@interfaces/settings';
 import { IKeyValue } from 'common/contexts/settings';
 
 type Options = {
-	settings: IKeyValue;
-}
-
-const getListWords = async (folderId: number | undefined): Promise<Words> => {
-	const criteria = (item: Word): boolean => item.folder_id === folderId;
-
-	// @ts-ignore
-	return findAllWords({ criteria });
+  settings: IKeyValue;
 };
 
-export const transform = async (listFolders: Folders, { settings }: Options): Promise<Folders> => {
-	const progressMap = new Map();
+const getListWords = async (folderId: number | undefined): Promise<Words> => {
+  const criteria = (item: Word): boolean => item.folder_id === folderId;
 
-	for (let i = 0; i < listFolders.length; i++) {
-		const itemFolder = listFolders[i];
-		// eslint-disable-next-line no-await-in-loop
-		const list = await getListWords(itemFolder.id);
-		const progress = calculateProgress({
-			list,
-			maxCountWins: (settings as Settings).play_max_count_wins,
-		});
+  // @ts-ignore
+  return findAllWords({ criteria });
+};
 
-		progressMap.set(itemFolder.id, progress);
-	}
+export const transform = async (
+  listFolders: Folders,
+  { settings }: Options
+): Promise<Folders> => {
+  const progressMap = new Map();
 
-	return listFolders.map(item => ({
-		...item,
-		progress: progressMap.get(item.id) || 0,
-	}));
+  for (let i = 0; i < listFolders.length; i++) {
+    const itemFolder = listFolders[i];
+    // eslint-disable-next-line no-await-in-loop
+    const list = await getListWords(itemFolder.id);
+    const progress = calculateProgress({
+      list,
+      maxCountWins: (settings as Settings).play_max_count_wins,
+    });
+
+    progressMap.set(itemFolder.id, progress);
+  }
+
+  return listFolders.map(item => ({
+    ...item,
+    progress: progressMap.get(item.id) || 0,
+  }));
 };
