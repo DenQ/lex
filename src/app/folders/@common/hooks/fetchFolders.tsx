@@ -26,7 +26,6 @@ const useFetchFolders = (): Output => {
       const transformedResponse = await transform(response, { settings });
 
       setList(transformedResponse);
-      // setList(response);
     } catch (error) {
       console.error(error);
     } finally {
