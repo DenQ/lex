@@ -4,8 +4,6 @@ import { updateById } from 'api/words';
 import { fieldNames as wordFieldNames } from 'common/@types/words';
 import urlManager from 'common/utils/url-manager';
 
-import { MAX_COUNT_WINS } from './constants';
-
 export const getWeakestWord = ({ list }) =>
 	_.chain(list).minBy(handleSortList).value();
 
@@ -42,20 +40,6 @@ export const setRate = ({ targetWord, isSuccess }) => {
 			[wordFieldNames.NUMBER_OF_WINS]: isSuccess ? wins + 1 : wins,
 		},
 	});
-};
-
-export const calculateProgress = ({ list, maxCountWins = MAX_COUNT_WINS }) => {
-	const maxAvalableValueList = list.length * maxCountWins;
-	const value = _.chain(list)
-		.map(item => {
-			const wins = item[wordFieldNames.NUMBER_OF_WINS];
-			if (wins >= maxCountWins) return maxCountWins;
-			return wins;
-		})
-		.sum()
-		.value();
-
-	return Math.round((value * 100) / maxAvalableValueList);
 };
 
 export const buildBreadCrumbsProps = ({ folderId, folderName }) => [

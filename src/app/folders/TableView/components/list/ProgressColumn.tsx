@@ -4,7 +4,7 @@ import ProgressLabel from 'lib/progress/label/ProgressLabel';
 import { Folder } from 'common/@interfaces/folders';
 import { SettingsContext } from 'common/contexts/settings';
 import useGetWordsByFolderId from 'common/hooks/useGetWordsByFolderId';
-import getLearnedWords from 'common/utils/store/get-learned-words/getLearnedWords';
+import { calculateProgress } from 'common/utils/folder/folder-progress';
 
 type Props = {
   row: Folder;
@@ -15,12 +15,11 @@ const ProgressColumn: React.FC<Props> = ({ row }) => {
   const {
     settings: { play_max_count_wins: playMaxCountWins },
   } = useContext(SettingsContext);
-
-  const learnedWords = useMemo(
+  const percentValue = useMemo(
     () =>
-      getLearnedWords({
+      calculateProgress({
         list,
-        countWins: Number(playMaxCountWins),
+        maxCountWins: Number(playMaxCountWins),
       }),
     [list, playMaxCountWins]
   );
@@ -30,8 +29,8 @@ const ProgressColumn: React.FC<Props> = ({ row }) => {
   return (
     <ProgressLabel
       variant="outlined"
-      percentValue={(100 * learnedWords) / list.length}
-      text={`${learnedWords} / ${list.length}`}
+      percentValue={percentValue}
+      text={`${Math.round(percentValue)} %`}
     />
   );
 };

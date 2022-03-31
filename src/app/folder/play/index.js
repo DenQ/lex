@@ -6,6 +6,7 @@ import GeneralLayout from 'app/system/layout';
 import { fieldNames as wordFieldNames } from 'common/@types/words';
 import NoData from 'common/components/no-data';
 import { useSettings } from 'common/contexts/settings';
+import { calculateProgress } from 'common/utils/folder/folder-progress';
 
 import { fieldNames as settingsFieldNames } from 'common/@types/settings';
 import Explored from './components/explored';
@@ -18,7 +19,6 @@ import {
 	getRange,
 	getWeakestWord,
 	setRate,
-	calculateProgress,
 	buildBreadCrumbsProps,
 } from './utils';
 import { fieldNames, noDataProps } from './constants';
