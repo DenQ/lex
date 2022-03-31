@@ -1,4 +1,6 @@
 import React, { useContext, useMemo } from 'react';
+
+import ProgressLabel from 'lib/progress/label/ProgressLabel';
 import { Folder } from 'common/@interfaces/folders';
 import { SettingsContext } from 'common/contexts/settings';
 import useGetWordsByFolderId from 'common/hooks/useGetWordsByFolderId';
@@ -25,11 +27,12 @@ const ProgressColumn: React.FC<Props> = ({ row }) => {
 
   if (loading) return <>loading...</>;
 
-  /* TODO: need to show in material component for it */
   return (
-    <>
-      {learnedWords} / {list.length}
-    </>
+    <ProgressLabel
+      variant="outlined"
+      percentValue={(100 * learnedWords) / list.length}
+      text={`${learnedWords} / ${list.length}`}
+    />
   );
 };
 
