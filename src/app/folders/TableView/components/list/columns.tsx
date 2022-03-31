@@ -1,6 +1,8 @@
 import React from 'react';
 import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 
+import { Folder } from 'common/@interfaces/folders';
+
 import ProgressColumn from './ProgressColumn';
 import SystemColumn from './SystemColumn';
 import { RemoveHandler } from '../../../@types/list';
@@ -32,10 +34,16 @@ export const getColumns = ({ removeHandler }: Input): GridColDef[] => [
     align: 'right',
     headerAlign: 'right',
     headerClassName: 'super-app-theme--header',
-    sortable: false,
+    sortable: true,
     renderCell: (cellParams: GridRenderCellParams) => (
-      <ProgressColumn row={cellParams.row} />
+      <ProgressColumn value={cellParams.value} />
     ),
+    sortComparator: (a, b, v1, v2) => {
+      const folder1 = v1.api.getRow(v1.id) as Folder;
+      const folder2 = v2.api.getRow(v2.id) as Folder;
+
+      return (folder1.progress as number) - (folder2.progress as number);
+    },
   },
   {
     field: 'system',

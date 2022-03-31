@@ -1,36 +1,17 @@
-import React, { useContext, useMemo } from 'react';
-import { Folder } from 'common/@interfaces/folders';
-import { SettingsContext } from 'common/contexts/settings';
-import useGetWordsByFolderId from 'common/hooks/useGetWordsByFolderId';
-import getLearnedWords from 'common/utils/store/get-learned-words/getLearnedWords';
+import React from 'react';
+
+import ProgressLabel from 'lib/progress/label/ProgressLabel';
 
 type Props = {
-  row: Folder;
+  value: number;
 };
 
-const ProgressColumn: React.FC<Props> = ({ row }) => {
-  const { loading, list } = useGetWordsByFolderId({ folderId: Number(row.id) });
-  const {
-    settings: { play_max_count_wins: playMaxCountWins },
-  } = useContext(SettingsContext);
-
-  const learnedWords = useMemo(
-    () =>
-      getLearnedWords({
-        list,
-        countWins: Number(playMaxCountWins),
-      }),
-    [list, playMaxCountWins]
-  );
-
-  if (loading) return <>loading...</>;
-
-  /* TODO: need to show in material component for it */
-  return (
-    <>
-      {learnedWords} / {list.length}
-    </>
-  );
-};
+const ProgressColumn: React.FC<Props> = ({ value }) => (
+  <ProgressLabel
+    variant="outlined"
+    percentValue={value}
+    text={`${Math.round(value)} %`}
+  />
+);
 
 export default ProgressColumn;

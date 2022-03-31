@@ -1,6 +1,11 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import _ from 'lodash';
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+
 import { findAll } from 'api/folders';
 import { Folders } from 'common/@interfaces/folders';
+import { SettingsContext } from 'common/contexts/settings';
+
+import { transform } from '../utils/transform-folders/transformFolders';
 
 type Output = {
   loading: boolean;
@@ -12,22 +17,25 @@ type Output = {
 const useFetchFolders = (): Output => {
   const [list, setList] = useState<Folders>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const { settings } = useContext(SettingsContext);
 
   const fetch = useCallback(async () => {
     try {
       setLoading(true);
       const response = await findAll();
-      setList(response);
+      const transformedResponse = await transform(response, { settings });
+
+      setList(transformedResponse);
     } catch (error) {
       console.error(error);
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [settings]);
 
-  React.useEffect(() => {
-    fetch();
-  }, [fetch]);
+  useEffect(() => {
+    !_.isEmpty(settings) && fetch();
+  }, [fetch, settings]);
 
   const noData = useMemo(() => !loading && list.length === 0, [loading, list]);
 
