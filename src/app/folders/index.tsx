@@ -12,9 +12,10 @@ import TableView from './TableView';
 
 const ListFoldersPage: React.FC = () => {
   const { fetch, list, loading, noData } = useFetchFolders();
-  const { confirmYes, confirmNo, removeCandidate, setRemoveCandidate } = useRemoveFolder({
-    afterSuccessHandler: fetch,
-  });
+  const { confirmYes, confirmNo, removeCandidate, setRemoveCandidate } =
+    useRemoveFolder({
+      afterSuccessHandler: fetch,
+    });
 
   return (
     <GeneralLayout title="Folders" isHome>
