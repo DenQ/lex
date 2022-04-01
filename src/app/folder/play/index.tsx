@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 import Box from '@material-ui/core/Box';
 
 import { findAll, updateByFolderId } from 'api/words';
@@ -22,10 +23,10 @@ import { noDataProps } from './constants';
 import { Word, WordFields } from '../../../common/@interfaces/words';
 import { SelectWordHandler } from './types';
 
-type Props = {};
+type Props = RouteComponentProps & {};
 
-const PlayPage: React.FC<Props> = props => {
-  const { entity, id } = useFindById(props);
+const PlayPage: React.FC<Props> = ({ match }) => {
+  const { entity, id } = useFindById({ match });
   const [list, setList] = useState<Word[]>([]);
   const [targetWord, setTargetWord] = useState<Word | null>(null);
   const [vector, setVector] = useState(true);
@@ -112,7 +113,7 @@ const PlayPage: React.FC<Props> = props => {
 
   const breadcrumbsProps = buildBreadCrumbsProps({
     folderId: id,
-  // @ts-ignore
+    // @ts-ignore
     folderName: entity.name,
   });
 
