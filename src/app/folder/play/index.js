@@ -9,7 +9,7 @@ import { useSettings } from 'common/contexts/settings';
 import { calculateProgress } from 'common/utils/folder/folder-progress';
 
 import { fieldNames as settingsFieldNames } from 'common/@types/settings';
-import Explored from './components/explored';
+import PlayExplored from './components/explored';
 import PlayListWords from './components/list';
 import Progress from './components/statistic-info';
 import Header from '../components/header';
@@ -129,7 +129,7 @@ const Component = props => {
 					</>
 				)}
 				{!noData && progress >= 100 && (
-					<Explored restartFolderHandler={restartFolderHandler} />
+					<PlayExplored restartFolderHandler={restartFolderHandler} />
 				)}
 			</Layout>
 		</GeneralLayout>
