@@ -7,7 +7,6 @@ import GeneralLayout from 'app/system/layout';
 import NoData from 'common/components/no-data';
 import { useSettings } from 'common/contexts/settings';
 import { calculateProgress } from 'common/utils/folder/folder-progress';
-import { fieldNames as settingsFieldNames } from 'common/@types/settings';
 
 import PlayExplored from './components/explored';
 import PlayListWords from './components/list';
@@ -22,6 +21,7 @@ import buildBreadCrumbsProps from './utils/buildBreadCrumbsProps';
 import { noDataProps } from './constants';
 import { Word, WordFields } from '../../../common/@interfaces/words';
 import { SelectWordHandler } from './types';
+import { SettingsFields } from '../../../common/@interfaces/settings';
 
 type Props = RouteComponentProps & {};
 
@@ -36,21 +36,19 @@ const PlayPage: React.FC<Props> = ({ match }) => {
   const [noData, setNoData] = useState(false);
   const { settings } = useSettings();
 
-  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
+    console.log(1);
     const criteria = (item: Word) => item.folder_id === id;
     // @ts-ignore
     findAll({ criteria }).then(list => {
       const targetWord = getWeakestWord({ list });
       const newList = getRange({
         list,
-        limit: settings[settingsFieldNames.PLAY_COUNT_WORDS] as number,
+        limit: settings[SettingsFields.PlayCountWords] as number,
       });
       const progress = calculateProgress({
         list,
-        maxCountWins: settings[
-          settingsFieldNames.PLAY_MAX_COUNT_WINS
-        ] as number,
+        maxCountWins: settings[SettingsFields.PlayMaxCountWins] as number,
       });
 
       if (list.length === 0) {
@@ -62,12 +60,7 @@ const PlayPage: React.FC<Props> = ({ match }) => {
       setVector(Math.random() >= 0.5);
       setProgress(progress);
     });
-  }, [
-    needReload,
-    settings[settingsFieldNames.PLAY_COUNT_WORDS],
-    settings[settingsFieldNames.PLAY_MAX_COUNT_WINS],
-  ]);
-  /* eslint-enable react-hooks/exhaustive-deps */
+  }, [id, needReload, settings, needReload]);
 
   const handleSelectWord: SelectWordHandler = ({
     targetWord,

@@ -60,6 +60,7 @@
         "maxDepth": 100
       }
     ],
+    "react-hooks/exhaustive-deps": "error",
     "@typescript-eslint/no-shadow": 1,
     "react/jsx-props-no-spreading": "off",
     "import/prefer-default-export": "off",
