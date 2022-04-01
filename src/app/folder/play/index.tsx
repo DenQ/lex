@@ -113,8 +113,7 @@ const PlayPage: React.FC<Props> = ({ match }) => {
 
   const breadcrumbsProps = buildBreadCrumbsProps({
     folderId: id,
-    // @ts-ignore
-    folderName: entity.name,
+    folderName: entity?.name || '?',
   });
 
   return (

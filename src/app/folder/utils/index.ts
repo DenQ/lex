@@ -3,6 +3,7 @@ import { RouteComponentProps } from 'react-router-dom';
 
 import { findById } from 'api/folders';
 import urlManager from 'common/utils/url-manager';
+import { Folder } from 'common/@interfaces/folders';
 
 export const useFindById = ({
   match: {
@@ -10,9 +11,9 @@ export const useFindById = ({
   },
 }: RouteComponentProps): {
   id: number;
-  entity: string | null;
+  entity: Folder | null;
 } => {
-  const [entity, setEntity] = useState<string | null>(null);
+  const [entity, setEntity] = useState<Folder | null>(null);
 
   useEffect(() => {
     findById({ id }).then(modelResult => {
