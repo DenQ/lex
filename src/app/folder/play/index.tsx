@@ -20,6 +20,7 @@ import getWeakestWord from './utils/getWeakestWord';
 import buildBreadCrumbsProps from './utils/buildBreadCrumbsProps';
 import { noDataProps } from './constants';
 import { Word, WordFields } from '../../../common/@interfaces/words';
+import { SelectWordHandler } from './types';
 
 type Props = {};
 
@@ -67,13 +68,10 @@ const PlayPage: React.FC<Props> = props => {
   ]);
   /* eslint-enable react-hooks/exhaustive-deps */
 
-  const handleSelectWord = ({
+  const handleSelectWord: SelectWordHandler = ({
     targetWord,
     selectedWord,
-  }: {
-    targetWord: Word;
-    selectedWord: Word;
-  }) => {
+  }): void => {
     const isSuccess = targetWord[WordFields.Id] === selectedWord[WordFields.Id];
 
     setRate({

@@ -1,15 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import _ from 'lodash';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import { makeStyles } from '@material-ui/core/styles';
-
-import {
-  fieldNames as wordFieldNames,
-  ModelProps as WordModelProps,
-} from 'common/@types/words';
+import { Word, WordFields } from 'common/@interfaces/words';
 import Text from 'lib/text';
+import { SelectWordHandler } from '../../types';
 
 const useStyles = makeStyles({
   errorItem: {
@@ -17,7 +12,15 @@ const useStyles = makeStyles({
   },
 });
 
-const Component = ({
+type Props = {
+  targetWord: Word;
+  list: Word[];
+  vector: boolean;
+  handleSelectWord: SelectWordHandler;
+  errorItem?: Word | null;
+};
+
+const PlayList: React.FC<Props> = ({
   targetWord,
   list,
   handleSelectWord,
@@ -25,14 +28,15 @@ const Component = ({
   errorItem,
 }) => {
   const classes = useStyles();
-  const onSelectWord = selectedWord => () => {
+  const onSelectWord = (selectedWord: Word) => () => {
     handleSelectWord({
       targetWord,
       selectedWord,
     });
   };
-  const getTitle = (item, vector) =>
-    item[vector ? wordFieldNames.WORD_TRANSLATION : wordFieldNames.WORD_NATIVE];
+  const getTitle = (item: Word, vector: boolean): string =>
+    item[vector ? WordFields.WordTransaction : WordFields.WordNative];
+
   const targetTitle = React.useMemo(
     () => getTitle(targetWord, !vector),
     [vector, targetWord]
@@ -41,14 +45,14 @@ const Component = ({
 
   return (
     <List>
-      <ListItem button key={targetWord[wordFieldNames.ID]}>
+      <ListItem button key={targetWord[WordFields.Id]}>
         <Text color="primary" variant={itemVariant}>
           {targetTitle}
         </Text>
       </ListItem>
       {list.map(item => {
         const isError = errorItem
-          ? item[wordFieldNames.ID] === errorItem[wordFieldNames.ID]
+          ? item[WordFields.Id] === errorItem[WordFields.Id]
           : false;
         return (
           <ListItem button key={item.id} onClick={onSelectWord(item)}>
@@ -66,17 +70,8 @@ const Component = ({
   );
 };
 
-Component.propTypes = {
-  targetWord: WordModelProps.isRequired,
-  list: PropTypes.arrayOf(WordModelProps),
-  handleSelectWord: PropTypes.func,
-  vector: PropTypes.bool.isRequired,
-  errorItem: WordModelProps,
-};
-
-Component.defaultProps = {
-  handleSelectWord: _.noop,
+PlayList.defaultProps = {
   errorItem: null,
 };
 
-export default Component;
+export default PlayList;
