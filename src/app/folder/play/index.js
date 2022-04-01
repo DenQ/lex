@@ -7,20 +7,18 @@ import { fieldNames as wordFieldNames } from 'common/@types/words';
 import NoData from 'common/components/no-data';
 import { useSettings } from 'common/contexts/settings';
 import { calculateProgress } from 'common/utils/folder/folder-progress';
-
 import { fieldNames as settingsFieldNames } from 'common/@types/settings';
+
 import PlayExplored from './components/explored';
 import PlayListWords from './components/list';
 import Progress from './components/statistic-info';
 import Header from '../components/header';
 import Layout from '../components/layout';
 import { useFindById } from '../utils';
-import {
-	getRange,
-	getWeakestWord,
-	setRate,
-	buildBreadCrumbsProps,
-} from './utils';
+import { getRange } from './utils/getRange';
+import { setRate } from './utils/setRate';
+import { getWeakestWord } from './utils/getWeakestWord';
+import { buildBreadCrumbsProps } from './utils/buildBreadCrumbsProps';
 import { fieldNames, noDataProps } from './constants';
 
 const Component = props => {
