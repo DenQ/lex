@@ -5,8 +5,10 @@ import Grid from '@mui/material/Grid';
 
 import Text from 'lib/text';
 
+import { RestartFolderHandler } from '../../types';
+
 type Props = {
-  restartFolderHandler: () => void;
+  restartFolderHandler: RestartFolderHandler;
 };
 
 const PlayExplored: React.FC<Props> = ({ restartFolderHandler }) => (
