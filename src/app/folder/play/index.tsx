@@ -3,7 +3,6 @@ import Box from '@material-ui/core/Box';
 
 import { findAll, updateByFolderId } from 'api/words';
 import GeneralLayout from 'app/system/layout';
-import { fieldNames as wordFieldNames } from 'common/@types/words';
 import NoData from 'common/components/no-data';
 import { useSettings } from 'common/contexts/settings';
 import { calculateProgress } from 'common/utils/folder/folder-progress';
@@ -19,32 +18,37 @@ import getRange from './utils/getRange';
 import setRate from './utils/setRate';
 import getWeakestWord from './utils/getWeakestWord';
 import buildBreadCrumbsProps from './utils/buildBreadCrumbsProps';
-import { fieldNames, noDataProps } from './constants';
+import { noDataProps } from './constants';
+import { Word, WordFields } from '../../../common/@interfaces/words';
 
-const Component = props => {
+type Props = {};
+
+const PlayPage: React.FC<Props> = props => {
   const { entity, id } = useFindById(props);
-  const [list, setList] = useState([]);
-  const [targetWord, setTargetWord] = useState(null);
+  const [list, setList] = useState<Word[]>([]);
+  const [targetWord, setTargetWord] = useState<Word | null>(null);
   const [vector, setVector] = useState(true);
-  const [needReload, setNeedReload] = useState(null);
-  const [errorItem, setErrorItem] = useState(null);
+  const [needReload, setNeedReload] = useState<number | null>(null);
+  const [errorItem, setErrorItem] = useState<Word | null>(null);
   const [progress, setProgress] = useState(0);
   const [noData, setNoData] = useState(false);
   const { settings } = useSettings();
 
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
-    const criteria = item => item[fieldNames.FOLDER_ID] === id;
+    const criteria = (item: Word) => item.folder_id === id;
+    // @ts-ignore
     findAll({ criteria }).then(list => {
       const targetWord = getWeakestWord({ list });
       const newList = getRange({
         list,
-        targetWord,
-        limit: settings[settingsFieldNames.PLAY_COUNT_WORDS],
+        limit: settings[settingsFieldNames.PLAY_COUNT_WORDS] as number,
       });
       const progress = calculateProgress({
         list,
-        maxCountWins: settings[settingsFieldNames.PLAY_MAX_COUNT_WINS],
+        maxCountWins: settings[
+          settingsFieldNames.PLAY_MAX_COUNT_WINS
+        ] as number,
       });
 
       if (list.length === 0) {
@@ -52,7 +56,7 @@ const Component = props => {
       }
 
       setList(newList);
-      setTargetWord(targetWord);
+      targetWord && setTargetWord(targetWord);
       setVector(Math.random() >= 0.5);
       setProgress(progress);
     });
@@ -63,9 +67,15 @@ const Component = props => {
   ]);
   /* eslint-enable react-hooks/exhaustive-deps */
 
-  const handleSelectWord = ({ targetWord, selectedWord }) => {
-    const isSuccess =
-      targetWord[wordFieldNames.ID] === selectedWord[wordFieldNames.ID];
+  const handleSelectWord = ({
+    targetWord,
+    selectedWord,
+  }: {
+    targetWord: Word;
+    selectedWord: Word;
+  }) => {
+    const isSuccess = targetWord[WordFields.Id] === selectedWord[WordFields.Id];
+
     setRate({
       targetWord,
       isSuccess,
@@ -86,8 +96,8 @@ const Component = props => {
 
   const restartFolderHandler = () => {
     const payload = {
-      [wordFieldNames.NUMBER_OF_ATTEMPTS]: 0,
-      [wordFieldNames.NUMBER_OF_WINS]: 0,
+      [WordFields.NumberOfAttempt]: 0,
+      [WordFields.NumberOfWins]: 0,
     };
     updateByFolderId({ folderId: id, payload })
       .then(() => {
@@ -99,11 +109,12 @@ const Component = props => {
   };
 
   if (!entity || !targetWord) {
-    if (!noData) return 'Loading';
+    if (!noData) return <>Loading</>;
   }
 
   const breadcrumbsProps = buildBreadCrumbsProps({
     folderId: id,
+  // @ts-ignore
     folderName: entity.name,
   });
 
@@ -118,7 +129,7 @@ const Component = props => {
             <Box m={2}>
               <PlayListWords
                 list={list}
-                targetWord={targetWord}
+                targetWord={targetWord!}
                 handleSelectWord={handleSelectWord}
                 vector={vector}
                 errorItem={errorItem}
@@ -134,8 +145,4 @@ const Component = props => {
   );
 };
 
-Component.propTypes = {};
-
-Component.defaultProps = {};
-
-export default Component;
+export default PlayPage;

@@ -7,7 +7,7 @@ type Input = {
   list: Word[];
 };
 
-const getWeakestWord = ({ list }: Input) =>
+const getWeakestWord = ({ list }: Input): Word | null =>
   _.chain(list).minBy(handleSortList).value();
 
 export default getWeakestWord;
