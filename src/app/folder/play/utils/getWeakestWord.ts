@@ -1,7 +1,13 @@
 import _ from 'lodash';
 
-import { Words } from '../../../../common/@interfaces/words';
-import { handleSortList } from './handleSortList';
+import { Word } from 'common/@interfaces/words';
+import handleSortList from './handleSortList';
 
-export const getWeakestWord = ({ list }: { list: Words }) =>
+type Input = {
+  list: Word[];
+};
+
+const getWeakestWord = ({ list }: Input) =>
   _.chain(list).minBy(handleSortList).value();
+
+export default getWeakestWord;

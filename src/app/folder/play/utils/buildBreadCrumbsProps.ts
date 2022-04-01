@@ -1,12 +1,11 @@
-import urlManager from '../../../../common/utils/url-manager';
+import urlManager from 'common/utils/url-manager';
 
-export const buildBreadCrumbsProps = ({
-  folderId,
-  folderName,
-}: {
+type Input = {
   folderId: number;
   folderName: string;
-}) => [
+};
+
+const buildBreadCrumbsProps = ({ folderId, folderName }: Input) => [
   {
     to: urlManager.home(),
     title: 'Home',
@@ -20,3 +19,5 @@ export const buildBreadCrumbsProps = ({
     title: 'Play',
   },
 ];
+
+export default buildBreadCrumbsProps;
