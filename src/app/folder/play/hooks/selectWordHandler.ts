@@ -22,7 +22,7 @@ const useSelectWordHandler = ({ setErrorItem, setNeedReload }: Input): Output =>
         targetWord,
         isSuccess,
       })
-        .then(r => {
+        .then(() => {
           if (!isSuccess) {
             setErrorItem(selectedWord);
           }

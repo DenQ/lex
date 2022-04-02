@@ -16,4 +16,11 @@ export type Word = {
   [WordFields.NumberOfWins]: number;
 };
 
-export type Words = Word[];
+type MetaWord = {
+  lastId?: number; // ?
+};
+
+export type EjectWord = {
+  list: Word[];
+  meta: MetaWord;
+};

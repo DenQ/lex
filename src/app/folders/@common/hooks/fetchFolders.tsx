@@ -2,7 +2,7 @@ import _ from 'lodash';
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
 import { findAll } from 'api/folders';
-import { Folders } from 'common/@interfaces/folders';
+import { Folder } from 'common/@interfaces/folders';
 import { SettingsContext } from 'common/contexts/settings';
 
 import { transform } from '../utils/transform-folders/transformFolders';
@@ -10,12 +10,12 @@ import { transform } from '../utils/transform-folders/transformFolders';
 type Output = {
   loading: boolean;
   noData: boolean;
-  list: Folders;
+  list: Folder[];
   fetch: () => void;
 };
 
 const useFetchFolders = (): Output => {
-  const [list, setList] = useState<Folders>([]);
+  const [list, setList] = useState<Folder[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const { settings } = useContext(SettingsContext);
 

@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  GridColDef,
-  GridRenderCellParams,
-} from '@mui/x-data-grid';
+import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import SystemColumn from '../components/system-column';
 
 export const getColumns = (): GridColDef[] => [

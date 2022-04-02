@@ -7,3 +7,10 @@ export type Settings = {
   [SettingsFields.PlayCountWords]: number;
   [SettingsFields.PlayMaxCountWins]: number;
 };
+
+type MetaSettings = {};
+
+export type EjectSettings = {
+  payload: Settings;
+  meta: MetaSettings;
+};

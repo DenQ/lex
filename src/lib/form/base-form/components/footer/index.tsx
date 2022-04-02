@@ -3,20 +3,20 @@ import React from 'react';
 type ButtonEvent = React.MouseEvent<HTMLButtonElement>;
 
 export interface Props {
-	formProps: object;
-	onSubmit: (args: any) => void;
-	// onSubmit: OnSubmitType;
+  formProps: object;
+  onSubmit: (args: any) => void;
+  // onSubmit: OnSubmitType;
 }
 
 export const BaseFormHeader: React.FC<Props> = props => {
-	const onClick = (e: ButtonEvent) => {
-		e.preventDefault();
-		props.onSubmit(props);
-	};
+  const onClick = (e: ButtonEvent) => {
+    e.preventDefault();
+    props.onSubmit(props);
+  };
 
-	return (
-		<button type="submit" onClick={onClick}>
-			Submit
-		</button>
-	);
+  return (
+    <button type="submit" onClick={onClick}>
+      Submit
+    </button>
+  );
 };

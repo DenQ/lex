@@ -4,13 +4,12 @@ import { Word, WordFields } from 'common/@interfaces/words';
 type Input = {
   targetWord: Word;
   isSuccess: boolean;
-}
+};
 
-const setRate = ({
-  targetWord,
-  isSuccess,
-}: Input) => {
+const setRate = ({ targetWord, isSuccess }: Input) => {
   const { id, number_of_wins: wins, number_of_attempts: attempts } = targetWord;
+
+  if (!id) return Promise.resolve(false);
 
   return updateById({
     id,

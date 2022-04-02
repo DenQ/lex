@@ -1,11 +1,11 @@
 import React from 'react';
-import { Folders } from 'common/@interfaces/folders';
+import { Folder } from 'common/@interfaces/folders';
 import TableComponent from 'lib/tables/general';
 import { getColumns } from './columns';
 import { RemoveHandler } from '../../../@types/list';
 
 type Props = {
-  list: Folders;
+  list: Folder[];
   loading: boolean;
   removeHandler: RemoveHandler;
 };

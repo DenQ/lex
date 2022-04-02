@@ -1,11 +1,11 @@
 import _ from 'lodash';
 import { MAX_COUNT_WINS } from 'app/folder/play/constants';
-import { Words } from 'common/@interfaces/words';
+import { Word } from 'common/@interfaces/words';
 import getPercent from 'common/utils/get-percent';
 
 type Input = {
   maxCountWins: number;
-  list: Words;
+  list: Word[];
 };
 
 export const calculateProgress = ({
@@ -16,7 +16,9 @@ export const calculateProgress = ({
   const value = _.chain(list)
     .map(item => {
       const wins = item.number_of_wins;
+
       if (wins >= maxCountWins) return maxCountWins;
+
       return wins;
     })
     .sum()

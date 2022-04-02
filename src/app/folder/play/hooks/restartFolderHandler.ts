@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 import { updateByFolderId } from 'api/words';
-import { WordFields } from 'common/@interfaces/words';
+import { Word, WordFields } from 'common/@interfaces/words';
 import { RestartFolderHandler } from '../types';
 
 type Input = {
@@ -16,7 +16,8 @@ export default ({ id, setNeedReload }: Input): Output => {
     const payload = {
       [WordFields.NumberOfAttempt]: 0,
       [WordFields.NumberOfWins]: 0,
-    };
+    } as Partial<Word>;
+
     updateByFolderId({ folderId: id, payload })
       .then(() => {
         setNeedReload(+new Date());

@@ -9,18 +9,18 @@ import Form from '../form';
 import { buildBreadCrumbsProps } from '../utils';
 
 const Component = () => {
-	const breadcrumbsProps = buildBreadCrumbsProps({
-		actionName: 'Add',
-	});
+  const breadcrumbsProps = buildBreadCrumbsProps({
+    actionName: 'Add',
+  });
 
-	return (
-		<GeneralLayout title="Add Folder">
-			<Layout>
-				<Header controls={[]} breadcrumbsProps={breadcrumbsProps} />
-				<Form />
-			</Layout>
-		</GeneralLayout>
-	);
+  return (
+    <GeneralLayout title="Add Folder">
+      <Layout>
+        <Header controls={[]} breadcrumbsProps={breadcrumbsProps} />
+        <Form />
+      </Layout>
+    </GeneralLayout>
+  );
 };
 
 Component.propTypes = {};

@@ -17,7 +17,7 @@ export const useFindById = ({
 
   useEffect(() => {
     findById({ id }).then(modelResult => {
-      setEntity(modelResult);
+      setEntity(modelResult || null);
     });
   }, [id]);
 

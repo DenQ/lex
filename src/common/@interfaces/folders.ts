@@ -12,4 +12,11 @@ export type Folder = {
   [FolderFields.progress]?: number;
 };
 
-export type Folders = Folder[];
+type MetaFolder = {
+  lastId?: number;
+};
+
+export type EjectFolder = {
+  list: Folder[];
+  meta: MetaFolder;
+};

@@ -11,57 +11,59 @@ import { orderListByName } from 'app/words/list/utils/ordering';
 import PresenterWord from '../presenter';
 
 const WordsListPage = ({ folderId, readOnly }) => {
-	const [needRefresh, setNeedRefresh] = React.useState(null);
-	const prepareList = useCallback(list => orderListByName({ list }), []);
+  const [needRefresh, setNeedRefresh] = React.useState(null);
+  const prepareList = useCallback(list => orderListByName({ list }), []);
 
-	const list = useGetList({
-		folderId,
-		needRefresh,
-		prepareList,
-	});
+  const list = useGetList({
+    folderId,
+    needRefresh,
+    prepareList,
+  });
 
-	const isShowListHeader = React.useMemo(
-		() => (list.length > 0 && !readOnly) || list.length > 0,
-		[readOnly, list.length]
-	);
+  const isShowListHeader = React.useMemo(
+    () => (list.length > 0 && !readOnly) || list.length > 0,
+    [readOnly, list.length]
+  );
 
-	const handleRemove = ({ id }) => {
-		removeById({ id })
-			.then(() => {
-				setNeedRefresh(+new Date());
-			})
-			.catch(e => {
-				console.log('Error', e);
-			});
-	};
+  const handleRemove = ({ id }) => {
+    removeById({ id })
+      .then(() => {
+        setNeedRefresh(+new Date());
+      })
+      .catch(e => {
+        console.log('Error', e);
+      });
+  };
 
-	return (
-		<Box m={2}>
-			{isShowListHeader && <Text variant="button">List words</Text>}
-			<List>
-				{!readOnly && <PresenterWord folderId={folderId} isNew words={list} key="new" />}
-				{list.map(item => (
-					<PresenterWord
-						folderId={folderId}
-						data={item}
-						key={item.id}
-						readOnly={readOnly}
-						handleRemove={handleRemove}
-						words={list}
-					/>
-				))}
-			</List>
-		</Box>
-	);
+  return (
+    <Box m={2}>
+      {isShowListHeader && <Text variant="button">List words</Text>}
+      <List>
+        {!readOnly && (
+          <PresenterWord folderId={folderId} isNew words={list} key="new" />
+        )}
+        {list.map(item => (
+          <PresenterWord
+            folderId={folderId}
+            data={item}
+            key={item.id}
+            readOnly={readOnly}
+            handleRemove={handleRemove}
+            words={list}
+          />
+        ))}
+      </List>
+    </Box>
+  );
 };
 
 WordsListPage.propTypes = {
-	folderId: PropTypes.number.isRequired,
-	readOnly: PropTypes.bool,
+  folderId: PropTypes.number.isRequired,
+  readOnly: PropTypes.bool,
 };
 
 WordsListPage.defaultProps = {
-	readOnly: false,
+  readOnly: false,
 };
 
 export default WordsListPage;
