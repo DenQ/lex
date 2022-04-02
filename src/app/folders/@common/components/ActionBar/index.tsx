@@ -1,11 +1,10 @@
-import React, { useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+import React from 'react';
 import { Box, Grid } from '@mui/material';
 import { Button } from '@material-ui/core';
 import { styled } from '@mui/material/styles';
 
-import urlManager from 'common/utils/url-manager';
 import Text from 'lib/text';
+import useAddEventHandler from '../../hooks/addEventHandler';
 
 const ItemActionRight = styled(Grid)(({ theme }) => ({
   textAlign: 'right',
@@ -16,20 +15,7 @@ const ItemTextRight = styled(Grid)(({ theme }) => ({
 }));
 
 const BarFolders: React.FC = () => {
-  const history = useHistory();
-
-  /* eslint-disable react-hooks/exhaustive-deps */
-  const addHandler = useCallback(
-    (event: React.MouseEvent<HTMLButtonElement>) => {
-      event.preventDefault();
-      event.stopPropagation();
-      const url = urlManager.folder().add();
-
-      history.push(url);
-    },
-    []
-  );
-  /* eslint-enable react-hooks/exhaustive-deps */
+  const addEventHandler = useAddEventHandler();
 
   return (
     <Box
@@ -45,7 +31,7 @@ const BarFolders: React.FC = () => {
         </ItemTextRight>
         <ItemActionRight item xs={2}>
           <Button
-            onClick={addHandler}
+            onClick={addEventHandler}
             color="primary"
             variant="contained"
             size="small"

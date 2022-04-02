@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 
 import { findAll } from 'api/folders';
 import { Folder } from 'common/@interfaces/folders';
@@ -37,7 +37,7 @@ const useFetchFolders = (): Output => {
     !_.isEmpty(settings) && fetch();
   }, [fetch, settings]);
 
-  const noData = useMemo(() => !loading && list.length === 0, [loading, list]);
+  const noData = !loading && list.length === 0;
 
   return { list, loading, noData, fetch };
 };
