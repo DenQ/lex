@@ -1,4 +1,9 @@
+export enum SettingsFields {
+  PlayCountWords = 'play_count_words',
+  PlayMaxCountWins = 'play_max_count_wins'
+}
+
 export type Settings = {
-  play_count_words: number;
-  play_max_count_wins: number;
+  [SettingsFields.PlayCountWords]: number;
+  [SettingsFields.PlayMaxCountWins]: number;
 };
