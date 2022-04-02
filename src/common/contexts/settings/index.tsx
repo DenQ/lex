@@ -1,27 +1,27 @@
 import React, { useContext } from 'react';
 
 export interface IKeyValue {
-	[string: string]: string | number;
+  [string: string]: string | number;
 }
 
 export interface ISettingsAction {
-	reload: () => void;
+  reload: () => void;
 }
 
 export interface ISettings {
-	settings: IKeyValue;
-	actions: ISettingsAction;
+  settings: IKeyValue;
+  actions: ISettingsAction;
 }
 
 const initialValues = {
-	settings: {},
-	actions: {
-		reload: () => null,
-	},
+  settings: {},
+  actions: {
+    reload: () => null,
+  },
 };
 
 export const SettingsContext = React.createContext<ISettings>({
-	...initialValues,
+  ...initialValues,
 });
 
 export const useSettings = (): ISettings => useContext(SettingsContext);

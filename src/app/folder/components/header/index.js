@@ -8,7 +8,7 @@ import { removeById } from 'api/folders';
 import { removeByFolderId } from 'api/words';
 import urlManager from 'common/utils/url-manager';
 import BreadCrumbs, {
-	BreadcrumbsPropTypes,
+  BreadcrumbsPropTypes,
 } from 'common/components/bread-crumbs';
 import { useConfirmationModal } from 'lib/modals/confirmation/hook';
 
@@ -16,80 +16,81 @@ import { ConfirmationModal } from 'lib/modals/confirmation';
 import { controlNames } from '../../constants';
 
 const Component = props => {
-	const history = useHistory();
-	const { id, controls, breadcrumbsProps } = props;
+  const history = useHistory();
+  const { id, controls, breadcrumbsProps } = props;
+  const toEditHandler = () => {
+    const to = urlManager.folder().edit(id);
 
-	const toEditHandler = () => {
-		const to = urlManager.folder().edit(id);
-		history.push(to);
-	};
+    history.push(to);
+  };
 
-	const toRemoveHandler = ({ reset }) => {
-		removeById({ id })
-			.then(r => removeByFolderId({ folderId: id }))
-			.then(r => {
-				reset();
-				const to = urlManager.folders();
-				history.push(to);
-			})
-			.catch(e => {
-				console.log('Catch error', e);
-			});
-	};
+  const toRemoveHandler = ({ reset }) => {
+    removeById({ id })
+      .then(r => removeByFolderId({ folderId: id }))
+      .then(r => {
+        reset();
+        const to = urlManager.folders();
 
-	const { open, toOpen, onYes, onCancel } = useConfirmationModal({
-		onConfirmation: toRemoveHandler,
-	});
+        history.push(to);
+      })
+      .catch(e => {
+        console.log('Catch error', e);
+      });
+  };
 
-	const onClickToRemove = () => {
-		toOpen();
-	};
+  const { open, toOpen, onYes, onCancel } = useConfirmationModal({
+    onConfirmation: toRemoveHandler,
+  });
 
-	const collectionControls = [];
+  const onClickToRemove = () => {
+    toOpen();
+  };
 
-	if (controls.includes(controlNames.TO_EDIT)) {
-		collectionControls.push(
-			<Button color="primary" onClick={toEditHandler} key="to-edit">
-				To Edit
-			</Button>
-		);
-	}
+  const collectionControls = [];
 
-	if (controls.includes(controlNames.TO_REMOVE)) {
-		collectionControls.push(
-			<Button color="secondary" onClick={onClickToRemove} key="to-remove">
-				Remove
-			</Button>
-		);
-	}
-	const breadcrumbs = breadcrumbsProps && (
-		<BreadCrumbs data={breadcrumbsProps} />
-	);
+  if (controls.includes(controlNames.TO_EDIT)) {
+    collectionControls.push(
+      <Button color="primary" onClick={toEditHandler} key="to-edit">
+        To Edit
+      </Button>
+    );
+  }
 
-	return (
-		<>
-			<Box m={2}>{breadcrumbs}</Box>
-			<Box m={2}>{collectionControls}</Box>
-			<ConfirmationModal
-				open={open}
-				title="Remove folder"
-				message="Are you sure you want to delete the folder?"
-				onYes={onYes}
-				onCancel={onCancel}
-			/>
-		</>
-	);
+  if (controls.includes(controlNames.TO_REMOVE)) {
+    collectionControls.push(
+      <Button color="secondary" onClick={onClickToRemove} key="to-remove">
+        Remove
+      </Button>
+    );
+  }
+  const breadcrumbs = breadcrumbsProps && (
+    <BreadCrumbs data={breadcrumbsProps} />
+  );
+
+  return (
+    <>
+      <Box m={2}>{breadcrumbs}</Box>
+      <Box m={2}>{collectionControls}</Box>
+      <ConfirmationModal
+        open={open}
+        title="Remove folder"
+        message="Are you sure you want to delete the folder?"
+        onYes={onYes}
+        onCancel={onCancel}
+      />
+    </>
+  );
 };
 
 Component.propTypes = {
-	id: PropTypes.number,
-	controls: PropTypes.array,
-	breadcrumbsProps: BreadcrumbsPropTypes,
+  id: PropTypes.number,
+  controls: PropTypes.array,
+  breadcrumbsProps: BreadcrumbsPropTypes,
 };
 
 Component.defaultProps = {
-	id: null,
-	controls: [],
+  id: null,
+  controls: [],
 };
 
 export default Component;
