@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
+
 import { findAll } from 'api/words';
 import { Word } from 'common/@interfaces/words';
+import { Filter } from '../@types/general';
 
 type Input = {
   folderId: number;
@@ -18,8 +20,7 @@ const useGetWordsByFolderId = ({ folderId }: Input): Output => {
   const fetch = async () => {
     setLoading(true);
     try {
-      const criteria = (item: Word) => item.folder_id === folderId;
-      // @ts-ignore
+      const criteria: Filter<Word> = item => item.folder_id === folderId;
       const list = await findAll({ criteria });
 
       setList(list);

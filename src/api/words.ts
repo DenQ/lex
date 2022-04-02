@@ -1,5 +1,6 @@
 import entityTypes from 'common/@types/entity';
 import { EjectWord, Word, WordFields } from '../common/@interfaces/words';
+import { Filter } from '../common/@types/general';
 
 export const eject = async (): Promise<EjectWord> => {
   let result;
@@ -44,14 +45,13 @@ export const findById = async ({
   return result;
 };
 
-// TODO" create Filter type generic
-export const findAll = async ({ criteria = () => true }): Promise<Word[]> => {
+export const findAll = async ({ criteria = () => true }: { criteria: Filter<Word> }): Promise<Word[]> => {
   const { list } = await eject();
 
   return list.filter(criteria);
 };
 
-export const count = async ({ criteria = () => true }): Promise<number> => {
+export const count = async ({ criteria = () => true }: { criteria: Filter<Word> }): Promise<number> => {
   const list = await findAll({ criteria });
 
   return list.length;

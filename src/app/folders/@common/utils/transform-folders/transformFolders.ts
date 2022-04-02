@@ -1,8 +1,9 @@
 import { Word, Words } from 'common/@interfaces/words';
+import { Settings } from 'common/@interfaces/settings';
 import { Folders } from 'common/@interfaces/folders';
+import { Filter } from 'common/@types/general';
 import { findAll as findAllWords } from 'api/words';
 import { calculateProgress } from 'common/utils/folder/folder-progress';
-import { Settings } from 'common/@interfaces/settings';
 import { IKeyValue } from 'common/contexts/settings';
 
 type Options = {
@@ -10,9 +11,8 @@ type Options = {
 };
 
 const getListWords = async (folderId: number | undefined): Promise<Words> => {
-  const criteria = (item: Word): boolean => item.folder_id === folderId;
+  const criteria: Filter<Word> = (item): boolean => item.folder_id === folderId;
 
-  // @ts-ignore
   return findAllWords({ criteria });
 };
 

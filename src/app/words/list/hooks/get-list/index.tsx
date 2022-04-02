@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { findAll } from 'api/words';
+import { Word } from 'common/@interfaces/words';
+import { Filter } from 'common/@types/general';
 import RefreshContext from 'common/contexts/refetch-context';
-// import { WordItemDTO } from 'common/@types/words';
-import { Word } from '../../../../../common/@interfaces/words';
 
 type K = () => boolean;
 
@@ -23,8 +23,8 @@ export const useGetList = ({
   const { wordsReload } = useContext(RefreshContext);
   const [list, setList] = useState<Word[]>([]);
 
-  React.useEffect(() => {
-    const criteria = (item: Word): boolean =>
+  useEffect(() => {
+    const criteria: Filter<Word> = (item): boolean =>
       Number(item.folder_id) === Number(folderId);
 
     findAll({ criteria } as { criteria: K }).then(results => {

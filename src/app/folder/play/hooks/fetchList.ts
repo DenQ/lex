@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 
 import { findAll } from 'api/words';
-import { Word } from 'common/@interfaces/words';
+import { Filter } from 'common/@types/general';
+import { Word, WordFields } from 'common/@interfaces/words';
 import { SettingsFields } from 'common/@interfaces/settings';
 import { calculateProgress } from 'common/utils/folder/folder-progress';
 import { useSettings } from 'common/contexts/settings';
@@ -32,8 +33,9 @@ const useFetchList = ({ id, needReload }: Input): Output => {
   const { settings } = useSettings();
 
   useEffect(() => {
-    const criteria = (item: Word) => item.folder_id === id;
-    // @ts-ignore
+    const criteria: Filter<Word> = (item: Word): boolean =>
+      item[WordFields.FolderId] === id;
+
     findAll({ criteria }).then(list => {
       const targetWord = getWeakestWord({ list });
       const newList = getRange({
