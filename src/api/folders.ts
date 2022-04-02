@@ -1,14 +1,5 @@
 import entityTypes from 'common/@types/entity';
-import { Folder } from '../common/@interfaces/folders';
-
-type MetaFolder = {
-  lastId?: number;
-};
-
-type EjectFolder = {
-  list: Folder[];
-  meta: MetaFolder;
-};
+import { EjectFolder, Folder } from 'common/@interfaces/folders';
 
 export const eject = async (): Promise<EjectFolder> => {
   const foldersEntitySerialized = window.localStorage.getItem(

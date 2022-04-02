@@ -12,4 +12,16 @@ export type Folder = {
   [FolderFields.progress]?: number;
 };
 
+// TODO: Need to remove this type anywhere
 export type Folders = Folder[];
+
+// For API
+type MetaFolder = {
+  lastId?: number;
+};
+
+// For API
+export type EjectFolder = {
+  list: Folder[];
+  meta: MetaFolder;
+};

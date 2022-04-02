@@ -65,12 +65,20 @@
     ],
     "padding-line-between-statements": [
       "error",
-      { "blankLine": "always", "prev": "*", "next": "return" },
+      { "blankLine": "always", "prev": "*", "next": ["return", "export"] },
       { "blankLine": "always", "prev": ["const", "let", "var"], "next": "*" },
       {
         "blankLine": "any",
         "prev": ["const", "let", "var"],
         "next": ["const", "let", "var"]
+      }
+    ],
+    "@typescript-eslint/padding-line-between-statements": [
+      "error",
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": ["interface", "type"]
       }
     ],
     "react-hooks/exhaustive-deps": "error",
