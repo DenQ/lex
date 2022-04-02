@@ -1,4 +1,4 @@
-import { Word } from '../../../common/@interfaces/words';
+import { Word } from 'common/@interfaces/words';
 
 export type RestartFolderHandler = () => void;
 
