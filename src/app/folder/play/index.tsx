@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import Box from '@material-ui/core/Box';
 
-import { findAll, updateByFolderId } from 'api/words';
+import { findAll } from 'api/words';
+import { SettingsFields } from 'common/@interfaces/settings';
+import { Word } from 'common/@interfaces/words';
 import GeneralLayout from 'app/system/layout';
 import NoData from 'common/components/no-data';
 import { useSettings } from 'common/contexts/settings';
@@ -15,13 +17,11 @@ import Header from '../components/header';
 import Layout from '../components/layout';
 import { useFindById } from '../utils';
 import getRange from './utils/getRange';
-import setRate from './utils/setRate';
 import getWeakestWord from './utils/getWeakestWord';
 import buildBreadCrumbsProps from './utils/buildBreadCrumbsProps';
 import { noDataProps } from './constants';
-import { Word, WordFields } from '../../../common/@interfaces/words';
-import { SelectWordHandler } from './types';
-import { SettingsFields } from '../../../common/@interfaces/settings';
+import useRestartFolder from './hooks/restartFolderHandler';
+import useSelectWordHandler from './hooks/selectWordHandler';
 
 type Props = RouteComponentProps & {};
 
@@ -37,7 +37,6 @@ const PlayPage: React.FC<Props> = ({ match }) => {
   const { settings } = useSettings();
 
   useEffect(() => {
-    console.log(1);
     const criteria = (item: Word) => item.folder_id === id;
     // @ts-ignore
     findAll({ criteria }).then(list => {
@@ -60,45 +59,14 @@ const PlayPage: React.FC<Props> = ({ match }) => {
       setVector(Math.random() >= 0.5);
       setProgress(progress);
     });
-  }, [id, needReload, settings, needReload]);
+  }, [id, needReload, settings]);
 
-  const handleSelectWord: SelectWordHandler = ({
-    targetWord,
-    selectedWord,
-  }): void => {
-    const isSuccess = targetWord[WordFields.Id] === selectedWord[WordFields.Id];
+  const restartFolderHandler = useRestartFolder({ id, setNeedReload });
 
-    setRate({
-      targetWord,
-      isSuccess,
-    })
-      .then(r => {
-        if (!isSuccess) {
-          setErrorItem(selectedWord);
-        }
-        setTimeout(() => {
-          setNeedReload(+new Date());
-          setErrorItem(null);
-        }, 300);
-      })
-      .catch(e => {
-        console.error(e);
-      });
-  };
-
-  const restartFolderHandler = () => {
-    const payload = {
-      [WordFields.NumberOfAttempt]: 0,
-      [WordFields.NumberOfWins]: 0,
-    };
-    updateByFolderId({ folderId: id, payload })
-      .then(() => {
-        setNeedReload(+new Date());
-      })
-      .catch(e => {
-        console.error(e);
-      });
-  };
+  const handleSelectWord = useSelectWordHandler({
+    setErrorItem,
+    setNeedReload,
+  });
 
   if (!entity || !targetWord) {
     if (!noData) return <>Loading</>;
