@@ -116,54 +116,57 @@ export const updateById = async ({
     ...payload,
   };
 
-	try {
-		const newList = list.map(item => {
-			if (item[WordFields.Id] === id) return newWord;
+  try {
+    const newList = list.map(item => {
+      if (item[WordFields.Id] === id) return newWord;
 
-			return item;
-		});
+      return item;
+    });
 
-		await inject({
-			meta,
-			list: newList,
-		});
-	} catch (e) {
-		console.error(e);
-	}
+    await inject({
+      meta,
+      list: newList,
+    });
+  } catch (e) {
+    console.error(e);
+  }
 
-	return true;
+  return true;
 };
 
-export const updateByFolderId = async ({ folderId, payload }: {
-	folderId: number;
-	payload: Partial<Word>;
+export const updateByFolderId = async ({
+  folderId,
+  payload,
+}: {
+  folderId: number;
+  payload: Partial<Word>;
 }): Promise<number> => {
   const { list, meta } = await eject();
-	let counterUpdated = 0;
+  let counterUpdated = 0;
 
-	try {
-		const newList = list.map(word => {
-			if (word.folder_id === folderId) {
-				counterUpdated += 1;
+  try {
+    const newList = list.map(word => {
+      if (word.folder_id === folderId) {
+        counterUpdated += 1;
 
-				return {
-					...word,
-					...payload,
-				};
-			}
+        return {
+          ...word,
+          ...payload,
+        };
+      }
 
-			return word;
-		});
+      return word;
+    });
 
-		if (counterUpdated > 0) {
-			await inject({
-				meta,
-				list: newList,
-			});
-		}
-	} catch (e) {
-		console.error(e);
-	}
+    if (counterUpdated > 0) {
+      await inject({
+        meta,
+        list: newList,
+      });
+    }
+  } catch (e) {
+    console.error(e);
+  }
 
-	return counterUpdated;
+  return counterUpdated;
 };
