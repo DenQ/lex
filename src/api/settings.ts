@@ -6,18 +6,8 @@ export const eject = async (): Promise<EjectSettings> => {
   const entitySerialized = window.localStorage.getItem(
     entityTypes.SETTINGS
   ) as string;
-  let result = {
-    meta: {},
-    payload: defaultSettings
-  };
-
-  try {
-    const entity = JSON.parse(entitySerialized);
-
-    result = await entity;
-  } catch (e) {
-    console.error(e);
-  }
+  const entity = JSON.parse(entitySerialized);
+  const result = await entity;
 
   return result;
 };
@@ -35,31 +25,21 @@ export const inject = async ({
 };
 
 export const fetchSettings = async (): Promise<Settings> => {
-  let result = defaultSettings;
-  
-  try {
-    const { payload } = await eject();
+  const { payload } = await eject();
 
-    result = payload;
-  } catch (e) {
-    console.error(e);
-  }
-
-  return result;
+  return payload || defaultSettings;
 };
 
-export const updateSettings = async (data: Partial<Settings>): Promise<void> => {
-  try {
-    const { payload, meta } = await eject();
+export const updateSettings = async (
+  data: Partial<Settings>
+): Promise<void> => {
+  const { payload, meta } = await eject();
 
-    await inject({
-      meta,
-      payload: {
-        ...payload,
-        ...data,
-      },
-    });
-  } catch (e) {
-    console.error(e);
-  }
+  await inject({
+    meta,
+    payload: {
+      ...payload,
+      ...data,
+    },
+  });
 };

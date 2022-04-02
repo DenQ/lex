@@ -19,12 +19,10 @@ export type Word = {
 // TODO: Need to remove this type anywhere
 export type Words = Word[];
 
-// For API
 type MetaWord = {
   lastId?: number; // ?
 };
 
-// For API
 export type EjectWord = {
   list: Word[];
   meta: MetaWord;

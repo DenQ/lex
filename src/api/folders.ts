@@ -2,18 +2,10 @@ import entityTypes from 'common/@types/entity';
 import { EjectFolder, Folder } from 'common/@interfaces/folders';
 
 export const eject = async (): Promise<EjectFolder> => {
-  let result;
-
-  try {
-    const foldersEntitySerialized = window.localStorage.getItem(
-      entityTypes.FOLDERS
-    ) as string;
-    const foldersEntity = JSON.parse(foldersEntitySerialized);
-
-    result = await foldersEntity;
-  } catch (e) {
-    console.error(e);
-  }
+  const foldersEntitySerialized = window.localStorage.getItem(
+    entityTypes.FOLDERS
+  ) as string;
+  const result = await JSON.parse(foldersEntitySerialized);
 
   return result;
 };
@@ -32,15 +24,8 @@ export const findById = async ({
 }: {
   id: number;
 }): Promise<Folder | undefined> => {
-  let result;
-
-  try {
-    const { list } = await eject();
-
-    result = await list.find(item => Number(item.id) === Number(id));
-  } catch (e) {
-    console.error(e);
-  }
+  const { list } = await eject();
+  const result = await list.find(item => Number(item.id) === Number(id));
 
   return result;
 };
@@ -54,18 +39,13 @@ export const findAll = async (): Promise<Folder[]> => {
 export const removeById = async ({ id }: { id: number }): Promise<boolean> => {
   const { list, meta } = await eject();
   const newList = list.filter(item => item.id !== id);
-
   const hasRemoveItem = list.length !== newList.length;
 
-  try {
-    if (hasRemoveItem) {
-      await inject({
-        meta,
-        list: newList,
-      });
-    }
-  } catch (e) {
-    console.error(e);
+  if (hasRemoveItem) {
+    await inject({
+      meta,
+      list: newList,
+    });
   }
 
   return Promise.resolve(hasRemoveItem);

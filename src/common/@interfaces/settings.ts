@@ -8,10 +8,8 @@ export type Settings = {
   [SettingsFields.PlayMaxCountWins]: number;
 };
 
-// For API
 type MetaSettings = {};
 
-// For API
 export type EjectSettings = {
   payload: Settings;
   meta: MetaSettings;
