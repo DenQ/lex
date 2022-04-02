@@ -1,6 +1,6 @@
 .component{
-  :global(.MuiAlert-icon) {
-    font-size: 18px;
+  :global(.MuiAlert-icon > svg) {
+    font-size: 35px;
   }
 }
 
