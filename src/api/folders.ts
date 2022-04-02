@@ -2,12 +2,12 @@ import entityTypes from 'common/@types/entity';
 import { EjectFolder, Folder } from 'common/@interfaces/folders';
 
 export const eject = async (): Promise<EjectFolder> => {
-  const foldersEntitySerialized = window.localStorage.getItem(
-    entityTypes.FOLDERS
-  ) as string;
-  let result = null;
+  let result;
 
   try {
+    const foldersEntitySerialized = window.localStorage.getItem(
+      entityTypes.FOLDERS
+    ) as string;
     const foldersEntity = JSON.parse(foldersEntitySerialized);
 
     result = await foldersEntity;
@@ -22,7 +22,7 @@ export const inject = async ({ meta, list }: EjectFolder): Promise<void> => {
   const newEntitySerialized = JSON.stringify({
     meta,
     list,
-  }) as string;
+  });
 
   await window.localStorage.setItem(entityTypes.FOLDERS, newEntitySerialized);
 };
