@@ -23,6 +23,10 @@ const useRemoveFolder = ({ afterSuccessHandler }: Input): Output => {
     try {
       const { id } = removeCandidate;
 
+      if (!id) {
+        throw new Error('Id not defined');
+      }
+
       return await removeById({ id })
         .then(r => removeByFolderId({ folderId: id }))
         .then(() => {
@@ -37,6 +41,7 @@ const useRemoveFolder = ({ afterSuccessHandler }: Input): Output => {
       // TODO: Here need to show notify
       // See: https://github.com/DenQ/lex/issues/79
     }
+
     return Promise.resolve();
   }, [afterSuccessHandler, removeCandidate]);
 
