@@ -12,9 +12,6 @@ export type Folder = {
   [FolderFields.progress]?: number;
 };
 
-// TODO: Need to remove this type anywhere
-export type Folders = Folder[];
-
 type MetaFolder = {
   lastId?: number;
 };

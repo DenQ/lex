@@ -1,14 +1,11 @@
-import { Word, Words } from 'common/@interfaces/words';
+import { Word } from 'common/@interfaces/words';
 
 type Input = {
   countWins: number;
-  list: Words;
+  list: Word[];
 };
 
-const getLearnedWords = ({
-  countWins,
-  list,
-}: Input): number =>
+const getLearnedWords = ({ countWins, list }: Input): number =>
   list
     .map(({ number_of_wins }: Word) => number_of_wins >= countWins)
     .filter((value: boolean) => value).length;

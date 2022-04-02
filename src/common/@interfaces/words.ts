@@ -16,9 +16,6 @@ export type Word = {
   [WordFields.NumberOfWins]: number;
 };
 
-// TODO: Need to remove this type anywhere
-export type Words = Word[];
-
 type MetaWord = {
   lastId?: number; // ?
 };
