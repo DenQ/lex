@@ -1,0 +1,12 @@
+.component{
+  :global(.MuiAlert-icon > svg) {
+    font-size: 35px;
+  }
+}
+
+.link{
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 1.02rem;
+  font-weight: 500;
+}

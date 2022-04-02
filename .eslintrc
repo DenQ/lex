@@ -81,6 +81,7 @@
         "next": ["interface", "type"]
       }
     ],
+    "jsx-a11y/no-static-element-interactions": 0,
     "react-hooks/exhaustive-deps": "error",
     "@typescript-eslint/no-shadow": 1,
     "react/jsx-props-no-spreading": "off",
