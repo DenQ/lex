@@ -5,12 +5,11 @@ export const eject = async (): Promise<EjectFolder> => {
   const foldersEntitySerialized = window.localStorage.getItem(
     entityTypes.FOLDERS
   ) as string;
-
-  const foldersEntity = JSON.parse(foldersEntitySerialized);
-
   let result = null;
 
   try {
+    const foldersEntity = JSON.parse(foldersEntitySerialized);
+
     result = await foldersEntity;
   } catch (e) {
     console.error(e);
