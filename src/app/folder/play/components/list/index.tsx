@@ -1,16 +1,12 @@
 import React from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import { makeStyles } from '@material-ui/core/styles';
+
 import { Word, WordFields } from 'common/@interfaces/words';
 import Text from 'lib/text';
 import { SelectWordHandler } from '../../types';
 
-const useStyles = makeStyles({
-  errorItem: {
-    color: 'red',
-  },
-});
+import styles from './ListPlay.module.scss';
 
 type Props = {
   targetWord: Word;
@@ -27,7 +23,6 @@ const PlayList: React.FC<Props> = ({
   vector,
   errorItem,
 }) => {
-  const classes = useStyles();
   const onSelectWord = (selectedWord: Word) => () => {
     handleSelectWord({
       targetWord,
@@ -44,7 +39,7 @@ const PlayList: React.FC<Props> = ({
   const itemVariant = 'button';
 
   return (
-    <List>
+    <List className={styles.component}>
       <ListItem button key={targetWord[WordFields.Id]}>
         <Text color="primary" variant={itemVariant}>
           {targetTitle}
@@ -54,12 +49,13 @@ const PlayList: React.FC<Props> = ({
         const isError = errorItem
           ? item[WordFields.Id] === errorItem[WordFields.Id]
           : false;
+
         return (
           <ListItem button key={item.id} onClick={onSelectWord(item)}>
             <Text
               color="textSecondary"
               variant={itemVariant}
-              className={isError ? classes.errorItem : undefined}
+              className={isError ? 'item-error' : undefined}
             >
               {getTitle(item, vector)}
             </Text>

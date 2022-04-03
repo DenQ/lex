@@ -29,7 +29,7 @@ const useSelectWordHandler = ({ setErrorItem, setNeedReload }: Input): Output =>
           setTimeout(() => {
             setNeedReload(+new Date());
             setErrorItem(null);
-          }, 300);
+          }, isSuccess ? 300 : 1000);
         })
         .catch(e => {
           console.error(e);
