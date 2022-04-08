@@ -9,14 +9,13 @@ import NoData from 'common/components/no-data';
 import PlayExplored from './components/explored';
 import PlayListWords from './components/list';
 import Progress from './components/statistic-info';
-import Header from '../components/header';
 import Layout from '../components/layout';
 import { useFindById } from '../utils';
-import buildBreadCrumbsProps from './utils/buildBreadCrumbsProps';
 import { noDataProps } from './constants';
 import useRestartFolder from './hooks/restartFolderHandler';
 import useSelectWordHandler from './hooks/selectWordHandler';
 import useFetchList from './hooks/fetchList';
+import HeaderPlayFolder from './components/header';
 
 type Props = RouteComponentProps & {};
 
@@ -40,15 +39,10 @@ const PlayPage: React.FC<Props> = ({ match }) => {
     if (!noData) return <>Loading</>;
   }
 
-  const breadcrumbsProps = buildBreadCrumbsProps({
-    folderId: id,
-    folderName: entity?.name || '?',
-  });
-
   return (
     <GeneralLayout title="Play Folder">
       <Layout>
-        <Header id={id} breadcrumbsProps={breadcrumbsProps} />
+        <HeaderPlayFolder name={entity?.name || ''} />
         {noData && <NoData {...noDataProps} />}
         {!noData && progress < 100 && (
           <>
