@@ -1,30 +1,31 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import Box from '@mui/material/Box';
 
 import GeneralLayout from 'app/system/layout';
-
-import Header from '../components/header';
+import BreadCrumbs from 'common/components/bread-crumbs';
 import Layout from '../components/layout';
 import Form from '../form';
 import { buildBreadCrumbsProps } from '../utils';
 
-const Component = () => {
-  const breadcrumbsProps = buildBreadCrumbsProps({
+const AddFolderPage = () => {
+  const breadcrumbs = buildBreadCrumbsProps({
     actionName: 'Add',
   });
 
   return (
     <GeneralLayout title="Add Folder">
       <Layout>
-        <Header controls={[]} breadcrumbsProps={breadcrumbsProps} />
+        <Box m={2}>
+          <BreadCrumbs data={breadcrumbs} />
+        </Box>
         <Form />
       </Layout>
     </GeneralLayout>
   );
 };
 
-Component.propTypes = {};
+AddFolderPage.propTypes = {};
 
-Component.defaultProps = {};
+AddFolderPage.defaultProps = {};
 
-export default Component;
+export default AddFolderPage;
