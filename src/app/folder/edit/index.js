@@ -1,10 +1,9 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 
 import WordsList from 'app/words/list';
 import GeneralLayout from 'app/system/layout';
-import Header from '../components/header';
 
+import Header from '../components/header';
 import Layout from '../components/layout';
 import FolderForm from '../form';
 import { useFindById, buildBreadCrumbsProps } from '../utils';

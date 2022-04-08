@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import { Button } from '@material-ui/core';
+import Button from '@mui/material/Button';
 import Box from '@material-ui/core/Box';
 
 import { removeById } from 'api/folders';
@@ -11,10 +11,12 @@ import BreadCrumbs, {
   BreadcrumbsPropTypes,
 } from 'common/components/bread-crumbs';
 import { useConfirmationModal } from 'lib/modals/confirmation/hook';
+import ActionBar from 'lib/ActionBar';
 
 import { ConfirmationModal } from 'lib/modals/confirmation';
 import { controlNames } from '../../constants';
 
+// TODO. Need to rewrite
 const Component = props => {
   const history = useHistory();
   const { id, controls, breadcrumbsProps } = props;
@@ -50,7 +52,12 @@ const Component = props => {
 
   if (controls.includes(controlNames.TO_EDIT)) {
     collectionControls.push(
-      <Button color="primary" onClick={toEditHandler} key="to-edit">
+      <Button
+        color="primary"
+        onClick={toEditHandler}
+        size="small"
+        key="to-edit"
+      >
         To Edit
       </Button>
     );
@@ -58,7 +65,13 @@ const Component = props => {
 
   if (controls.includes(controlNames.TO_REMOVE)) {
     collectionControls.push(
-      <Button color="secondary" onClick={onClickToRemove} key="to-remove">
+      <Button
+        color="secondary"
+        variant="outlined"
+        size="small"
+        onClick={onClickToRemove}
+        key="to-remove"
+      >
         Remove
       </Button>
     );
@@ -69,8 +82,8 @@ const Component = props => {
 
   return (
     <>
+      <ActionBar title="Edit Folder" rightControls={collectionControls} />
       <Box m={2}>{breadcrumbs}</Box>
-      <Box m={2}>{collectionControls}</Box>
       <ConfirmationModal
         open={open}
         title="Remove folder"

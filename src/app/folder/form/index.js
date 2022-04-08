@@ -78,7 +78,7 @@ const EntityForm = ({ initialValues, readOnly }) => {
 
 EntityForm.propTypes = {
 	initialValues: PropTypes.shape({
-		id: null,
+		id: PropTypes.number,
 		name: PropTypes.string,
 		description: PropTypes.string,
 	}),
