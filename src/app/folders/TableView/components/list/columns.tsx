@@ -28,6 +28,24 @@ export const getColumns = ({ removeHandler }: Input): GridColDef[] => [
     flex: 3,
   },
   {
+    field: 'words',
+    headerName: 'Words',
+    flex: 1,
+    align: 'right',
+    headerAlign: 'right',
+    headerClassName: 'super-app-theme--header',
+    sortable: true,
+    renderCell: (cellParams: GridRenderCellParams) => (
+      <>{cellParams.value?.length || 0}</>
+    ),
+    sortComparator: (a, b, v1, v2) => {
+      const folder1 = v1.api.getRow(v1.id) as Folder;
+      const folder2 = v2.api.getRow(v2.id) as Folder;
+
+      return (folder1?.words?.length || 0) - (folder2.words?.length || 0);
+    },
+  },
+  {
     field: 'progress',
     headerName: 'Progress',
     flex: 1,
