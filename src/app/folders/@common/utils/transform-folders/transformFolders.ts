@@ -20,22 +20,26 @@ export const transform = async (
   listFolders: Folder[],
   { settings }: Options
 ): Promise<Folder[]> => {
-  const progressMap = new Map();
+  const foldersMap = new Map();
 
   for (let i = 0; i < listFolders.length; i++) {
     const itemFolder = listFolders[i];
     // eslint-disable-next-line no-await-in-loop
-    const list = await getListWords(itemFolder.id);
+    const words = await getListWords(itemFolder.id);
     const progress = calculateProgress({
-      list,
+      list: words,
       maxCountWins: (settings as Settings).play_max_count_wins,
     });
 
-    progressMap.set(itemFolder.id, progress);
+    foldersMap.set(itemFolder.id, {
+      progress,
+      words
+    });
   }
 
   return listFolders.map(item => ({
     ...item,
-    progress: progressMap.get(item.id) || 0,
+    progress: foldersMap.get(item.id).progress || 0,
+    words: foldersMap.get(item.id).words || []
   }));
 };
