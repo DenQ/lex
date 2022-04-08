@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { defaultSettings } from 'common/@contants/settings';
 
 export interface IKeyValue {
   [string: string]: string | number;
@@ -14,7 +15,7 @@ export interface ISettings {
 }
 
 const initialValues = {
-  settings: {},
+  settings: defaultSettings,
   actions: {
     reload: () => null,
   },

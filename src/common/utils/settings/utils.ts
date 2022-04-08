@@ -1,9 +1,7 @@
 import { IKeyValue } from 'common/@interfaces';
-import { fieldNames } from 'common/@types/settings';
+import { defaultSettings } from 'common/@contants/settings';
 
 export const preparePayload = (data: IKeyValue): IKeyValue => ({
-	[fieldNames.PLAY_COUNT_WORDS]: Number(data[fieldNames.PLAY_COUNT_WORDS]),
-	[fieldNames.PLAY_MAX_COUNT_WINS]: Number(
-		data[fieldNames.PLAY_MAX_COUNT_WINS]
-	),
+	...defaultSettings,
+	...data,
 });

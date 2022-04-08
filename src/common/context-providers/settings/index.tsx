@@ -1,13 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { preparePayload } from 'common/utils/settings/utils';
+
 import { fetchSettings } from 'api/settings';
+import { preparePayload } from 'common/utils/settings/utils';
 import { ISettings, SettingsContext } from 'common/contexts/settings';
+import { defaultSettings } from 'common/@contants/settings';
 
-type Props = {};
 
-export const SettingsProvider: React.FC<Props> = ({ children }) => {
+export const SettingsProvider: React.FC = ({ children }) => {
   const [settingsValue, setSettingsValue] = useState<ISettings>({
-    settings: {},
+    settings: defaultSettings,
     actions: {
       reload: () => null,
     },
