@@ -32,6 +32,7 @@ const useFetchList = ({ id, needReload }: Input): Output => {
   const [noData, setNoData] = useState(false);
   const { settings } = useSettings();
 
+  // TODO: Here two rerenders. Need use fetch method and use useEffect as didMount
   useEffect(() => {
     const criteria: Filter<Word> = (item: Word): boolean =>
       item[WordFields.FolderId] === id;
