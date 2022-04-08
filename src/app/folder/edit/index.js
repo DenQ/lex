@@ -3,14 +3,13 @@ import React from 'react';
 import WordsList from 'app/words/list';
 import GeneralLayout from 'app/system/layout';
 
-import Header from '../components/header';
 import Layout from '../components/layout';
 import FolderForm from '../form';
-import { useFindById, buildBreadCrumbsProps } from '../utils';
-import { controlNames } from '../constants';
+import HeaderEditFolder from './components/header';
+import { useFindById } from '../utils';
 
 const Component = ({ match }) => {
-  const { entity, id } = useFindById({ match });
+  const { entity } = useFindById({ match });
 
   if (!entity) {
     return 'Loading';
@@ -20,19 +19,10 @@ const Component = ({ match }) => {
     ...entity,
   };
 
-  const breadcrumbsProps = buildBreadCrumbsProps({
-    folderName: entity.name,
-    actionName: 'Edit',
-  });
-
   return (
     <GeneralLayout title="Edit Folder">
       <Layout>
-        <Header
-          id={id}
-          controls={[controlNames.TO_REMOVE]}
-          breadcrumbsProps={breadcrumbsProps}
-        />
+        <HeaderEditFolder entity={entity} />
         <FolderForm initialValues={initialValues} />
         <WordsList folderId={entity.id} />
       </Layout>
