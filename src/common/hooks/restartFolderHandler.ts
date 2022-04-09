@@ -1,18 +1,15 @@
 import { useCallback } from 'react';
 
 import { updateByFolderId } from 'api/words';
+import { RestartFolderHandler } from 'app/folder/play/types';
 import { Word, WordFields } from 'common/@interfaces/words';
-import { RestartFolderHandler } from '../types';
 
 type Input = {
   id: number;
   setNeedReload: (v: number | null) => void;
 };
 
-type Output = RestartFolderHandler;
-
-export default ({ id, setNeedReload }: Input): Output => {
-  const restartFolderHandler: RestartFolderHandler = useCallback(() => {
+export default ({ id, setNeedReload }: Input): RestartFolderHandler => useCallback(() => {
     const payload = {
       [WordFields.NumberOfAttempt]: 0,
       [WordFields.NumberOfWins]: 0,
@@ -26,6 +23,3 @@ export default ({ id, setNeedReload }: Input): Output => {
         console.error(e);
       });
   }, [id, setNeedReload]);
-
-  return restartFolderHandler;
-};

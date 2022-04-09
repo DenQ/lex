@@ -5,6 +5,7 @@ import Box from '@material-ui/core/Box';
 import { Word } from 'common/@interfaces/words';
 import GeneralLayout from 'app/system/layout';
 import NoData from 'common/components/no-data';
+import useRestartFolder from 'common/hooks/restartFolderHandler';
 
 import PlayExplored from './components/explored';
 import PlayListWords from './components/list';
@@ -12,7 +13,6 @@ import Progress from './components/statistic-info';
 import Layout from '../components/layout';
 import { useFindById } from '../utils';
 import { noDataProps } from './constants';
-import useRestartFolder from './hooks/restartFolderHandler';
 import useSelectWordHandler from './hooks/selectWordHandler';
 import useFetchList from './hooks/fetchList';
 import HeaderPlayFolder from './components/header';
@@ -42,7 +42,7 @@ const PlayPage: React.FC<Props> = ({ match }) => {
   return (
     <GeneralLayout title="Play Folder">
       <Layout>
-        <HeaderPlayFolder name={entity?.name || ''} />
+        <HeaderPlayFolder name={entity?.name || ''} restartFolderHandler={restartFolderHandler} />
         {noData && <NoData {...noDataProps} />}
         {!noData && progress < 100 && (
           <>
