@@ -29,7 +29,7 @@ const ActionBar: React.FC<Props> = ({ title, rightControls }) => (
       </Grid>
       {rightControls && (
         <Grid item xs={8} md={10}>
-          {rightControls.map((item, index) => (
+          {rightControls.reverse().map((item, index) => (
             // eslint-disable-next-line react/no-array-index-key
             <ItemActionRight component="span" key={index}>
               {item}

@@ -2,25 +2,37 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Box from '@material-ui/core/Box';
+import { styled } from '@mui/material/styles';
 
 import { removeById } from 'api/folders';
 import { removeByFolderId } from 'api/words';
+import { useConfirmationModal } from 'lib/modals/confirmation/hook';
+import { ConfirmationModal } from 'lib/modals/confirmation';
+import ActionBar from 'lib/ActionBar';
 import urlManager from 'common/utils/url-manager';
 import BreadCrumbs from 'common/components/bread-crumbs';
-import { useConfirmationModal } from 'lib/modals/confirmation/hook';
-import ActionBar from 'lib/ActionBar';
-import { ConfirmationModal } from 'lib/modals/confirmation';
 
 import { buildBreadCrumbsProps } from '../../../utils';
 
+const ButtonCounter = styled(Button)(() => ({
+  color: '#555',
+  pointerEvents: 'none',
+  backgroundColor: '#efefef',
+  borderColor: '#ddd',
+}));
+
 type Props = {
+  counterWords: number;
   entity: {
     id: number;
     name: string;
   };
 };
 
-const HeaderEditFolder: React.FC<Props> = ({ entity: { id, name } }) => {
+const HeaderEditFolder: React.FC<Props> = ({
+  counterWords,
+  entity: { id, name },
+}) => {
   const history = useHistory();
 
   const toRemoveHandler = ({ reset }: { reset: any }) => {
@@ -46,6 +58,9 @@ const HeaderEditFolder: React.FC<Props> = ({ entity: { id, name } }) => {
   };
 
   const collectionControls = [
+    <ButtonCounter variant="outlined" color="info" size="small" key="counter">
+      Words:&nbsp;<b>{counterWords}</b>
+    </ButtonCounter>,
     <Button
       color="secondary"
       variant="outlined"
