@@ -25,22 +25,22 @@ function App() {
   };
 
   return (
-      <RefreshContext.Provider value={refreshContextValue}>
-        <SettingsProvider>
-          <Router>
-            <Switch>
-              <Route path={urls.FOLDER_SHOW} component={ShowFolder} />
-              <Route path={urls.FOLDER_ADD} component={AddFolder} />
-              <Route path={urls.FOLDER_EDIT} component={EditFolder} />
-              <Route path={urls.FOLDER_PLAY} component={PlayFolder} />
-              <Route path={urls.FOLDERS} component={ListFolders} />
-              <Route path={urls.SETTINGS} component={SettingsPage} />
-              <Route path={urls.PING} component={PingPage} />
-              <Route path="/" component={ListFolders} />
-            </Switch>
-          </Router>
-        </SettingsProvider>
-      </RefreshContext.Provider>
+    <RefreshContext.Provider value={refreshContextValue}>
+      <SettingsProvider>
+        <Router>
+          <Switch>
+            <Route path={urls.FOLDER_SHOW} component={ShowFolder} />
+            <Route path={urls.FOLDER_ADD} component={AddFolder} />
+            <Route path={urls.FOLDER_EDIT} component={EditFolder} />
+            <Route path={urls.FOLDER_PLAY} component={PlayFolder} />
+            <Route path={urls.FOLDERS} component={ListFolders} />
+            <Route path={urls.SETTINGS} component={SettingsPage} />
+            <Route path={urls.PING} component={PingPage} />
+            <Route path="/" component={ListFolders} />
+          </Switch>
+        </Router>
+      </SettingsProvider>
+    </RefreshContext.Provider>
   );
 }
 
