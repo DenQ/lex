@@ -14,7 +14,6 @@ import PlayFolder from './app/folder/play';
 import SettingsPage from './app/settings';
 
 function App() {
-
   const [wordsReload, setWordsReload] = React.useState(0);
   const [foldersReload, setFoldersReload] = React.useState(0);
 

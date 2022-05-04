@@ -2,24 +2,17 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Box from '@material-ui/core/Box';
-import { styled } from '@mui/material/styles';
 
 import { removeById } from 'api/folders';
 import { removeByFolderId } from 'api/words';
 import { useConfirmationModal } from 'lib/modals/confirmation/hook';
 import { ConfirmationModal } from 'lib/modals/confirmation';
 import ActionBar from 'lib/ActionBar';
+import ButtonCounter from 'lib/buttons/ButtonCounter';
 import urlManager from 'common/utils/url-manager';
 import BreadCrumbs from 'common/components/bread-crumbs';
 
 import { buildBreadCrumbsProps } from '../../../utils';
-
-const ButtonCounter = styled(Button)(() => ({
-  color: '#555',
-  pointerEvents: 'none',
-  backgroundColor: '#efefef',
-  borderColor: '#ddd',
-}));
 
 type Props = {
   counterWords: number;
