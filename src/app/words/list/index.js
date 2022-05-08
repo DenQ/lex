@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import List from '@material-ui/core/List';
-import Box from '@material-ui/core/Box';
+import Box from '@mui/material/Box';
 
 import Text from 'lib/text';
 import { removeById } from 'api/words';
@@ -24,8 +24,12 @@ const WordsListPage = ({ folderId, readOnly, list, setNeedRefresh }) => {
   };
 
   return (
-    <Box m={2}>
-      {isShowListHeader && <Text variant="button">List words</Text>}
+    <>
+      {isShowListHeader && (
+        <Box m={2}>
+          <Text variant="button">List words</Text>
+        </Box>
+      )}
       <List>
         {!readOnly && (
           <PresenterWord folderId={folderId} isNew words={list} key="new" />
@@ -41,7 +45,7 @@ const WordsListPage = ({ folderId, readOnly, list, setNeedRefresh }) => {
           />
         ))}
       </List>
-    </Box>
+    </>
   );
 };
 
