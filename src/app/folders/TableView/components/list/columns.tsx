@@ -9,9 +9,10 @@ import { RemoveHandler } from '../../../@types/list';
 
 type Input = {
   removeHandler: RemoveHandler;
+  isCompactView: boolean
 };
 
-export const getColumns = ({ removeHandler }: Input): GridColDef[] => [
+export const getColumns = ({ removeHandler, isCompactView }: Input): GridColDef[] => [
   {
     field: 'id',
     headerName: 'ID',
@@ -19,13 +20,15 @@ export const getColumns = ({ removeHandler }: Input): GridColDef[] => [
     align: 'right',
     headerAlign: 'right',
     headerClassName: 'super-app-theme--header',
+    hide: isCompactView
   },
   { field: 'name', headerName: 'Name', flex: 2 },
   {
     field: 'description',
     headerClassName: 'super-app-theme--header',
     headerName: 'Description',
-    flex: 3,
+    flex: 2,
+    hide: isCompactView
   },
   {
     field: 'words',
@@ -66,7 +69,7 @@ export const getColumns = ({ removeHandler }: Input): GridColDef[] => [
   {
     field: 'system',
     headerName: '',
-    flex: 2,
+    flex: isCompactView ? 1 : 2,
     align: 'right',
     headerAlign: 'center',
     sortable: false,
