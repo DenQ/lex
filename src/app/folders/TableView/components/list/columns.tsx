@@ -4,7 +4,7 @@ import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { Folder } from 'common/@interfaces/folders';
 
 import ProgressColumn from './ProgressColumn';
-import SystemColumn from './SystemColumn';
+import SystemColumn from '../SystemColumn/SystemColumn';
 import { RemoveHandler } from '../../../@types/list';
 
 type Input = {

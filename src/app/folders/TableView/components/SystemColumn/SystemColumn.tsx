@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react';
-import { Button } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 
 import { Folder } from 'common/@interfaces/folders';
 import getUrl from 'app/folders/@common/utils/getUrl';
+import ButtonViewSystemColumn from './ButtonViewSystemColumn';
 import { ActionName, RemoveHandler } from '../../../@types/list';
 
 type Props = {
@@ -30,19 +30,17 @@ const SystemColumn: React.FC<Props> = ({ row, removeHandler }) => {
     [history, row, removeHandler]
   );
 
+  const handleActionPlay = handleClickAction(ActionName.play);
+  const handleActionEdit = handleClickAction(ActionName.edit);
+  const handleActionRemove = handleClickAction(ActionName.remove);
+
   return (
-    <>
-      <Button onClick={handleClickAction(ActionName.play)} variant="text">
-        Play
-      </Button>
-      <Button onClick={handleClickAction(ActionName.edit)} variant="text">
-        Edit
-      </Button>
-      <Button onClick={handleClickAction(ActionName.remove)} variant="text" color="secondary">
-        Remove
-      </Button>
-    </>
-  );
+    <ButtonViewSystemColumn
+        handleActionPlay={handleActionPlay}
+        handleActionEdit={handleActionEdit}
+        handleActionRemove={handleActionRemove}
+    />
+  )
 };
 
 export default SystemColumn;
