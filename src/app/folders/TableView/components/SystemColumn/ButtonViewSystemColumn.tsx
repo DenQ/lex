@@ -25,4 +25,4 @@ const ButtonViewSystemColumn: React.FC<SystemColumnViewProps> = ({
   </>
 );
 
-export default ButtonViewSystemColumn;
+export default React.memo(ButtonViewSystemColumn);

@@ -1,6 +1,6 @@
 import React from 'react';
 
-type HandlerEvent = (e: React.MouseEvent<HTMLButtonElement>) => void;
+export type HandlerEvent = (e: React.MouseEvent<HTMLButtonElement | HTMLLIElement>) => void;
 
 export type SystemColumnViewProps = {
   handleActionPlay: HandlerEvent;
