@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from '@mui/material';
 import { SystemColumnViewProps } from './types';
+import { ActionTitle } from '../../../@types/list';
 
 const ButtonViewSystemColumn: React.FC<SystemColumnViewProps> = ({
   handleActionPlay,
@@ -9,10 +10,10 @@ const ButtonViewSystemColumn: React.FC<SystemColumnViewProps> = ({
 }) => (
   <>
     <Button onClick={handleActionPlay} variant="text" size="small">
-      Play
+      {ActionTitle.play}
     </Button>
     <Button onClick={handleActionEdit} variant="text" size="small">
-      Edit
+      {ActionTitle.edit}
     </Button>
     <Button
       onClick={handleActionRemove}
@@ -20,7 +21,7 @@ const ButtonViewSystemColumn: React.FC<SystemColumnViewProps> = ({
       color="secondary"
       size="small"
     >
-      Remove
+      {ActionTitle.remove}
     </Button>
   </>
 );

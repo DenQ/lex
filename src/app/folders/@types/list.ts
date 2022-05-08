@@ -6,5 +6,11 @@ export enum ActionName {
   remove = 'remove'
 }
 
+export enum ActionTitle {
+  edit = 'Edit',
+  play = 'Play',
+  remove = 'Remove'
+}
+
 
 export type RemoveHandler = (folder: Folder) => void;

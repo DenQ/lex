@@ -1,8 +1,21 @@
 import React, { FC, useState } from 'react';
 import { Button } from '@mui/material';
 import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import { SystemColumnViewProps } from './types';
+import MenuItem, { MenuItemProps } from '@mui/material/MenuItem';
+import { styled } from '@mui/material/styles';
+
+import { HandlerEvent, SystemColumnViewProps } from './types';
+import { ActionTitle } from '../../../@types/list';
+
+const MenuItemPrimary = styled(MenuItem)<MenuItemProps>(({ theme }) => ({
+  color: theme.palette.primary.main,
+}));
+const MenuItemSecondary = styled(MenuItem)<MenuItemProps>(({ theme }) => ({
+  color: theme.palette.secondary.main,
+}));
+
+const BUTTON_ID = 'button-for-open-menu';
+const MENU_ID = 'menu-folder-list';
 
 const DropdownViewSystemColumn: FC<SystemColumnViewProps> = ({
   handleActionPlay,
@@ -17,12 +30,18 @@ const DropdownViewSystemColumn: FC<SystemColumnViewProps> = ({
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const handleClickWrapper =
+    (cb: HandlerEvent): HandlerEvent =>
+    e => {
+      handleClose();
+      cb(e);
+    };
 
   return (
-    <div>
+    <>
       <Button
-        id="demo-positioned-button"
-        aria-controls={open ? 'demo-positioned-menu' : undefined}
+        id={BUTTON_ID}
+        aria-controls={open ? MENU_ID : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
@@ -31,8 +50,8 @@ const DropdownViewSystemColumn: FC<SystemColumnViewProps> = ({
         Actions
       </Button>
       <Menu
-        id="demo-positioned-menu"
-        aria-labelledby="demo-positioned-button"
+        id={MENU_ID}
+        aria-labelledby={BUTTON_ID}
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
@@ -45,18 +64,17 @@ const DropdownViewSystemColumn: FC<SystemColumnViewProps> = ({
           horizontal: 'left',
         }}
       >
-        <MenuItem onClick={handleActionPlay}>Play</MenuItem>
-        <MenuItem onClick={handleActionEdit}>Edit</MenuItem>
-        <MenuItem
-          onClick={handleActionRemove}
-          sx={theme => ({
-            color: theme.palette.secondary.main,
-          })}
-        >
-          Remove
-        </MenuItem>
+        <MenuItemPrimary onClick={handleClickWrapper(handleActionPlay)}>
+          {ActionTitle.play}
+        </MenuItemPrimary>
+        <MenuItemPrimary onClick={handleClickWrapper(handleActionEdit)}>
+          {ActionTitle.edit}
+        </MenuItemPrimary>
+        <MenuItemSecondary onClick={handleClickWrapper(handleActionRemove)}>
+          {ActionTitle.remove}
+        </MenuItemSecondary>
       </Menu>
-    </div>
+    </>
   );
 };
 
