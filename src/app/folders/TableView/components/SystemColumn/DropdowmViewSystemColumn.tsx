@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import { Button } from '@mui/material';
 import Menu from '@mui/material/Menu';
 import MenuItem, { MenuItemProps } from '@mui/material/MenuItem';
@@ -24,18 +24,20 @@ const DropdownViewSystemColumn: FC<SystemColumnViewProps> = ({
 }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+  const handleClick = useCallback((event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
+  }, []);
+  const handleClose = useCallback(() => {
     setAnchorEl(null);
-  };
-  const handleClickWrapper =
+  }, []);
+  const handleClickWrapper = useCallback(
     (cb: HandlerEvent): HandlerEvent =>
-    e => {
-      handleClose();
-      cb(e);
-    };
+      e => {
+        handleClose();
+        cb(e);
+      },
+    [handleClose]
+  );
 
   return (
     <>
