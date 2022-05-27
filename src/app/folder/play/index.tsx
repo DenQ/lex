@@ -4,7 +4,7 @@ import Box from '@material-ui/core/Box';
 
 import { Word } from 'common/@interfaces/words';
 import GeneralLayout from 'app/system/layout';
-import NoData from 'common/components/no-data';
+import NoData from 'common/components/no-data/NoData';
 import useRestartFolder from 'common/hooks/restartFolderHandler';
 
 import PlayExplored from './components/explored';
