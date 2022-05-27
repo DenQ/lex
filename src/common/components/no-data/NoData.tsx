@@ -1,9 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Box from '@material-ui/core/Box';
 import Text from 'lib/text';
 
-const NoDataComponent = ({ title, message }) => (
+type Props = {
+  title: string;
+  message: string;
+}
+
+const NoData: React.FC<Props>  = ({ title, message }) => (
   <Box m={2}>
     <Text color="primary" variant="h5" align="center">
       {title}
@@ -14,11 +18,4 @@ const NoDataComponent = ({ title, message }) => (
   </Box>
 );
 
-NoDataComponent.propTypes = {
-  title: PropTypes.string.isRequired,
-  message: PropTypes.string.isRequired,
-};
-
-NoDataComponent.defaultProps = {};
-
-export default NoDataComponent;
+export default NoData;
